@@ -17,19 +17,32 @@ public class DatabaseCreator{
                 
                 String line;
                 br.readLine(); // skip header
-                
-                String sql = "INSERT INTO flights (date , MKT_CARRIER , MKT_CARRIER_FL_NUM, ORIGIN, ORIGIN_CITY_NAME, ORIGIN_STATE_ABR, ORIGIN_WAC, DEST ,DEST_CITY_NAME, DEST_STATE_ABR, DEST_WAC, TIME , CRS_DEPT_TIME, DEPT_TIME, CRS_ARR_TIME, ARR_TIME, CANCELLED, DIVERTED, DISTANCE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                PreparedStatement pstmt = conn.prepareStatement(sql);
+                String sql = "INSERT INTO flights (date, MKT_CARRIER, MKT_CARRIER_FL_NUM, ORIGIN, ORIGIN_CITY_NAME, ORIGIN_STATE_ABR, ORIGIN_WAC, DEST, DEST_CITY_NAME, DEST_STATE_ABR, DEST_WAC, CRS_DEPT_TIME, DEPT_TIME, CRS_ARR_TIME, ARR_TIME, CANCELLED, DIVERTED, DISTANCE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";                PreparedStatement pstmt = conn.prepareStatement(sql);
                 
                 while ((line = br.readLine()) != null) {
-                    
+
                     String[] values = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
-                    for(int i = 0; i < 18;i++){
-                        try{pstmt.setInt(i+1, Integer.parseInt(values[i]));}
-                        catch(NumberFormatException e){pstmt.setString(i+1, values[i]);}
+
+                    for(int i = 0; i < 18; i++){
+
+                        String value = values[i].replace("\"","");
+
+                        // remove ", ST" from city names
+                        if(i == 4 || i == 8){
+                            if(value.contains(",")){
+                                value = value.split(",")[0];
+                            }
+                        }
+
+                        try{
+                            pstmt.setInt(i+1, Integer.parseInt(value));
+                        }
+                        catch(NumberFormatException e){
+                            pstmt.setString(i+1, value);
+                        }
                     }
                     pstmt.executeUpdate();
-                }
+}
                 
                 br.close();
             }
