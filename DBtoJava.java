@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 class DBtoJava{
     
-    public void main(String[] args){
+    public static void main(String[] args){
         int columnNum = 1999;
         //String code = "";
         //String condition = "FROM flights WHERE flight_id = ";
@@ -14,7 +14,8 @@ class DBtoJava{
             Statement stmt = conn.createStatement();
             String code = "SELECT date FROM flights WHERE flight_id > 1997";
             ResultSet rs = stmt.executeQuery(code);
-            System.out.println(rs);
+
+            System.out.println(rs.getInt(""));
 
 
             
