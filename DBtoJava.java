@@ -1,11 +1,66 @@
-import java.sql.*;
 import java.util.ArrayList;
 
 class DBtoJava{
 
-    public ArrayList<String> strFlightsToArrayList(String file){
-        ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<>ArrayList<String>>>>>>> list = new ArrayList<>();
+    public ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<String>>>>>>>> strFlightsToArrayList(){
+        ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<String>>>>>>>> list = new ArrayList<String>();
+        String query = "";
 
+        // date
+        for (int i = 0; i < 1999; i++){
+            query = "SELECT date FROM flights WHERE flight_id = " + i + ";";
+            list.set(i) = query(query).get(1);
+            System.out.println(query(query).get(1));
+        }
+
+        // MKT_CARRIER
+        for (int i = 0; i < 1999; i++){
+        query = "SELECT MKT_CARRIER FROM flights WHERE flight_id = " + i + ";";
+            list.set(i) = query(query).get(1);
+            System.out.println(query(query).get(1));
+        }
+
+        // ORIGIN
+        for (int i = 0; i < 1999; i++){
+            query = "SELECT ORIGIN FROM flights WHERE flight_id = " + i + ";";
+            list.set(i) = query(query).get(1);
+            System.out.println(query(query).get(1));
+        }
+
+        // ORIGIN_CITY_NAME
+        for (int i = 0; i < 1999; i++){
+            query = "SELECT ORIGIN_CITY_NAME FROM flights WHERE flight_id = " + i + ";";
+            list.set(i) = query(query).get(1);
+            System.out.println(query(query).get(1));
+        }
+
+        // ORIGIN_STATE_ABR
+        for (int i = 0; i < 1999; i++){
+            query = "SELECT ORIGIN_STATE_ABR FROM flights WHERE flight_id = " + i + ";";
+            list.set(i) = query(query).get(1);
+            System.out.println(query(query).get(1));
+        }
+
+        // DEST
+        for (int i = 0; i < 1999; i++){
+            query = "SELECT DEST FROM flights WHERE flight_id = " + i + ";";
+            list.set(i) = query(query).get(1);
+            System.out.println(query(query).get(1));
+        }
+
+        // DEST_CITY_NAME
+        for (int i = 0; i < 1999; i++){
+            query = "SELECT DEST_CITY_NAME FROM flights WHERE flight_id = " + i + ";";
+            list.set(i) = query(query).get(1);
+            System.out.println(query(query).get(1));
+        }
+
+        // DEST_STATE_ABR
+        for (int i = 0; i < 1999; i++){
+            query = "SELECT DEST_STATE_ABR FROM flights WHERE flight_id = " + i + ";";
+            list.set(i) = query(query).get(1);
+            System.out.println(query(query).get(1));
+        }
         
         return list;
     }
