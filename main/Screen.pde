@@ -1,7 +1,6 @@
 class Screen {
 
   ArrayList<Button> button = new ArrayList<Button>();
-
   color backgroudColor ;
 
   Screen (color backgroudColor){

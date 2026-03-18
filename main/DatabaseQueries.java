@@ -1,24 +1,26 @@
 import java.sql.*;
 import java.util.ArrayList;
 public class DatabaseQueries {
+    public static String dbPath = "database.db";
 
     public static ArrayList<ArrayList<String>> query(String query){
         ArrayList<ArrayList<String>> queryResultArray = new ArrayList<>(0);
-        try(Connection conn = DriverManager.getConnection("jdbc:sqlite:database.db")){
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            int numberOfFields = rs.getMetaData().getColumnCount() + 1;
-            while (rs.next()){
-                ArrayList<String> queryResultSubarray = new ArrayList<>(0);
-                for (int i = 1; i < numberOfFields;i++){
-                    queryResultSubarray.add(rs.getString(i)) ;
+            try{
+                Class.forName("org.sqlite.JDBC");
+                Connection conn = DriverManager.getConnection("jdbc:sqlite:"+dbPath);
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(query);
+                int numberOfFields = rs.getMetaData().getColumnCount() + 1;
+                while (rs.next()){
+                    ArrayList<String> queryResultSubarray = new ArrayList<>(0);
+                    for (int i = 1; i < numberOfFields;i++){
+                        queryResultSubarray.add(rs.getString(i)) ;
+                    }
+                queryResultArray.add(queryResultSubarray);
                 }
-               queryResultArray.add(queryResultSubarray);
-            }
 
-            return queryResultArray;
-            
-        }catch(SQLException e){
+                return queryResultArray;      
+        }catch(Exception e){
             e.printStackTrace();
             return (queryResultArray);
         }
@@ -45,10 +47,5 @@ public class DatabaseQueries {
         }
     }
     
-/*
-    public static void main(String[] args) {
-        System.out.println(query("SELECT flight_id,date FROM flights WHERE flight_id > 1960"));
-        System.out.println(IntegerQuery("SELECT flight_id FROM flights WHERE flight_id > 1960"));
-    }
-*/
+
 }

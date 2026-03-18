@@ -1,3 +1,4 @@
+
  color squareColor = color(200);
 ArrayList<Screen> screens = new ArrayList<Screen>();
 Screen theScreen;
@@ -5,7 +6,10 @@ Screen theScreen;
 void setup()
 {
   //size(500, 400);
-  size(1500, 900);
+  size(100, 100);
+  DatabaseQueries.dbPath = sketchPath("database.db");
+  System.out.println(DatabaseQueries.query("SELECT flight_id,date FROM flights WHERE flight_id > 1960"));
+  
 
   screens.add (new Screen(color(150)));
   screens.add (new Screen(color(150)));
