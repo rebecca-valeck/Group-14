@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class DatabaseQueries {
     public static String dbPath = "database.db";
 
+    @SuppressWarnings("CallToPrintStackTrace")
     public ArrayList<ArrayList<String>> query(String query){
         ArrayList<ArrayList<String>> queryResultArray = new ArrayList<>(0);
             try{
@@ -20,11 +21,12 @@ public class DatabaseQueries {
                 }
 
                 return queryResultArray;      
-        }catch(Exception e){
+        }catch(ClassNotFoundException | SQLException e){
             e.printStackTrace();
             return (queryResultArray);
         }
     }
+    @SuppressWarnings("CallToPrintStackTrace")
         public ArrayList<ArrayList<Integer>> IntegerQuery(String query){
         ArrayList<ArrayList<Integer>> queryResultArray = new ArrayList<>(0);
         try(Connection conn = DriverManager.getConnection("jdbc:sqlite:database.db")){
