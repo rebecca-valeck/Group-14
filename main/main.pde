@@ -11,17 +11,11 @@ void settings() {
 }
 void setup()
 {
-
   DatabaseQueries.dbPath = sketchPath("database.db");
 
-    ArrayList<ArrayList<String>> data = db.query(
-    //"SELECT MKT_CARRIER, COUNT(*) as cnt FROM flights GROUP BY MKT_CARRIER ORDER BY cnt DESC"
-    "SELECT ORIGIN, COUNT(*) FROM flights GROUP BY DEST ORDER BY COUNT(*) DESC LIMIT 10"
-  );
 
   chart = new Barchart(
-   SCREENX/2, SCREENY/2, 800, 600,
-    "Flights by ORIGIN", "ORIGIN", "Number of Flights", data
+   SCREENX/2, SCREENY/2, 800, 600, 60, "ORIGIN", "Number of Flights"
   );
   
 
