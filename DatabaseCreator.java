@@ -10,7 +10,7 @@ public class DatabaseCreator{
 
                 String createTable = "CREATE TABLE IF NOT EXISTS flights (flight_id INT, date TEXT, MKT_CARRIER TEXT, MKT_CARRIER_FL_NUM INT, ORIGIN TEXT, ORIGIN_CITY_NAME TEXT , ORIGIN_STATE_ABR TEXT, ORIGIN_WAC INT , DEST TEXT,DEST_CITY_NAME TEXT , DEST_STATE_ABR TEXT, DEST_WAC INT , CRS_DEPT_TIME INT, DEPT_TIME INT, CRS_ARR_TIME INT, ARR_TIME INT, CANCELLED INT, DIVERTED INT, DISTANCE INT)";
                 Statement stmt = conn.createStatement();
-                stmt.execute(createTable);
+                stmt.execute(createTable);//
                 
                 BufferedReader br;
                 br = new BufferedReader(new FileReader("flights2k.csv"));
