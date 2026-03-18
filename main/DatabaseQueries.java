@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class DatabaseQueries {
     public static String dbPath = "database.db";
 
-    public static ArrayList<ArrayList<String>> query(String query){
+    public ArrayList<ArrayList<String>> query(String query){
         ArrayList<ArrayList<String>> queryResultArray = new ArrayList<>(0);
             try{
                 Class.forName("org.sqlite.JDBC");
@@ -25,7 +25,7 @@ public class DatabaseQueries {
             return (queryResultArray);
         }
     }
-        public static ArrayList<ArrayList<Integer>> IntegerQuery(String query){
+        public ArrayList<ArrayList<Integer>> IntegerQuery(String query){
         ArrayList<ArrayList<Integer>> queryResultArray = new ArrayList<>(0);
         try(Connection conn = DriverManager.getConnection("jdbc:sqlite:database.db")){
             Statement stmt = conn.createStatement();
