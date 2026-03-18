@@ -1,15 +1,28 @@
-
+final int SCREENX = 1920;
+final int SCREENY = 1080;
+Barchart chart;
  color squareColor = color(200);
 ArrayList<Screen> screens = new ArrayList<Screen>();
 Screen theScreen;
 DatabaseQueries db = new DatabaseQueries();
 
+void settings() {
+  size(SCREENX, SCREENY);
+}
 void setup()
 {
-  size(1920, 1080);
 
   DatabaseQueries.dbPath = sketchPath("database.db");
-  System.out.println(db.query("SELECT flight_id,date FROM flights WHERE flight_id > 1960"));
+
+    ArrayList<ArrayList<String>> data = db.query(
+    //"SELECT MKT_CARRIER, COUNT(*) as cnt FROM flights GROUP BY MKT_CARRIER ORDER BY cnt DESC"
+    "SELECT ORIGIN, COUNT(*) FROM flights GROUP BY DEST ORDER BY COUNT(*) DESC LIMIT 10"
+  );
+
+  chart = new Barchart(
+   SCREENX/2, SCREENY/2, 800, 600,
+    "Flights by ORIGIN", "ORIGIN", "Number of Flights", data
+  );
   
 
   screens.add (new Screen(color(150)));
@@ -42,7 +55,8 @@ void setup()
 
 void draw() {
 
-  theScreen.draw();
+  //theScreen.draw();
+  chart.draw();
 }
 
 void mousePressed()
