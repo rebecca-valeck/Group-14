@@ -1,20 +1,24 @@
 
 void keyPressed() {
-  String newl =" ";
-  String oldl =" ";
-  
+  String newLetter ="";
 
-  if (theScreen.getEvent().label == "| " ) {
-    newl = str(key);
-    theScreen.getEvent().label = newl;
-    println(key);
+  
+  Button clickedButton = theScreen.getEvent();
+  if (clickedButton.label == "| " ) {
+    newLetter = str(key);
+    userInputDestination = newLetter;
+    clickedButton.label = userInputDestination;
   }
-  if (newl==oldl) {
-    oldl=newl;
-    newl = str(key);
-    theScreen.getEvent().label += newl;
-    println(key);
-    userInputDestination = theScreen.getEvent().label;
+
+  else if (clickedButton.label == userInputDestination) {
+    newLetter = str(key);
+    userInputDestination += newLetter;
+    clickedButton.label = userInputDestination;
   }
+  if (key == BACKSPACE){
+    userInputDestination = userInputDestination.substring(0,userInputDestination.length()-2);
+    clickedButton.label = userInputDestination;
+  } 
+  
   
 }
