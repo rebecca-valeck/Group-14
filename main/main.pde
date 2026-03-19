@@ -53,7 +53,6 @@ void setup()
 
   theScreen = screens.get(3);
   theScreen.addButton(new Button(40, 10, 100, 50, "Back"));
-  theScreen.addBarchart(new Barchart(SCREENX/2, SCREENY/2, 800, 600, 60, "ORIGIN", "Number of Flights"));
 
   theScreen = screens.get(0);
 
@@ -78,7 +77,10 @@ void mousePressed()
 
     else if (theScreen.getEvent().label == "search by destination")  theScreen.getEvent().label = "| ";
     else if (theScreen.getEvent().label == "clear" )  change = true;
-    else if (theScreen.getEvent().label == "graph" )  theScreen = screens.get(3);
+    else if (theScreen.getEvent().label == "graph" )  {
+      theScreen = screens.get(3);
+      screens.get(3).addBarchart(new Barchart(SCREENX/2, SCREENY/2, 800, 600, 60, userInputDestination, "Number of Flights"));
+    }
 
 
     else if(change && theScreen.getEvent().label==userInputDestination) {
