@@ -1,6 +1,8 @@
 class Screen {
 
   ArrayList<Button> button = new ArrayList<Button>();
+  ArrayList<Barchart> charts = new ArrayList<Barchart>();
+
   color backgroudColor ;
 
   Screen (color backgroudColor){
@@ -12,6 +14,9 @@ class Screen {
     button.add(b);
   }
 
+  void addBarchart(Barchart c){
+    charts.add(c);
+  }
   void draw() {
     
     background(backgroudColor);
@@ -23,6 +28,11 @@ class Screen {
     for (Button b : button)
     {
       b.draw();
+    }
+
+    for ( Barchart c: charts)
+    {
+      c.draw();
     }
 
   }
