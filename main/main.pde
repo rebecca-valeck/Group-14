@@ -6,6 +6,10 @@ ArrayList<Screen> screens = new ArrayList<Screen>();
 Screen theScreen;
 DatabaseQueries db = new DatabaseQueries();
 
+String userInputDestination="";
+boolean change=false;
+
+
 void settings() {
   size(SCREENX, SCREENY);
 }
@@ -33,6 +37,9 @@ void setup()
 
   theScreen.addButton(new Button(40, 300, 100, 50, "Add filters:"));
   theScreen.addButton(new Button(1300, 700, 100, 50, "SEARCH"));
+  theScreen.addButton(new Button(SCREENX/3-200, 50, 200, 50, "search by destination"));
+  theScreen.addButton(new Button(SCREENX/3+10, 50, 50, 50, "clear"));
+
   
   theScreen = screens.get(1);
   theScreen.addButton(new Button(40, 10, 100, 50, "Back"));
@@ -49,7 +56,7 @@ void setup()
 
 void draw() {
 
-  //theScreen.draw();
+  theScreen.draw();
   chart.draw();
 }
 
@@ -62,6 +69,14 @@ void mousePressed()
     else if (theScreen.getEvent().label == "say hi") println("hi!");
     else if (theScreen.getEvent().label == "SEARCH") theScreen = screens.get(2);
 
+    else if (theScreen.getEvent().label == "search by destination")  theScreen.getEvent().label = "| ";
+    else if (theScreen.getEvent().label == "clear" )  change = true;
+    
+
+    else if(change && theScreen.getEvent().label==userInputDestination) {
+    theScreen.getEvent().label = "| ";
+    userInputDestination = "";
+    }
   }
 }
 
