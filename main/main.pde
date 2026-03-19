@@ -6,6 +6,10 @@ ArrayList<Screen> screens = new ArrayList<Screen>();
 Screen theScreen;
 DatabaseQueries db = new DatabaseQueries();
 
+String userInputDestination="";
+boolean change=false;
+
+
 void settings() {
   size(SCREENX, SCREENY);
 }
@@ -14,14 +18,16 @@ void setup()
   DatabaseQueries.dbPath = sketchPath("database.db");
 
 
-  chart = new Barchart(
+  /*chart = new Barchart(
    SCREENX/2, SCREENY/2, 800, 600, 60, "ORIGIN", "Number of Flights"
   );
-  
+  */
 
   screens.add (new Screen(color(150)));
   screens.add (new Screen(color(150)));
   screens.add (new Screen(color(150)));
+  screens.add (new Screen(color(150)));
+
 
 
 
@@ -33,6 +39,10 @@ void setup()
 
   theScreen.addButton(new Button(40, 300, 100, 50, "Add filters:"));
   theScreen.addButton(new Button(1300, 700, 100, 50, "SEARCH"));
+  theScreen.addButton(new Button(SCREENX/3-200, 70, 200, 50, "search by destination"));
+  theScreen.addButton(new Button(SCREENX/3+10, 70, 50, 50, "clear"));
+  theScreen.addButton(new Button(SCREENX/2+10, SCREENY/2, 50, 50, "graph"));
+
   
   theScreen = screens.get(1);
   theScreen.addButton(new Button(40, 10, 100, 50, "Back"));
@@ -40,6 +50,10 @@ void setup()
 
   theScreen = screens.get(2);
   theScreen.addButton(new Button(40, 10, 100, 50, "Back"));
+
+  theScreen = screens.get(3);
+  theScreen.addButton(new Button(40, 10, 100, 50, "Back"));
+  theScreen.addBarchart(new Barchart(SCREENX/2, SCREENY/2, 800, 600, 60, "ORIGIN", "Number of Flights"));
 
   theScreen = screens.get(0);
 
@@ -49,8 +63,8 @@ void setup()
 
 void draw() {
 
-  //theScreen.draw();
-  chart.draw();
+  theScreen.draw();
+  //chart.draw();
 }
 
 void mousePressed()
@@ -62,6 +76,15 @@ void mousePressed()
     else if (theScreen.getEvent().label == "say hi") println("hi!");
     else if (theScreen.getEvent().label == "SEARCH") theScreen = screens.get(2);
 
+    else if (theScreen.getEvent().label == "search by destination")  theScreen.getEvent().label = "| ";
+    else if (theScreen.getEvent().label == "clear" )  change = true;
+    else if (theScreen.getEvent().label == "graph" )  theScreen = screens.get(3);
+
+
+    else if(change && theScreen.getEvent().label==userInputDestination) {
+    theScreen.getEvent().label = "| ";
+    userInputDestination = "";
+    }
   }
 }
 

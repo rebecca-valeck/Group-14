@@ -27,13 +27,13 @@
   boolean clicked(float mx, float my) {
     return mx > x && mx < x+w && my > y && my < y+h;
   }
-
+/*
   color getColor() {
     if (label.equals("red"))  return color(255, 0, 0);
     if (label.equals("green"))  return color(0, 255, 0);
     if (label.equals("blue"))  return color(0, 0, 255);
     return color(200);
-  }
+  }*/
 }
 
 //END CLASS
