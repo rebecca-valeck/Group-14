@@ -1,8 +1,12 @@
+import java.util.Arrays;
+
+
 final int SCREENX = 1920;
 final int SCREENY = 1080;
 Barchart chart;
  color squareColor = color(200);
 ArrayList<Screen> screens = new ArrayList<Screen>();
+
 Screen theScreen;
 DatabaseQueries db = new DatabaseQueries();
 
