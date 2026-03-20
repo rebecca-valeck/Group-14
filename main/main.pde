@@ -1,17 +1,14 @@
 import java.util.Arrays;
-
-
 final int SCREENX = 1920;
 final int SCREENY = 1080;
 Barchart chart;
- color squareColor = color(200);
+Color squareColor = color(200);
 ArrayList<Screen> screens = new ArrayList<Screen>();
-
 Screen theScreen;
 DatabaseQueries db = new DatabaseQueries();
 
 String userInputDestination="";
-boolean change=false;
+boolean change = false;
 
 
 void settings() {
@@ -22,75 +19,64 @@ void setup()
   DatabaseQueries.dbPath = sketchPath("database.db");
 
 
-  /*chart = new Barchart(
-   SCREENX/2, SCREENY/2, 800, 600, 60, "ORIGIN", "Number of Flights"
-  );
-  */
-
   screens.add (new Screen(color(150)));
   screens.add (new Screen(color(150)));
   screens.add (new Screen(color(150)));
   screens.add (new Screen(color(150)));
 
 
-
-
-
-  //screens.get(0).addButton(new Button(10, 10, 80, 40, "say hello!"));
-  //screens.get(1).addButton(new Button(10, 10, 80, 40, "say hi"));
-
-  theScreen = screens.get(0);
-
-  theScreen.addButton(new Button(40, 300, 100, 50, "Add filters:"));
-  theScreen.addButton(new Button(1300, 700, 100, 50, "SEARCH"));
-  theScreen.addButton(new Button(SCREENX/3-200, 70, 200, 50, "search by destination"));
-  theScreen.addButton(new Button(SCREENX/3+10, 70, 50, 50, "clear"));
-  theScreen.addButton(new Button(SCREENX/2+10, SCREENY/2, 50, 50, "graph"));
+  screens.get(0).addButton(new Button(40, 300, 100, 50, "Add filters:"));
+  screens.get(0).addButton(new Button(1300, 700, 100, 50, "SEARCH"));
+  screens.get(0).addButton(new Button(SCREENX/3-200, 70, 200, 50, "search by destination"));
+  screens.get(0).addButton(new Button(SCREENX/3+10, 70, 50, 50, "clear"));
+  screens.get(0).addButton(new Button(SCREENX/2+10, SCREENY/2, 50, 50, "graph"));
 
   
-  theScreen = screens.get(1);
-  theScreen.addButton(new Button(40, 10, 100, 50, "Back"));
+  screens.get(1).addButton(new Button(40, 10, 100, 50, "Back"));
 
+  screens.get(2).addButton(new Button(40, 10, 100, 50, "Back"));
 
-  theScreen = screens.get(2);
-  theScreen.addButton(new Button(40, 10, 100, 50, "Back"));
-
-  theScreen = screens.get(3);
-  theScreen.addButton(new Button(40, 10, 100, 50, "Back"));
+  screens.get(3).addButton(new Button(40, 10, 100, 50, "Back"));
 
   theScreen = screens.get(0);
 
-  //we are going to display the map with the plane and the map
 
 }
 
 void draw() {
-
   theScreen.draw();
-  //chart.draw();
 }
 
 void mousePressed()
 {
-  if (theScreen.getEvent()!= null) {
-    if (theScreen.getEvent().label == "say hello!") println("hello");
-    else if (theScreen.getEvent().label == "Back") theScreen = screens.get(0);
-    else if (theScreen.getEvent().label == "Add filters:") theScreen = screens.get(1);
-    else if (theScreen.getEvent().label == "say hi") println("hi!");
-    else if (theScreen.getEvent().label == "SEARCH") theScreen = screens.get(2);
-
-    else if (theScreen.getEvent().label == "search by destination")  theScreen.getEvent().label = "| ";
-    else if (theScreen.getEvent().label == "clear" )  change = true;
-    else if (theScreen.getEvent().label == "graph" )  {
-      theScreen = screens.get(3);
-      screens.get(3).addBarchart(new Barchart(SCREENX/2, SCREENY/2, 800, 600, 60, userInputDestination, "Number of Flights"));
+  for (Button b : theScreen.button) {
+    if (b.clicked(mouseX, mouseY)) {
+      switch(b.label){
+        case("Back"):
+          theScreen = screens.get(0);
+          break;
+        case("SEARCH"):
+          theScreen = screens.get(2);
+          break;
+        case("Add filters:"):
+          theScreen = screens.get(1);
+          break;
+        case("graph"):
+          theScreen = screens.get(3);
+          screens.get(3).addBarchart(new Barchart(SCREENX/2, SCREENY/2, 800, 600, 60, userInputDestination, "Number of Flights"));
+        break;
+        case("clear"):
+          change = true;
+          break;
+        case("search by destination"):
+          b.label = "| ";
+          break;
+        default:
+          return;
+      }
     }
 
 
-    else if(change && theScreen.getEvent().label==userInputDestination) {
-    theScreen.getEvent().label = "| ";
-    userInputDestination = "";
-    }
   }
 }
 
@@ -100,4 +86,3 @@ void mouseMoved() {
     else b.stroke = false;
   }
 }
-//END MAIN
