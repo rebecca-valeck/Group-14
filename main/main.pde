@@ -13,7 +13,10 @@ Button searchDes = new Button(SCREENX/3-200, 70, 200, 50, "search by destination
 Button graph = new Button(SCREENX/2+10, SCREENY/2, 50, 50, "graph");
 Button back = new Button(40, 10, 100, 50, "Back");
 
+FilterButton date = new FilterButton(40, 70, 450, 30, "Enter date and time in dd/mm/yyyy hh:mm format");
+
 String userInputDestination="";
+String userInputDate = "";
 boolean change = false;
 
 
@@ -38,6 +41,7 @@ void setup()
 
   
   screens.get(1).addButton(back);
+  screens.get(1).addFilterButton(date);
 
   screens.get(2).addButton(back);
 
@@ -69,6 +73,9 @@ void mousePressed()
   } 
   else if (searchDes.clicked(mouseX, mouseY)) {
     searchDes.label = "| ";
+  }
+  else if (date.clicked(mouseX, mouseY) && date.label == "Enter date and time in dd/mm/yyyy hh:mm format") {
+    date.label = "|";
   }
 
 /*
@@ -104,6 +111,11 @@ void mousePressed()
 
 void mouseMoved() {
   for (Button b : theScreen.button) {
+    if (b.clicked(mouseX, mouseY)) b.stroke = true;
+    else b.stroke = false;
+  }
+
+  for (FilterButton b : theScreen.filters) {
     if (b.clicked(mouseX, mouseY)) b.stroke = true;
     else b.stroke = false;
   }
