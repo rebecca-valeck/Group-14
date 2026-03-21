@@ -6,7 +6,7 @@ class Map{
   
 
   //float minLon = -123; // LAX - JFK case
-  //float maxLon = -71;  
+  //float maxLon = -69;  
   
   float minLon = -123; // MIA - LAS
   float maxLon = -72;  // Decreased to push MIA further Right
@@ -53,7 +53,7 @@ class Map{
 
   // Others airport is represented as a smaller dot
   void renderNormal(float x, float y) {
-    fill(0,0,0,0);                         //??` currently just fill with 0, need discuse -> color this or not
+    fill(0,0,0,0);                         //?? currently just fill with 0, need discuse -> color this or not
     noStroke();
     ellipse(x , y, 4, 4);
   }

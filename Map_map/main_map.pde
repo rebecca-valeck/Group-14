@@ -26,7 +26,7 @@ void draw() {
 }
 
 /*
-Im hardcode the min,max long/lat so that it fit possiton according to the map
+Im hardcode the min,max long/lat so that it fit possition according to the map
 as the cooridinate is 3D, but processing is 2D so it does not have gernaral min,max long/lat
 for all destination
 Please use 2 of these couple below
