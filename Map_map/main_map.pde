@@ -1,8 +1,10 @@
 
 PImage bg;
 
-String currentOrigin = "JFK";      // replace this with the input from user
-String currentDest = "LAX";
+String currentOrigin = "MIA";      // 
+String currentDest = "LAS";
+//String currentOrigin = "LAX";      // replace this with the input from user
+//String currentDest = "JFK";
 Map graph;
 
 void setup() {
@@ -20,4 +22,14 @@ void draw() {
   
   //Dest and Origin are highlighted 
   graph.display(currentOrigin, currentDest);
+  
 }
+
+/*
+Im hardcode the min,max long/lat so that it fit possiton according to the map
+as the cooridinate is 3D, but processing is 2D so it does not have gernaral min,max long/lat
+for all destination
+Please use 2 of these couple below
+  MIA - LAS : minLon = -123 ; maxLon = -72; minLat = 22.5;  maxLat = 51.0
+  LAX - JFK :  minLon = -124 ; maxLon = -69; minLat = 22.5;  maxLat = 51.0 (this also work with MIA - LAS but MIA is abit up to north)
+*/
