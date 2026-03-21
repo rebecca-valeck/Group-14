@@ -12,6 +12,7 @@ Button search = new Button(1300, 700, 100, 50, "SEARCH");
 Button searchDes = new Button(SCREENX/3-200, 70, 200, 50, "search by destination");
 Button graph = new Button(SCREENX/2+10, SCREENY/2, 50, 50, "graph");
 Button back = new Button(40, 10, 100, 50, "Back");
+PFont  font;
 
 String userInputDestination="";
 boolean change = false;
@@ -23,12 +24,13 @@ void settings() {
 void setup()
 {
   DatabaseQueries.dbPath = sketchPath("database.db");
+  font = loadFont("PoorRichard-Regular-30.vlw");
+  textFont(font);
 
-
-  screens.add (new Screen(color(150)));
-  screens.add (new Screen(color(150)));
-  screens.add (new Screen(color(150)));
-  screens.add (new Screen(color(150)));
+  screens.add (new Screen(color(#D3DCEE)));
+  screens.add (new Screen(color(#D3DCEE)));
+  screens.add (new Screen(color(#D3DCEE)));
+  screens.add (new Screen(color(#D3DCEE)));
 
 
   screens.get(0).addButton(addFilter);
