@@ -2,10 +2,16 @@ import java.util.Arrays;
 final int SCREENX = 1920;
 final int SCREENY = 1080;
 Barchart chart;
-Color squareColor = color(200);
+color squareColor = color(200);
 ArrayList<Screen> screens = new ArrayList<Screen>();
 Screen theScreen;
 DatabaseQueries db = new DatabaseQueries();
+
+Button addFilter = new Button(40, 300, 100, 50, "Add filters:");
+Button search = new Button(1300, 700, 100, 50, "SEARCH");
+Button searchDes = new Button(SCREENX/3-200, 70, 200, 50, "search by destination");
+Button graph = new Button(SCREENX/2+10, SCREENY/2, 50, 50, "graph");
+Button back = new Button(40, 10, 100, 50, "Back");
 
 String userInputDestination="";
 boolean change = false;
@@ -25,18 +31,17 @@ void setup()
   screens.add (new Screen(color(150)));
 
 
-  screens.get(0).addButton(new Button(40, 300, 100, 50, "Add filters:"));
-  screens.get(0).addButton(new Button(1300, 700, 100, 50, "SEARCH"));
-  screens.get(0).addButton(new Button(SCREENX/3-200, 70, 200, 50, "search by destination"));
-  screens.get(0).addButton(new Button(SCREENX/3+10, 70, 50, 50, "clear"));
-  screens.get(0).addButton(new Button(SCREENX/2+10, SCREENY/2, 50, 50, "graph"));
+  screens.get(0).addButton(addFilter);
+  screens.get(0).addButton(search);
+  screens.get(0).addButton(searchDes);
+  screens.get(0).addButton(graph);
 
   
-  screens.get(1).addButton(new Button(40, 10, 100, 50, "Back"));
+  screens.get(1).addButton(back);
 
-  screens.get(2).addButton(new Button(40, 10, 100, 50, "Back"));
+  screens.get(2).addButton(back);
 
-  screens.get(3).addButton(new Button(40, 10, 100, 50, "Back"));
+  screens.get(3).addButton(back);
 
   theScreen = screens.get(0);
 
@@ -49,6 +54,24 @@ void draw() {
 
 void mousePressed()
 {
+  if(back.clicked(mouseX, mouseY)){
+    theScreen = screens.get(0);
+  } 
+  else if (search.clicked(mouseX, mouseY)) {
+    theScreen = screens.get(2);
+  } 
+  else if (addFilter.clicked(mouseX, mouseY)) {
+    theScreen = screens.get(1);
+  } 
+  else if (graph.clicked(mouseX, mouseY)) {
+    theScreen = screens.get(3);
+    screens.get(3).addBarchart(new Barchart(SCREENX/2, SCREENY/2, 800, 600, 60, userInputDestination, "Number of Flights"));
+  } 
+  else if (searchDes.clicked(mouseX, mouseY)) {
+    searchDes.label = "| ";
+  }
+
+/*
   for (Button b : theScreen.button) {
     if (b.clicked(mouseX, mouseY)) {
       switch(b.label){
@@ -75,9 +98,8 @@ void mousePressed()
           return;
       }
     }
-
-
   }
+    */
 }
 
 void mouseMoved() {
