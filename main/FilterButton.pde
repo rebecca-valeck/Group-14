@@ -7,7 +7,7 @@ class FilterButton extends Button{
 
   @Override
   boolean clicked(float mx, float my){
-      if(mx > x && mx < x+w && my > y && my < y+h){
+      if(mx > x && mx < x+w && my > y && my < y+h && mousePressed){
         if (checked) checked = false;
         else checked = true;
         return true;

@@ -14,6 +14,10 @@ Button graph = new Button(SCREENX/2+10, SCREENY/2, 50, 50, "graph");
 Button back = new Button(40, 10, 100, 50, "Back");
 
 FilterButton date = new FilterButton(40, 70, 450, 30, "Enter date and time in dd/mm/yyyy hh:mm format");
+FilterButton origin = new FilterButton(500, 70, 100, 30, "Origin");
+ArrayList<ArrayList<String>> originAirports;
+ArrayList<Checkbox> origins = new ArrayList<Checkbox>();
+float oy = 120;
 
 String userInputDestination="";
 String userInputDate = "";
@@ -42,6 +46,7 @@ void setup()
   
   screens.get(1).addButton(back);
   screens.get(1).addFilterButton(date);
+  screens.get(1).addFilterButton(origin);
 
   screens.get(2).addButton(back);
 
@@ -49,11 +54,24 @@ void setup()
 
   theScreen = screens.get(0);
 
-
+  originAirports = db.query("SELECT DISTINCT(ORIGIN) FROM flights ORDER BY ORIGIN ASC;");
+  for(int i = 0; i < originAirports.size(); i++){
+    origins.add(new Checkbox(510, oy, originAirports.get(i).get(0)));
+    oy += 25;
+  }
 }
 
 void draw() {
   theScreen.draw();
+
+  if(origin.checked){
+    fill(255);
+    stroke(0);
+    rect(500, 110, 300, 500);
+    for (Checkbox c: origins){
+      c.draw();
+    }
+  }
 }
 
 void mousePressed()
@@ -76,6 +94,10 @@ void mousePressed()
   }
   else if (date.clicked(mouseX, mouseY) && date.label == "Enter date and time in dd/mm/yyyy hh:mm format") {
     date.label = "|";
+  }
+  origin.clicked(mouseX, mouseY);
+  for (Checkbox c: origins){
+    c.clicked(mouseX, mouseY);
   }
 
 /*
