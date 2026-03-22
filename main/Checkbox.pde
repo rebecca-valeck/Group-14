@@ -1,17 +1,17 @@
 class Checkbox {
-    float x, y;
+    float x, y = 0;
     int w = 20;
     int h = 20;
     String label;
     boolean checked = false;
 
-    Checkbox(float x, float y, String str){
+    Checkbox(float x, String str){
         this.x = x;
-        this.y = y;
         label = str;
     }
 
-    void draw(){
+    void draw(float y){
+        this.y = y;
         stroke(0);
         fill(255);
         rect(x, y, w, h);

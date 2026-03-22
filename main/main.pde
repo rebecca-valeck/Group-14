@@ -17,7 +17,8 @@ FilterButton date = new FilterButton(40, 70, 450, 30, "Enter date and time in dd
 FilterButton origin = new FilterButton(500, 70, 100, 30, "Origin");
 ArrayList<ArrayList<String>> originAirports;
 ArrayList<Checkbox> origins = new ArrayList<Checkbox>();
-float oy = 120;
+Scrollbar bar;
+int offset = 0;
 
 String userInputDestination="";
 String userInputDate = "";
@@ -56,9 +57,9 @@ void setup()
 
   originAirports = db.query("SELECT DISTINCT(ORIGIN) FROM flights ORDER BY ORIGIN ASC;");
   for(int i = 0; i < originAirports.size(); i++){
-    origins.add(new Checkbox(510, oy, originAirports.get(i).get(0)));
-    oy += 25;
+    origins.add(new Checkbox(510, originAirports.get(i).get(0)));
   }
+  bar = new Scrollbar(800 - 8, 110, 16, 505, 16);
 }
 
 void draw() {
@@ -67,10 +68,27 @@ void draw() {
   if(origin.checked){
     fill(255);
     stroke(0);
-    rect(500, 110, 300, 500);
-    for (Checkbox c: origins){
-      c.draw();
+    rect(500, 110, 300, 505);
+
+    int i = ((int)bar.getPos() / (bar.sh/(origins.size()-20))-22);
+    if(i < origins.size() - 21 && i >= 0){
+      for (int j = 0; j <20; j++){
+        origins.get(i+j).draw(115+ j * 25);
+      }
+    } else if (i >= origins.size()-21){
+      for (int j = 0; j <20; j++){
+        int index = origins.size() -20;
+        origins.get(index+j).draw(115+ j * 25);
+      }
+    }else if (i < 0){
+      for (int j = 0; j <20; j++){
+        int index = 0;
+        origins.get(index+j).draw(115+ j * 25);
+      }
     }
+
+    bar.update();
+    bar.draw();
   }
 }
 
@@ -92,8 +110,11 @@ void mousePressed()
   else if (searchDes.clicked(mouseX, mouseY)) {
     searchDes.label = "| ";
   }
-  else if (date.clicked(mouseX, mouseY) && date.label == "Enter date and time in dd/mm/yyyy hh:mm format") {
-    date.label = "|";
+  else if (date.clicked(mouseX, mouseY)){
+    origin.checked = false;
+    if (date.label == "Enter date and time in dd/mm/yyyy hh:mm format") {
+      date.label = "|";
+    }
   }
   origin.clicked(mouseX, mouseY);
   for (Checkbox c: origins){
