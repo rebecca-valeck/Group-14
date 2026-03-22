@@ -7,11 +7,11 @@ ArrayList<Screen> screens = new ArrayList<Screen>();
 Screen theScreen;
 DatabaseQueries db = new DatabaseQueries();
 
-Button addFilter = new Button(40, 300, 100, 50, "Add filters:");
-Button search = new Button(1300, 700, 100, 50, "SEARCH");
-Button searchDes = new Button(SCREENX/3-200, 70, 200, 50, "search by destination");
-Button graph = new Button(SCREENX/2+10, SCREENY/2, 50, 50, "graph");
-Button back = new Button(40, 10, 100, 50, "Back");
+Button addFilter = new Button(40, 300, 100, 50, "Add filters:", 30);
+Button search = new Button(1300, 700, 100, 50, "SEARCH", 30);
+Button searchDes = new Button(SCREENX/3-75, 150, 370, 70, "Search by destination", 30);
+Button graph = new Button(SCREENX/2+10, SCREENY/2, 50, 50, "graph",30);
+Button back = new Button(40, 10, 100, 50, "Back",30);
 PFont  font;
 
 String userInputDestination="";
@@ -23,6 +23,7 @@ void settings() {
 }
 void setup()
 {
+  noStroke();
   DatabaseQueries.dbPath = sketchPath("database.db");
   font = loadFont("PoorRichard-Regular-30.vlw");
   textFont(font);
@@ -51,6 +52,7 @@ void setup()
 }
 
 void draw() {
+
   theScreen.draw();
 }
 
