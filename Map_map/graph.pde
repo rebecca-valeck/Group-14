@@ -3,7 +3,8 @@ class Map{
 
   Table airportTable; // container to hold  CSV data
  
-   // --- HArd code max/min lat long -> no need more 
+   // --- Hard code max/min lat long i try different value for them
+   //    by trying random and fixing untill it fit-> no need more 
 
   //float minLon = -123; // LAX - JFK case
   //float maxLon = -69;  
@@ -37,12 +38,11 @@ class Map{
       float lon = row.getFloat("Longitude");
   
       // --- THE FIX: after using anchor point, miami x = 798 y = 551 ; washing ton x = 62 y = 26
-      
+      // I got the ideas of using anchor point to find out the pixel position form Gemini
       // Decide min/max lat/long, width, height
       //using your pixels: 62 to 798
       float x = map(lon, -120, -80.19, 62, 798);
       
-      // Latitude (Y): Map from Washington (48.3) to Miami (25.76)
       // using pixels: 26 to 551
       float y = map(lat, 48.3, 25.76, 26, 551);
   
