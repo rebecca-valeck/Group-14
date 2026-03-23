@@ -22,7 +22,8 @@ void draw() {
   
   //Dest and Origin are highlighted 
   graph.display(currentOrigin, currentDest);
-  
+  fill(0);
+  text("X: " + mouseX + "  Y: " + mouseY, mouseX, mouseY);
 }
 
 /*
