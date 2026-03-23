@@ -19,12 +19,15 @@ class Screen {
   }
   void draw() {
     
-    background(backgroudColor);
-    textSize(20);
+    fill(#8797B2);
+    rect(0, 0, 1900, 100);
 
-     String s = "Search planes!";
-    fill(0);
-    text(s, 500, 5, 300, 100);  
+    String s = "S E A R C H  P L A N E S !";
+    fill(#D3DCEE);
+    textAlign(CENTER, CENTER);
+    textSize(60);
+    text(s, SCREENX/2-200, 50);  
+
     for (Button b : button)
     {
       b.draw();
