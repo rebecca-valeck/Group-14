@@ -29,9 +29,11 @@ class Screen {
     fill(#2E5E8E);
     rect(0, 0, 1900, 100);
 
-     String s = "Search planes!";
+    textSize(60);
+    String s = "S E A R C H   P L A N E S !";
     fill(0);
-    text(s, 500, 5, 300, 100);  
+    textAlign(CENTER, CENTER);
+    text(s, 0, 0, width, 100);  
     for (Button b : button)
     {
       b.draw();

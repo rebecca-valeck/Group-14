@@ -1,6 +1,6 @@
 import java.util.Arrays;
-final int SCREENX = 900;
-final int SCREENY = 600;
+final int SCREENX = 1950;
+final int SCREENY = 1200;
 DatabaseQueries db = new DatabaseQueries();
 Barchart chart;
 Screen theScreen;
@@ -10,19 +10,13 @@ ArrayList<ArrayList<String>> originAirports; //= db.query("SELECT DISTINCT(ORIGI
 
 color squareColor = color(200);
 
-Button addFilter = new Button(40, 300, 100, 50, "Add filters:");
-Button search = new Button(1300, 700, 100, 50, "SEARCH");
-Button searchDes = new Button(SCREENX/3-200, 70, 200, 50, "search by destination");
-Button graph = new Button(SCREENX/2+10, SCREENY/2, 50, 50, "graph");
-Button back = new Button(40, 10, 100, 50, "Back");
 
-Button date = new Button(40, 70, 450, 30, "Enter date and time in dd/mm/yyyy hh:mm format");
-Button origin = new Button(500, 70, 100, 30, "Origin");
+Button date = new Button(40, 70, 450, 30, "Enter date and time in dd/mm/yyyy hh:mm format",30);
+Button origin = new Button(500, 70, 100, 30, "Origin",30);
 Scrollbar bar;
 int offset = 0;
 Checkbox cancelled = new Checkbox(610, "Cancelled");
-Screen theScreen;
-DatabaseQueries db = new DatabaseQueries();
+
 PImage plane;
 Button addFilter = new Button(40, 300, 100, 50, "Add filters:", 30);
 Button search = new Button(1300, 700, 100, 50, "SEARCH", 30);
@@ -30,7 +24,6 @@ Button searchDes = new Button(SCREENX/3-75, 150, 370, 70, "Search by destination
 Button graph = new Button(SCREENX/2+10, SCREENY/2, 50, 50, "graph",30);
 Button back = new Button(40, 10, 100, 50, "Back",30);
 PFont  font;
-float x
 
 String userInputDestination="";
 String userInputDate = "";
@@ -38,21 +31,23 @@ boolean change = false;
 
 
 void settings() {
-  size(SCREENX, SCREENY);
+  fullScreen();
 }
 void setup()
 {
   plane=loadImage("aereo.jpg");
+  font = loadFont("PoorRichard-Regular-30.vlw");
+  textFont(font);
   noStroke();
   DatabaseQueries.dbPath = sketchPath("database.db");
   originAirports = db.query("SELECT DISTINCT(ORIGIN) FROM flights ORDER BY ORIGIN ASC");
   System.out.println(originAirports);
 
 
-  screens.add (new Screen(color(#2E5E8E)));
-  screens.add (new Screen(color(#2E5E8E)));
-  screens.add (new Screen(color(#2E5E8E)));
-  screens.add (new Screen(color(#2E5E8E)));
+  screens.add (new Screen(color(#D3DCEE)));
+  screens.add (new Screen(color(#D3DCEE)));
+  screens.add (new Screen(color(#D3DCEE)));
+  screens.add (new Screen(color(#D3DCEE)));
 
 
   screens.get(0).addButton(addFilter);
@@ -82,6 +77,7 @@ void setup()
 void draw() {
   plane.resize(SCREENX/3,100);
   image (plane, -plane.width, 0);
+  
   theScreen.draw();
 
   if(origin.checked){
@@ -113,9 +109,7 @@ void draw() {
 
 void mousePressed()
 {
-  if(plane.x != 0){
-    plane.x += 0.2;
-  }
+
   if(back.clicked(mouseX, mouseY)){
     theScreen = screens.get(0);
   } 
