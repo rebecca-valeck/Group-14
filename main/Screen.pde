@@ -26,6 +26,8 @@ class Screen {
     
     background(backgroudColor);
     textSize(20);
+    fill(#2E5E8E);
+    rect(0, 0, 1900, 100);
 
      String s = "Search planes!";
     fill(0);
