@@ -22,7 +22,7 @@ public class DatabaseQueries {
 
                 return queryResultArray;      
         }catch(ClassNotFoundException | SQLException e){
-            //e.printStackTrace();
+            e.printStackTrace();
             return (queryResultArray);
         }
     }
@@ -44,7 +44,7 @@ public class DatabaseQueries {
             return queryResultArray;
             
         }catch(SQLException e){
-            //e.printStackTrace();
+            e.printStackTrace();
             return (queryResultArray);
         }
     }

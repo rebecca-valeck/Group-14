@@ -1,11 +1,14 @@
 import java.util.Arrays;
-final int SCREENX = 1920;
-final int SCREENY = 1080;
-Barchart chart;
-color squareColor = color(200);
-ArrayList<Screen> screens = new ArrayList<Screen>();
-Screen theScreen;
+final int SCREENX = 900;
+final int SCREENY = 600;
 DatabaseQueries db = new DatabaseQueries();
+Barchart chart;
+Screen theScreen;
+ArrayList<Screen> screens = new ArrayList<Screen>();
+ArrayList<Checkbox> origins = new ArrayList<Checkbox>();
+ArrayList<ArrayList<String>> originAirports; //= db.query("SELECT DISTINCT(ORIGIN) FROM flights ORDER BY ORIGIN ASC");
+
+color squareColor = color(200);
 
 Button addFilter = new Button(40, 300, 100, 50, "Add filters:");
 Button search = new Button(1300, 700, 100, 50, "SEARCH");
@@ -15,8 +18,6 @@ Button back = new Button(40, 10, 100, 50, "Back");
 
 Button date = new Button(40, 70, 450, 30, "Enter date and time in dd/mm/yyyy hh:mm format");
 Button origin = new Button(500, 70, 100, 30, "Origin");
-ArrayList<ArrayList<String>> originAirports;
-ArrayList<Checkbox> origins = new ArrayList<Checkbox>();
 Scrollbar bar;
 int offset = 0;
 Checkbox cancelled = new Checkbox(610, "Cancelled");
@@ -32,6 +33,8 @@ void settings() {
 void setup()
 {
   DatabaseQueries.dbPath = sketchPath("database.db");
+  originAirports = db.query("SELECT DISTINCT(ORIGIN) FROM flights ORDER BY ORIGIN ASC");
+  System.out.println(originAirports);
 
 
   screens.add (new Screen(color(150)));
@@ -50,6 +53,7 @@ void setup()
   screens.get(1).addButton(date);
   screens.get(1).addButton(origin);
   screens.get(1).addCheckbox(cancelled);
+  screens.get(1).addButton(graph);
 
   screens.get(2).addButton(back);
 
@@ -57,7 +61,6 @@ void setup()
 
   theScreen = screens.get(0);
 
-  originAirports = db.query("SELECT DISTINCT(ORIGIN) FROM flights ORDER BY ORIGIN ASC;");
   for(int i = 0; i < originAirports.size(); i++){
     origins.add(new Checkbox(510, originAirports.get(i).get(0)));
   }
@@ -107,7 +110,7 @@ void mousePressed()
   } 
   else if (graph.clicked(mouseX, mouseY)) {
     theScreen = screens.get(3);
-    screens.get(3).addBarchart(new Barchart(SCREENX/2, SCREENY/2, 800, 600, 60, userInputDestination, "Number of Flights"));
+    screens.get(3).addBarchart(new Barchart(SCREENX/2, SCREENY/2, 800, 600, 60, origins));
   } 
   else if (searchDes.clicked(mouseX, mouseY)) {
     searchDes.label = "| ";
@@ -123,36 +126,6 @@ void mousePressed()
     c.clicked(mouseX, mouseY);
   }
   cancelled.clicked(mouseX, mouseY);
-
-/*
-  for (Button b : theScreen.button) {
-    if (b.clicked(mouseX, mouseY)) {
-      switch(b.label){
-        case("Back"):
-          theScreen = screens.get(0);
-          break;
-        case("SEARCH"):
-          theScreen = screens.get(2);
-          break;
-        case("Add filters:"):
-          theScreen = screens.get(1);
-          break;
-        case("graph"):
-          theScreen = screens.get(3);
-          screens.get(3).addBarchart(new Barchart(SCREENX/2, SCREENY/2, 800, 600, 60, userInputDestination, "Number of Flights"));
-        break;
-        case("clear"):
-          change = true;
-          break;
-        case("search by destination"):
-          b.label = "| ";
-          break;
-        default:
-          return;
-      }
-    }
-  }
-    */
 }
 
 void mouseMoved() {

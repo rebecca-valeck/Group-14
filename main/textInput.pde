@@ -4,9 +4,7 @@ ArrayList<String> beta = new ArrayList<String>(Arrays.asList(" ", "0", "1", "2",
 void keyPressed() {
   String newLetter = str(key);
   Button clickedButton = theScreen.getEvent();
- // FilterButton clickedFButton = theScreen.getFEvent();
 
-  
   if (clickedButton != null){
     if (alpha.contains(newLetter)){
       if (clickedButton.label == "| "  || clickedButton.label == "" ) {
@@ -24,28 +22,8 @@ void keyPressed() {
     } 
       if (key == ENTER ||  key == RETURN){
         theScreen = screens.get(3);
-        screens.get(3).addBarchart(new Barchart(SCREENX/2, SCREENY/2, 800, 600, 60, userInputDestination, "Number of Flights"));
+        screens.get(3).addBarchart(new Barchart(SCREENX/2, SCREENY/2, 800, 600, 60, origins));
     } 
   }
-/*
-  if (clickedFButton != null){
-    if (beta.contains(newLetter)){
-      if (clickedFButton.label == "|" || clickedFButton.label == "" ) {
-        userInputDate = newLetter;
-        clickedFButton.label = userInputDate;
-      }
-      else if (clickedFButton.label == userInputDate) {
-        userInputDate += newLetter;
-        clickedFButton.label = userInputDate;
-      }
-    }
-    if (key == BACKSPACE && clickedFButton.label.length() > 0){
-      userInputDate = userInputDate.substring(0,userInputDate.length()-1);
-      clickedFButton.label = userInputDate;
-    } 
-      //if (key == ENTER ||  key == RETURN){
-        //theScreen = screens.get(3);
-        //screens.get(3).addBarchart(new Barchart(SCREENX/2, SCREENY/2, 800, 600, 60, userInputDestination, "Number of Flights"));
-    //}
-  }*/
+
 }
