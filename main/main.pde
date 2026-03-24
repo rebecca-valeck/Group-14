@@ -72,6 +72,24 @@ void setup()
     origins.add(new Checkbox(510, originAirports.get(i).get(0)));
   }
   bar = new Scrollbar(800 - 8, 110, 16, 505, 16);
+  ArrayList<Plane> planes = new ArrayList<Plane>();
+  ArrayList<ArrayList<String>> planesQuery = db.query("SELECT * from flights WHERE ORIGIN = BOI");
+  for (ArrayList<String> plane : planesQuery){
+    planes.add(Plane(
+      plane.get(0),
+      plane.get(0),
+      plane.get(0),
+      plane.get(0),
+      plane.get(0),
+      plane.get(0),
+      plane.get(0),
+      plane.get(0),
+      plane.get(0),
+      plane.get(0),
+      plane.get(0),
+      plane.get(0)
+    ));
+  }
 }
 
 void draw() {

@@ -4,17 +4,17 @@ class Plane {
     String origin_state_abr; 
     String dest;
     String dest_state_abr;
-    float dest_wac;
-    float crs_dep_time;
-    float crs_arr_time;
-    float arr_time;
-    float cancelled;
-    float diverted;
-    float distance;
+    String dest_wac;
+    String crs_dep_time;
+    String crs_arr_time;
+    String arr_time;
+    String cancelled;
+    String diverted;
+    String distance;
 
     Plane( String date, String origin, String origin_state_abr, String dest,
-           String dest_state_abr, float crs_dep_time, float dest_wac , float crs_arr_time,
-           float arr_time, float cancelled, float diverted, float distance) {
+           String dest_state_abr, String crs_dep_time, String dest_wac , String crs_arr_time,
+           String arr_time, String cancelled, String diverted, String distance) {
         this.date = date;
         this.origin = origin;
         this.origin_state_abr = origin_state_abr;
