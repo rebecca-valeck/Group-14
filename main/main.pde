@@ -1,6 +1,7 @@
 import java.util.Arrays;
-final int SCREENX = 1950;
-final int SCREENY = 1200;
+final int SCREENX = 1280;
+final int SCREENY = 720;
+
 DatabaseQueries db = new DatabaseQueries();
 Barchart chart;
 Screen theScreen;
@@ -18,8 +19,8 @@ int offset = 0;
 Checkbox cancelled = new Checkbox(610, "Cancelled");
 
 PImage plane;
-Button addFilter = new Button(40, 300, 100, 50, "Add filters:", 30);
-Button search = new Button(1300, 700, 100, 50, "SEARCH", 30);
+//Button addFilter = new Button(50, 300, 100, 50, "Add filters:", 30);
+Button search = new Button(SCREENX/2, SCREENY/2, 300, 50, "SEARCH", 30);
 Button searchDes = new Button(SCREENX/3-75, 150, 370, 70, "Search by destination", 30);
 Button graph = new Button(SCREENX/2+10, SCREENY/2, 50, 50, "graph",30);
 Button back = new Button(40, 10, 100, 50, "Back",30);
@@ -31,7 +32,7 @@ boolean change = false;
 
 
 void settings() {
-  fullScreen();
+  size(SCREENX,SCREENY);
 }
 void setup()
 {
@@ -50,17 +51,17 @@ void setup()
   screens.add (new Screen(color(#D3DCEE)));
 
 
-  screens.get(0).addButton(addFilter);
+ // screens.get(0).addButton(addFilter);
   screens.get(0).addButton(search);
   screens.get(0).addButton(searchDes);
   screens.get(0).addButton(graph);
 
   
-  screens.get(1).addButton(back);
-  screens.get(1).addButton(date);
-  screens.get(1).addButton(origin);
-  screens.get(1).addCheckbox(cancelled);
-  screens.get(1).addButton(graph);
+  //screens.get(1).addButton(back);
+  screens.get(0).addButton(date);
+  screens.get(0).addButton(origin);
+  screens.get(0).addCheckbox(cancelled);
+  screens.get(0).addButton(graph);
 
   screens.get(2).addButton(back);
 
@@ -116,9 +117,9 @@ void mousePressed()
   else if (search.clicked(mouseX, mouseY)) {
     theScreen = screens.get(2);
   } 
-  else if (addFilter.clicked(mouseX, mouseY)) {
-    theScreen = screens.get(1);
-  } 
+ // else if (addFilter.clicked(mouseX, mouseY)) {
+  //  theScreen = screens.get(1);
+  //} 
   else if (graph.clicked(mouseX, mouseY)) {
     theScreen = screens.get(3);
     screens.get(3).addBarchart(new Barchart(SCREENX/2, SCREENY/2, 800, 600, 60, origins));
