@@ -32,15 +32,16 @@ void settings() {
 }
 void setup()
 {
+  noStroke();
   DatabaseQueries.dbPath = sketchPath("database.db");
   originAirports = db.query("SELECT DISTINCT(ORIGIN) FROM flights ORDER BY ORIGIN ASC");
   System.out.println(originAirports);
 
 
-  screens.add (new Screen(color(150)));
-  screens.add (new Screen(color(150)));
-  screens.add (new Screen(color(150)));
-  screens.add (new Screen(color(150)));
+  screens.add (new Screen(color(#D3DCEE)));
+  screens.add (new Screen(color(#D3DCEE)));
+  screens.add (new Screen(color(#D3DCEE)));
+  screens.add (new Screen(color(#D3DCEE)));
 
 
   screens.get(0).addButton(addFilter);
@@ -68,6 +69,7 @@ void setup()
 }
 
 void draw() {
+
   theScreen.draw();
 
   if(origin.checked){
