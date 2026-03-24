@@ -25,7 +25,7 @@ class Plane {
         this.crs_arr_time = crs_arr_time;
         this.cancelled = cancelled;
         this.diverted = diverted; 
-        this distance = distance;
+        this.distance = distance;
     }
     // void draw (){
     //     circle (map.getXcoordinate (origin, origin_state_abr),
