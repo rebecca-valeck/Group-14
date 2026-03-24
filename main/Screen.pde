@@ -19,7 +19,7 @@ class Screen {
   }
   void draw() {
     
-    fill(#8797B2);
+    fill(#2E5E8E);
     rect(0, 0, 1900, 100);
 
     String s = "S E A R C H  P L A N E S !";
