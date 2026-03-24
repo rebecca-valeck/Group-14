@@ -1,15 +1,16 @@
  class Button {
-  float x, y, w, h;
+  float x, y, w, h, r;
   String label;
   boolean stroke = false;
   boolean checked = false;
 
-  Button(float x, float y, float w, float h, String label) {
+  Button(float x, float y, float w, float h, String label, float r) {
     this.x=x;
     this.y=y;
     this.w=w;
     this.h=h;
     this.label = label;
+    this.r = r;
   }
 
   void draw() {
@@ -18,7 +19,7 @@
     else noStroke();
     
     fill(180);
-    rect(x, y, w, h);
+    rect(x, y, w, h, r);
 
     fill(0);
     textAlign(CENTER, CENTER);
