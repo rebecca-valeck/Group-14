@@ -18,7 +18,8 @@ class Checkbox {
 
         fill(0);
         textSize(h);
-        text(label, x+45, y+h/2);
+        textAlign(LEFT, CENTER);
+        text(label, x+w+5, y+h/2);
 
         if (checked){
             textAlign(CENTER,CENTER);

@@ -2,8 +2,7 @@ class Screen {
 
   ArrayList<Button> button = new ArrayList<Button>();
   ArrayList<Barchart> charts = new ArrayList<Barchart>();
-  ArrayList<FilterButton> filters = new ArrayList<FilterButton>();
-
+  ArrayList<Checkbox> checks = new ArrayList<Checkbox>();
   color backgroudColor ;
 
   Screen (color backgroudColor){
@@ -19,8 +18,8 @@ class Screen {
     charts.add(c);
   }
 
-  void addFilterButton(FilterButton f){
-    filters.add(f);
+  void addCheckbox(Checkbox c){
+    checks.add(c);
   }
 
   void draw() {
@@ -41,10 +40,9 @@ class Screen {
       c.draw();
     }
 
-    for (FilterButton f: filters){
-      f.draw();
+    for (Checkbox c: checks){
+      c.draw(70);
     }
-
   }
 
 
@@ -52,13 +50,6 @@ class Screen {
   {
     for (Button b : button) {
       if (b.clicked(mouseX, mouseY)) return b;
-    }
-    return null;
-  }
-
-  FilterButton getFEvent(){
-    for (FilterButton f: filters){
-      if (f.clicked(mouseX, mouseY)) return f;
     }
     return null;
   }

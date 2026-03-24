@@ -4,7 +4,7 @@ ArrayList<String> beta = new ArrayList<String>(Arrays.asList(" ", "0", "1", "2",
 void keyPressed() {
   String newLetter = str(key);
   Button clickedButton = theScreen.getEvent();
-  FilterButton clickedFButton = theScreen.getFEvent();
+ // FilterButton clickedFButton = theScreen.getFEvent();
 
   
   if (clickedButton != null){
@@ -27,7 +27,7 @@ void keyPressed() {
         screens.get(3).addBarchart(new Barchart(SCREENX/2, SCREENY/2, 800, 600, 60, userInputDestination, "Number of Flights"));
     } 
   }
-
+/*
   if (clickedFButton != null){
     if (beta.contains(newLetter)){
       if (clickedFButton.label == "|" || clickedFButton.label == "" ) {
@@ -47,5 +47,5 @@ void keyPressed() {
         //theScreen = screens.get(3);
         //screens.get(3).addBarchart(new Barchart(SCREENX/2, SCREENY/2, 800, 600, 60, userInputDestination, "Number of Flights"));
     //}
-  }
+  }*/
 }

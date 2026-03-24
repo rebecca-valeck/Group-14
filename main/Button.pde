@@ -2,6 +2,7 @@
   float x, y, w, h;
   String label;
   boolean stroke = false;
+  boolean checked = false;
 
   Button(float x, float y, float w, float h, String label) {
     this.x=x;
@@ -24,8 +25,15 @@
     text(label, x+w/2, y+h/2);
   }
 
-  boolean clicked(float mx, float my) {
-    return mx > x && mx < x+w && my > y && my < y+h;
+  boolean clicked(float mx, float my){
+      if(mx > x && mx < x+w && my > y && my < y+h){
+        if (mousePressed){
+          if (checked) checked = false;
+          else checked = true;
+        }
+        return true;
+      }
+      return false;
   }
 /*
   color getColor() {

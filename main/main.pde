@@ -13,12 +13,13 @@ Button searchDes = new Button(SCREENX/3-200, 70, 200, 50, "search by destination
 Button graph = new Button(SCREENX/2+10, SCREENY/2, 50, 50, "graph");
 Button back = new Button(40, 10, 100, 50, "Back");
 
-FilterButton date = new FilterButton(40, 70, 450, 30, "Enter date and time in dd/mm/yyyy hh:mm format");
-FilterButton origin = new FilterButton(500, 70, 100, 30, "Origin");
+Button date = new Button(40, 70, 450, 30, "Enter date and time in dd/mm/yyyy hh:mm format");
+Button origin = new Button(500, 70, 100, 30, "Origin");
 ArrayList<ArrayList<String>> originAirports;
 ArrayList<Checkbox> origins = new ArrayList<Checkbox>();
 Scrollbar bar;
 int offset = 0;
+Checkbox cancelled = new Checkbox(610, "Cancelled");
 
 String userInputDestination="";
 String userInputDate = "";
@@ -46,8 +47,9 @@ void setup()
 
   
   screens.get(1).addButton(back);
-  screens.get(1).addFilterButton(date);
-  screens.get(1).addFilterButton(origin);
+  screens.get(1).addButton(date);
+  screens.get(1).addButton(origin);
+  screens.get(1).addCheckbox(cancelled);
 
   screens.get(2).addButton(back);
 
@@ -113,13 +115,14 @@ void mousePressed()
   else if (date.clicked(mouseX, mouseY)){
     origin.checked = false;
     if (date.label == "Enter date and time in dd/mm/yyyy hh:mm format") {
-      date.label = "|";
+      date.label = "| ";
     }
   }
   origin.clicked(mouseX, mouseY);
   for (Checkbox c: origins){
     c.clicked(mouseX, mouseY);
   }
+  cancelled.clicked(mouseX, mouseY);
 
 /*
   for (Button b : theScreen.button) {
@@ -154,11 +157,6 @@ void mousePressed()
 
 void mouseMoved() {
   for (Button b : theScreen.button) {
-    if (b.clicked(mouseX, mouseY)) b.stroke = true;
-    else b.stroke = false;
-  }
-
-  for (FilterButton b : theScreen.filters) {
     if (b.clicked(mouseX, mouseY)) b.stroke = true;
     else b.stroke = false;
   }
