@@ -45,7 +45,7 @@ class Screen {
     }
 
     for (Checkbox c: checks){
-      c.draw(70);
+      c.draw((SCREENY/4)-45);
     }
   }
 

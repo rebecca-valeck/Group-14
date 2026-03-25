@@ -31,10 +31,12 @@ Checkbox diverted = new Checkbox(1125, "Diverted");
 
 PImage plane;
 //Button addFilter = new Button(50, 300, 100, 50, "Add filters:", 30);
-Button search = new Button(SCREENX/2-150, SCREENY/2-25, 300, 50, "SEARCH", 30);
+
+Button search = new Button(SCREENX/2-150, SCREENY/2-25, 300, 50, "G E N E R A T E   M A P", 30);
+
 //Button searchDes = new Button((SCREENX/4)-75, 150, 370, 70, "Search by destination", 30);
-Button graph = new Button(SCREENX/2+10, SCREENY/2, 50, 50, "graph",30);
-Button back = new Button(40, 10, 100, 50, "Back",30);
+Button graph = new Button(SCREENX/3+10, SCREENY/2, 50, 50, "graph",30);
+Button back = new Button(40, 25, 100, 50, "BACK",30);
 PFont  font;
 
 String userInputDestination="";
@@ -109,17 +111,17 @@ void draw() {
     int i = ((int)bar.getPos() / (bar.sh/(origins.size()-20))-22);
     if(i < origins.size() - 21 && i >= 0){
       for (int j = 0; j <20; j++){
-        origins.get(i+j).draw(115+ j * 25);
+        origins.get(i+j).draw(170+ j * 25);
       }
     } else if (i >= origins.size()-21){
       for (int j = 0; j <20; j++){
         int index = origins.size() -20;
-        origins.get(index+j).draw(115+ j * 25);
+        origins.get(index+j).draw(170+ j * 25);
       }
     }else if (i < 0){
       for (int j = 0; j <20; j++){
         int index = 0;
-        origins.get(index+j).draw(115+ j * 25);
+        origins.get(index+j).draw(170+ j * 25);
       }
     }
 
