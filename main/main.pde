@@ -72,28 +72,7 @@ void setup()
     origins.add(new Checkbox(510, originAirports.get(i).get(0)));
   }
   bar = new Scrollbar(800 - 8, 110, 16, 505, 16);
-  ArrayList<Plane> planes = new ArrayList<Plane>();
-  ArrayList<ArrayList<String>> planesQuery = db.query("SELECT * from flights WHERE ORIGIN = \"DEN\"");
-  for (ArrayList<String> plane : planesQuery){
-
-    System.out.println(plane);
-      planes.add(new Plane(
-      plane.get(1), // date
-      plane.get(4), // origin
-      plane.get(6), // origin state abr
-      plane.get(8), // dest
-      plane.get(10), // dest state abr
-      plane.get(12), // crs dept time
-      plane.get(11), // dept wac
-      plane.get(14), // crs arr time
-      plane.get(15), // arr time
-      plane.get(16), // cancelled
-      plane.get(17), // diverted
-      plane.get(18)  // distance
-    ));
-  }
 }
-
 void draw() {
   plane.resize(SCREENX/3,100);
   image (plane, -plane.width, 0);
