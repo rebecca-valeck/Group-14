@@ -11,6 +11,12 @@ class Plane {
     String cancelled;
     String diverted;
     String distance;
+    
+    float planeX = 200;
+    float planeY = 200;
+    float planeWidth = 100; 
+    float planeHeight = 100;
+    PImage planeImage;
 
     Plane(  String date,
             String origin,
@@ -37,11 +43,12 @@ class Plane {
         this.diverted = diverted; 
         this.distance = distance;
     }
-    // void draw (){
-    //     circle (map.getXcoordinate (origin, origin_state_abr),
-    //             map.getYcoordinate (origin, origin_state_abr),
-    //             10 )
-    // }
+    
+    void draw()
+    {
+        planeImage = loadImage("plane.png");
+        image(planeImage, planeX, planeY, planeWidth, planeHeight);
+    }
     
 
    
