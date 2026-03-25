@@ -1,6 +1,6 @@
 import java.util.Arrays;
-final int SCREENX = 1950;
-final int SCREENY = 1200;
+final int SCREENX = 800;
+final int SCREENY = 600;
 DatabaseQueries db = new DatabaseQueries();
 Barchart chart;
 Screen theScreen;
@@ -31,7 +31,7 @@ boolean change = false;
 
 
 void settings() {
-  fullScreen();
+  size(SCREENX,SCREENY);
 }
 void setup()
 {
@@ -73,21 +73,23 @@ void setup()
   }
   bar = new Scrollbar(800 - 8, 110, 16, 505, 16);
   ArrayList<Plane> planes = new ArrayList<Plane>();
-  ArrayList<ArrayList<String>> planesQuery = db.query("SELECT * from flights WHERE ORIGIN = BOI");
+  ArrayList<ArrayList<String>> planesQuery = db.query("SELECT * from flights WHERE ORIGIN = \"DEN\"");
   for (ArrayList<String> plane : planesQuery){
-    planes.add(Plane(
-      plane.get(0),
-      plane.get(0),
-      plane.get(0),
-      plane.get(0),
-      plane.get(0),
-      plane.get(0),
-      plane.get(0),
-      plane.get(0),
-      plane.get(0),
-      plane.get(0),
-      plane.get(0),
-      plane.get(0)
+
+    System.out.println(plane);
+      planes.add(new Plane(
+      plane.get(1), // date
+      plane.get(4), // origin
+      plane.get(6), // origin state abr
+      plane.get(8), // dest
+      plane.get(10), // dest state abr
+      plane.get(12), // crs dept time
+      plane.get(11), // dept wac
+      plane.get(14), // crs arr time
+      plane.get(15), // arr time
+      plane.get(16), // cancelled
+      plane.get(17), // diverted
+      plane.get(18)  // distance
     ));
   }
 }
