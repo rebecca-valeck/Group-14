@@ -7,6 +7,7 @@ Screen theScreen;
 ArrayList<Screen> screens = new ArrayList<Screen>();
 ArrayList<Checkbox> origins = new ArrayList<Checkbox>();
 ArrayList<ArrayList<String>> originAirports; //= db.query("SELECT DISTINCT(ORIGIN) FROM flights ORDER BY ORIGIN ASC");
+ArrayList<Plane> planes = new ArrayList<Plane>();
 
 color squareColor = color(200);
 
@@ -17,7 +18,6 @@ Scrollbar bar;
 int offset = 0;
 Checkbox cancelled = new Checkbox(610, "Cancelled");
 
-PImage plane;
 Button addFilter = new Button(40, 300, 100, 50, "Add filters:", 30);
 Button search = new Button(1300, 700, 100, 50, "SEARCH", 30);
 Button searchDes = new Button(SCREENX/3-75, 150, 370, 70, "Search by destination", 30);
@@ -35,7 +35,6 @@ void settings() {
 }
 void setup()
 {
-  plane=loadImage("aereo.jpg");
   font = loadFont("PoorRichard-Regular-30.vlw");
   textFont(font);
   noStroke();
@@ -72,7 +71,6 @@ void setup()
     origins.add(new Checkbox(510, originAirports.get(i).get(0)));
   }
   bar = new Scrollbar(800 - 8, 110, 16, 505, 16);
-  ArrayList<Plane> planes = new ArrayList<Plane>();
   ArrayList<ArrayList<String>> planesQuery = db.query("SELECT * from flights WHERE ORIGIN = \"DEN\"");
   for (ArrayList<String> plane : planesQuery){
 
@@ -95,8 +93,6 @@ void setup()
 }
 
 void draw() {
-  plane.resize(SCREENX/3,100);
-  image (plane, -plane.width, 0);
   
   theScreen.draw();
 
@@ -121,10 +117,11 @@ void draw() {
         origins.get(index+j).draw(115+ j * 25);
       }
     }
-
+//sdfs
     bar.update();
     bar.draw();
   }
+  planes.get(0).draw();
 }
 
 void mousePressed()
