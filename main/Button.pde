@@ -18,10 +18,10 @@
     if(stroke)  stroke(0);
     else noStroke();
     
-    fill(180);
+    fill(#2E5E8E);
     rect(x, y, w, h, r);
 
-    fill(0);
+    fill(#D3DCEE);
     textAlign(CENTER, CENTER);
     text(label, x+w/2, y+h/2);
   }
