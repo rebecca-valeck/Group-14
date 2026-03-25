@@ -12,16 +12,27 @@ ArrayList<ArrayList<String>> originAirports; //= db.query("SELECT DISTINCT(ORIGI
 color squareColor = color(200);
 
 
-Button date = new Button(40, 70, 450, 30, "Enter date and time in dd/mm/yyyy hh:mm format",30);
-Button origin = new Button(500, 70, 100, 30, "Origin",30);
+Button day = new Button(50, (SCREENY/4)-50, 75, 30, "Day", 30);
+Button month = new Button(155, (SCREENY/4)-50, 80, 30, "Month", 30);
+
+Button origin = new Button(265, (SCREENY/4)-50, 90, 30, "Origin", 30);
+Button destination = new Button(380, (SCREENY/4)-50, 120, 30, "Destination", 30);
+Button depTime = new Button(530, (SCREENY/4)-50, 150, 30, "Departure time", 30);
+Button arrTime = new Button(710, (SCREENY/4)-50, 130, 30, "Arrival time", 30);
+Button distance = new Button(870, (SCREENY/4)-50, 100, 30, "Distance", 30);
+
+
+
 Scrollbar bar;
 int offset = 0;
-Checkbox cancelled = new Checkbox(610, "Cancelled");
+Checkbox cancelled = new Checkbox(1005, "Cancelled");
+Checkbox diverted = new Checkbox(1125, "Diverted");
+
 
 PImage plane;
 //Button addFilter = new Button(50, 300, 100, 50, "Add filters:", 30);
-Button search = new Button(SCREENX/2, SCREENY/2, 300, 50, "SEARCH", 30);
-Button searchDes = new Button(SCREENX/3-75, 150, 370, 70, "Search by destination", 30);
+Button search = new Button(SCREENX/2-150, SCREENY/2-25, 300, 50, "SEARCH", 30);
+//Button searchDes = new Button((SCREENX/4)-75, 150, 370, 70, "Search by destination", 30);
 Button graph = new Button(SCREENX/2+10, SCREENY/2, 50, 50, "graph",30);
 Button back = new Button(40, 10, 100, 50, "Back",30);
 PFont  font;
@@ -41,7 +52,7 @@ void setup()
   textFont(font);
   noStroke();
   DatabaseQueries.dbPath = sketchPath("database.db");
-  originAirports = db.query("SELECT DISTINCT(ORIGIN) FROM flights ORDER BY ORIGIN ASC");
+  originAirports = db.query("SELECT DISTINCT(ORIGIN_CITY_NAME) FROM flights ORDER BY ORIGIN ASC");
   System.out.println(originAirports);
 
 
@@ -53,15 +64,24 @@ void setup()
 
  // screens.get(0).addButton(addFilter);
   screens.get(0).addButton(search);
-  screens.get(0).addButton(searchDes);
+ // screens.get(0).addButton(searchDes);
   screens.get(0).addButton(graph);
 
   
   //screens.get(1).addButton(back);
-  screens.get(0).addButton(date);
+  screens.get(0).addButton(day);
+  screens.get(0).addButton(month);
+
   screens.get(0).addButton(origin);
   screens.get(0).addCheckbox(cancelled);
+  screens.get(0).addCheckbox(diverted);
+
   screens.get(0).addButton(graph);
+  screens.get(0).addButton(depTime);
+  screens.get(0).addButton(arrTime);
+  screens.get(0).addButton(destination);
+  screens.get(0).addButton(distance);
+
 
   screens.get(2).addButton(back);
 
@@ -70,21 +90,21 @@ void setup()
   theScreen = screens.get(0);
 
   for(int i = 0; i < originAirports.size(); i++){
-    origins.add(new Checkbox(510, originAirports.get(i).get(0)));
+    origins.add(new Checkbox(183, originAirports.get(i).get(0)));
   }
-  bar = new Scrollbar(800 - 8, 110, 16, 505, 16);
+  bar = new Scrollbar(460, (SCREENY/4)-15, 16, 505, 16);
 }
 
 void draw() {
-  plane.resize(SCREENX/3,100);
-  image (plane, -plane.width, 0);
+  //plane.resize(SCREENX/3,100);
+ // image (plane, -plane.width, 0);
   
   theScreen.draw();
 
   if(origin.checked){
     fill(255);
     stroke(0);
-    rect(500, 110, 300, 505);
+    rect(173, (SCREENY/4)-15, 290, 505);
 
     int i = ((int)bar.getPos() / (bar.sh/(origins.size()-20))-22);
     if(i < origins.size() - 21 && i >= 0){
@@ -124,15 +144,10 @@ void mousePressed()
     theScreen = screens.get(3);
     screens.get(3).addBarchart(new Barchart(SCREENX/2, SCREENY/2, 800, 600, 60, origins));
   } 
-  else if (searchDes.clicked(mouseX, mouseY)) {
-    searchDes.label = "| ";
-  }
-  else if (date.clicked(mouseX, mouseY)){
-    origin.checked = false;
-    if (date.label == "Enter date and time in dd/mm/yyyy hh:mm format") {
-      date.label = "| ";
-    }
-  }
+ // else if (searchDes.clicked(mouseX, mouseY)) {
+//    searchDes.label = "| ";
+ // }
+ 
   origin.clicked(mouseX, mouseY);
   for (Checkbox c: origins){
     c.clicked(mouseX, mouseY);

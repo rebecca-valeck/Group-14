@@ -30,10 +30,10 @@ class Screen {
     
     textSize(60);
     String s = "S E A R C H   P L A N E S !";
-    fill(0);
+    fill(#D3DCEE);
     textAlign(CENTER, CENTER);
     text(s, 0, 0, width, 100);  
-    textSize(40);
+    textSize(20);
     for (Button b : button)
     {
       b.draw();
