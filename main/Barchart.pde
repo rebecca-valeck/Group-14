@@ -19,22 +19,6 @@ class Barchart{
         this.gap = gap;
         this.title = "Flights by" ;
 
-        String filteredAirports = "WHERE ";
-        String originBuffer = "";
-        for(int i = 0; i < origins.size() -1; i++){
-            
-            if (origins.get(i).checked){
-                if (originBuffer != "") filteredAirports += "ORIGIN = \"" +originBuffer +"\" OR ";
-                originBuffer =  origins.get(i).label;
-            } 
-        }
-        filteredAirports += "ORIGIN = \"" +originBuffer +"\"";
-        
-        System.out.println("SELECT DEST, COUNT(*) FROM flights " + filteredAirports + " GROUP BY DEST ORDER BY COUNT(*) DESC LIMIT " +  (int)((w - 50) /  gap));
-        data = db.query(
-                "SELECT DEST, COUNT(*) FROM flights " + filteredAirports + " GROUP BY DEST ORDER BY COUNT(*) DESC LIMIT " +  (int)((w - 50) /  gap)
-                );
-
 
     }
     //this is for simple count charts where y is number of flights and x the different variables of the given x_title column
