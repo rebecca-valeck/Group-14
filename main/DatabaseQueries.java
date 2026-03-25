@@ -62,7 +62,7 @@ public class DatabaseQueries {
             filteredAirports += "ORIGIN = \"" +originBuffer +"\")";
 
             queryString+= "WHERE" + filteredAirports;
-            
+
             queryString +=" GROUP BY DEST ORDER BY COUNT(*)"+
                           "DESC LIMIT " +  (int)((w - 50) /  gap)
 
