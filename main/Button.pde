@@ -29,6 +29,7 @@
   boolean clicked(float mx, float my){
       if(mx > x && mx < x+w && my > y && my < y+h){
         if (mousePressed){
+          System.out.print("clicked button");
           if (checked) checked = false;
           else checked = true;
         }

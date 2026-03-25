@@ -5,24 +5,30 @@ void keyPressed() {
   String newLetter = str(key);
   Button clickedButton = theScreen.getEvent();
 
-  if (clickedButton != null){
+
+  System.out.println(clickedButton instanceof Button);
+  if (clickedButton != null && clickedButton instanceof TextButton){
+    TextButton clickedTextButton = (TextButton) clickedButton;
     if (alpha.contains(newLetter)){
       if (clickedButton.label == "| "  || clickedButton.label == "" ) {
-        userInputDestination = newLetter;
-        clickedButton.label = userInputDestination;
+        clickedTextButton.userInput += newLetter;
+        clickedButton.label = clickedTextButton.userInput;
       }
-      else if (clickedButton.label == userInputDestination) {
-        userInputDestination += newLetter;
-        clickedButton.label = userInputDestination;
+      else if (clickedButton.label == clickedTextButton.userInput) {
+        clickedTextButton.userInput += newLetter;
+        clickedButton.label = clickedTextButton.userInput;
+        println(clickedButton.label);
+        println(clickedTextButton.label);
+
       }
     }
     if (key == BACKSPACE && clickedButton.label.length() > 0){
-      userInputDestination = userInputDestination.substring(0,userInputDestination.length()-1);
-      clickedButton.label = userInputDestination;
+      clickedTextButton.userInput = clickedTextButton.userInput.substring(0,clickedTextButton.userInput.length()-1);
+      clickedButton.label = clickedTextButton.userInput;
     } 
       if (key == ENTER ||  key == RETURN){
-        theScreen = screens.get(3);
-        screens.get(3).addBarchart(new Barchart(SCREENX/2, SCREENY/2, 800, 600, 60, origins));
+    //    theScreen = screens.get(3);
+     //   screens.get(3).addBarchart(new Barchart(SCREENX/2, SCREENY/2, 800, 600, 60, origins));
     } 
   }
 
