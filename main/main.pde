@@ -19,10 +19,10 @@ Button month = new Button(155, (SCREENY/4)-50, 80, 30, "Month", 30);
 
 Button origin = new Button(265, (SCREENY/4)-50, 90, 30, "Origin", 30);
 Button destination = new Button(380, (SCREENY/4)-50, 120, 30, "Destination", 30);
-Button depTime = new Button(530, (SCREENY/4)-50, 150, 30, "Departure time", 30);
-Button arrTime = new Button(710, (SCREENY/4)-50, 130, 30, "Arrival time", 30);
-Button distance = new Button(870, (SCREENY/4)-50, 100, 30, "Distance", 30);
 
+TextButton depTime = new TextButton(530, (SCREENY/4)-50, 150, 30, "Departure time", 30);
+TextButton arrTime = new TextButton(710, (SCREENY/4)-50, 130, 30, "Arrival time", 30);
+TextButton distance = new TextButton(870, (SCREENY/4)-50, 100, 30, "Distance", 30);
 
 
 Scrollbar bar;
@@ -42,7 +42,6 @@ Button back = new Button(40, 25, 100, 50, "BACK",30);
 PFont  font;
 
 String userInputDestination="";
-String userInputDate = "";
 boolean change = false;
 
 
@@ -68,9 +67,7 @@ void setup()
   screens.add (new Screen(color(#D3DCEE)));
 
 
- // screens.get(0).addButton(addFilter);
   screens.get(0).addButton(search);
- // screens.get(0).addButton(searchDes);
   screens.get(0).addButton(graph);
 
   
@@ -83,10 +80,10 @@ void setup()
   screens.get(0).addCheckbox(diverted);
 
   screens.get(0).addButton(graph);
-  screens.get(0).addButton(depTime);
-  screens.get(0).addButton(arrTime);
+  screens.get(0).addTextButton(depTime);
+  screens.get(0).addTextButton(arrTime);
   screens.get(0).addButton(destination);
-  screens.get(0).addButton(distance);
+  screens.get(0).addTextButton(distance);
 
 
   screens.get(2).addButton(back);
@@ -165,7 +162,8 @@ void draw() {
 
 void mousePressed()
 {
-
+  
+  depTime.clicked(mouseX,mouseY);
   if(back.clicked(mouseX, mouseY)){
     theScreen = screens.get(0);
     origin.checked = false;
@@ -185,12 +183,17 @@ void mousePressed()
     destination.checked = false;
     screens.get(3).addBarchart(new Barchart(SCREENX/2, SCREENY/2, 800, 600, 60, origins));
   } 
-  else if(origin.clicked(mouseX, mouseY)) destination.checked = false;
-  else if(destination.clicked(mouseX, mouseY)) origin.checked = false;
- // else if (searchDes.clicked(mouseX, mouseY)) {
-//    searchDes.label = "| ";
- // }
-
+  else if (depTime.clicked(mouseX, mouseY)) {
+    depTime.label = "| ";
+  }
+  else if (distance.clicked(mouseX, mouseY)) {
+  distance.label = "| ";
+  }
+  else if (arrTime.clicked(mouseX, mouseY)) {
+    arrTime.label = "| ";
+  }
+ 
+  origin.clicked(mouseX, mouseY);
   for (Checkbox c: origins){
     c.clicked(mouseX, mouseY);
   }
