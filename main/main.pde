@@ -13,7 +13,6 @@ ArrayList<ArrayList<String>> destAirports; //= db.query("SELECT DISTINCT(DEST) F
 
 color squareColor = color(200);
 
-
 Button day;
 Button month ;
 Button origin ;
@@ -35,8 +34,8 @@ Button graph;
 Button back;
 PFont  font;
 
-int offset = 0;
 PImage plane;
+MovingImage movplaneimg;
 String userInputDestination="";
 boolean change = false;
 
@@ -47,6 +46,7 @@ void settings() {
 void setup()
 {
   plane=loadImage("aereo.jpg");
+  movplaneimg = new MovingImage(plane, plane.width * -1, SCREENY/2 - plane.height/2);
   font = loadFont("PoorRichard-Regular-30.vlw");
   textFont(font);
   noStroke();
@@ -89,7 +89,7 @@ void setup()
 
   screens.add (new Screen(color(#D3DCEE)));
   screens.add (new Screen(color(#D3DCEE)));
-  screens.add (new Screen(color(#D3DCEE)));
+  screens.add (new Screen(color(#2E5E8E)));
   screens.add (new Screen(color(#D3DCEE)));
 
 
@@ -110,9 +110,6 @@ void setup()
   screens.get(0).addTextButton(arrTime);
   screens.get(0).addButton(destination);
   screens.get(0).addTextButton(distance);
-
-
-  screens.get(2).addButton(back);
 
   screens.get(3).addButton(back);
 
@@ -183,6 +180,11 @@ void draw() {
 
     dbar.update();
     dbar.draw();
+  }
+
+  if (theScreen == screens.get(2)){
+    movplaneimg.drawImg();
+    movplaneimg.moveImg();
   }
 }
 
