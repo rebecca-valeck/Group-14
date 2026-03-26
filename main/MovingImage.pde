@@ -14,10 +14,9 @@ class MovingImage{
     }
 
     void moveImg(){
-        x += 15;
-        if (x >= SCREENX){
-           // theScreen = screens.get(1);
-            x = initialx;
+        if (x < 0){
+            x += 15;
         }
+        else x = 0;
     }
 }

@@ -46,7 +46,7 @@ void settings() {
 void setup()
 {
   plane=loadImage("aereo.jpg");
-  plane.resize(540, 100);
+  plane.resize(1480, 100);
   movplaneimg = new MovingImage(plane, plane.width * -1, 0);
   font = loadFont("PoorRichard-Regular-30.vlw");
   textFont(font);
@@ -179,11 +179,6 @@ void draw() {
     dbar.update();
     dbar.draw();
   }
-
-  if (theScreen == screens.get(1)){
-    movplaneimg.drawImg();
-    movplaneimg.moveImg();
-  }
 }
 
 void mousePressed()
@@ -198,6 +193,7 @@ void mousePressed()
     theScreen = screens.get(1);
     origin.checked = false;
     destination.checked = false;
+    movplaneimg.x = movplaneimg.initialx;
     screens.get(1).addBarchart(new Barchart(SCREENX/2+400, 240, 400, 200, 60, origins, "ORIGIN_CITY_NAME","DEST"));
     screens.get(1).addBarchart(new Barchart(SCREENX/2+400, 530, 400, 300, 60, destins, "DEST_CITY_NAME","ORIGIN"));
   } 
