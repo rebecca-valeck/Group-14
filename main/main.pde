@@ -185,15 +185,27 @@ void mousePressed()
   } 
   else if (depTime.clicked(mouseX, mouseY)) {
     depTime.label = "| ";
+    origin.checked = false;
+    destination.checked = false;
   }
   else if (distance.clicked(mouseX, mouseY)) {
-  distance.label = "| ";
+    distance.label = "| ";
+    origin.checked = false;
+    destination.checked = false;
   }
   else if (arrTime.clicked(mouseX, mouseY)) {
     arrTime.label = "| ";
+    origin.checked = false;
+    destination.checked = false;
+  }
+  else if (origin.clicked(mouseX, mouseY)){
+    destination.checked = false;
+  }
+  else if (destination.clicked(mouseX, mouseY)){
+    origin.checked = false;
   }
  
-  origin.clicked(mouseX, mouseY);
+  
   for (Checkbox c: origins){
     c.clicked(mouseX, mouseY);
   }
