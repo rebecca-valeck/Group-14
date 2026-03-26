@@ -11,7 +11,7 @@
 
   boolean clicked(float mx, float my){
       if(mx > x && mx < x+w && my > y && my < y+h){
-            if (userInput = "") label = "| "
+            if (userInput == "") label = "| ";
             return true;
       }
       return false;

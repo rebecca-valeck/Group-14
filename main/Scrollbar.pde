@@ -41,13 +41,13 @@ class Scrollbar{
     }
 
     void draw(){
-        fill(100);
+        fill(#89A1D1);
         rect(x, y, sw, sh, 5);
 
         if(over || locked){
-            fill(200);
+            fill(#D3DCEE);
         }
-        else fill(175);
+        else fill(#B6C5E2);
         rect(x, slidery, sw, sw, 5);
     }
     
