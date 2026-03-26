@@ -14,15 +14,14 @@ ArrayList<ArrayList<String>> destAirports; //= db.query("SELECT DISTINCT(DEST) F
 color squareColor = color(200);
 
 
-Button day = new Button(50, (SCREENY/4)-50, 75, 30, "Day", 30);
-Button month = new Button(155, (SCREENY/4)-50, 80, 30, "Month", 30);
+Button day;
+Button month ;
+Button origin ;
+Button destination ;
 
-Button origin = new Button(265, (SCREENY/4)-50, 90, 30, "Origin", 30);
-Button destination = new Button(380, (SCREENY/4)-50, 120, 30, "Destination", 30);
-
-TextButton depTime = new TextButton(530, (SCREENY/4)-50, 150, 30, "Departure time", 30);
-TextButton arrTime = new TextButton(710, (SCREENY/4)-50, 130, 30, "Arrival time", 30);
-TextButton distance = new TextButton(870, (SCREENY/4)-50, 100, 30, "Distance", 30);
+TextButton depTime;
+TextButton arrTime;
+TextButton distance;
 
 
 Scrollbar bar;
@@ -31,16 +30,14 @@ Checkbox cancelled = new Checkbox(1005, "Cancelled");
 Checkbox diverted = new Checkbox(1125, "Diverted");
 
 
-PImage plane;
-//Button addFilter = new Button(50, 300, 100, 50, "Add filters:", 30);
-
-Button search = new Button(SCREENX/2-150, SCREENY/2-25, 300, 50, "G E N E R A T E   M A P", 30);
-
-//Button searchDes = new Button((SCREENX/4)-75, 150, 370, 70, "Search by destination", 30);
-Button graph = new Button(SCREENX/3+10, SCREENY/2, 50, 50, "graph",30);
-Button back = new Button(40, 25, 100, 50, "BACK",30);
+Button search;
+Button graph;
+Button back;
 PFont  font;
 
+int offset = 0;
+Scrollbar bar;
+PImage plane;
 String userInputDestination="";
 boolean change = false;
 
@@ -59,6 +56,36 @@ void setup()
   destAirports = db.query("SELECT DISTINCT(DEST_CITY_NAME) FROM flights ORDER BY DEST_CITY_NAME ASC");
   System.out.println(originAirports);
   System.out.println(destAirports);
+
+
+  search = new Button(SCREENX/2-150, SCREENY/2-25, 300, 50, "G E N E R A T E   M A P", 30);
+  graph = new Button(SCREENX/3+10, SCREENY/2, 50, 50, "graph",30);
+  back = new Button(40, 25, 100, 50, "BACK",30);
+
+
+  day = new Button(50, (SCREENY/4)-50, 75, 30, "Day", 30);
+  month = new Button(155, (SCREENY/4)-50, 80, 30, "Month",30);
+  origin = new Button(265, (SCREENY/4)-50, 90, 30, "Origin", 30);
+  destination = new Button(380, (SCREENY/4)-50, 120, 30, "Destination", 30);
+
+  depTime = new TextButton(530, (SCREENY/4)-50, 150, 30, "Departure time", 30);
+  arrTime = new TextButton(710, (SCREENY/4)-50, 130, 30, "Arrival time", 30);
+  distance = new TextButton(870, (SCREENY/4)-50, 100, 30, "Distance", 30);
+
+
+  search = new Button(SCREENX/2-150, SCREENY/2-25, 300, 50, "G E N E R A T E   M A P", 30);
+  graph = new Button(SCREENX/3+10, SCREENY/2, 50, 50, "graph",30);
+  back = new Button(40, 25, 100, 50, "BACK",30);
+
+
+  day = new Button(50, (SCREENY/4)-50, 75, 30, "Day", 30);
+  month = new Button(155, (SCREENY/4)-50, 80, 30, "Month",30);
+  origin = new Button(265, (SCREENY/4)-50, 90, 30, "Origin", 30);
+  destination = new Button(380, (SCREENY/4)-50, 120, 30, "Destination", 30);
+
+  depTime = new TextButton(530, (SCREENY/4)-50, 150, 30, "Departure time", 30);
+  arrTime = new TextButton(710, (SCREENY/4)-50, 130, 30, "Arrival time", 30);
+  distance = new TextButton(870, (SCREENY/4)-50, 100, 30, "Distance", 30);
 
 
   screens.add (new Screen(color(#D3DCEE)));
@@ -163,7 +190,7 @@ void draw() {
 void mousePressed()
 {
   
-  depTime.clicked(mouseX,mouseY);
+ // depTime.clicked(mouseX,mouseY);
   if(back.clicked(mouseX, mouseY)){
     theScreen = screens.get(0);
     origin.checked = false;
@@ -184,6 +211,7 @@ void mousePressed()
     screens.get(3).addBarchart(new Barchart(SCREENX/2, SCREENY/2, 800, 600, 60, origins));
   } 
   else if (depTime.clicked(mouseX, mouseY)) {
+    println("yloll");
     depTime.label = "| ";
     origin.checked = false;
     destination.checked = false;

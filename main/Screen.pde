@@ -1,7 +1,6 @@
 class Screen {
 
   ArrayList<Button> button = new ArrayList<Button>();
-  ArrayList<TextButton> textbutton = new ArrayList<TextButton>();
 
   ArrayList<Barchart> charts = new ArrayList<Barchart>();
   ArrayList<Checkbox> checks = new ArrayList<Checkbox>();
@@ -16,7 +15,7 @@ class Screen {
     button.add(b);
   }
   void addTextButton(TextButton t) {
-    textbutton.add(t);
+    button.add(t);
   }
 
   void addBarchart(Barchart c){
@@ -44,10 +43,6 @@ class Screen {
       b.draw();
     }
 
-     for (TextButton t : textbutton)
-    {
-      t.draw();
-    }
 
     for ( Barchart c: charts)
     {
