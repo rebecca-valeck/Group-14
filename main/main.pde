@@ -39,7 +39,7 @@ void setup()
   font = loadFont("PoorRichard-Regular-30.vlw");
   textFont(font);
   noStroke();
-  DatabaseQueries.dbPath = sketchPath("database.db");
+  db.dbPath = sketchPath("database.db");
   originAirports = db.query("SELECT DISTINCT(ORIGIN) FROM flights ORDER BY ORIGIN ASC");
   System.out.println(originAirports);
 

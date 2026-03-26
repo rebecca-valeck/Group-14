@@ -18,6 +18,7 @@ class Barchart{
         this.h = h;
         this.gap = gap;
         this.title = "Flights by" ;
+        this.data = db.filteredQuery(origins);
 
 
     }
@@ -31,11 +32,9 @@ class Barchart{
         this.title = "Flights by" + x_title;
         if (variables.contains(x_title)){
             this.x_title = x_title;
-                        data = db.query(
-                "SELECT " + x_title +", COUNT(*) FROM flights GROUP BY " + x_title +" ORDER BY COUNT(*) DESC LIMIT " +  (int)((w - 50) /  gap)
-                );
         }
         this.y_title = y_title;
+        
  
     }
 

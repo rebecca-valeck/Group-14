@@ -1,7 +1,6 @@
 import java.sql.*;
-import java.util.ArrayList;
 public class DatabaseQueries {
-    public static String dbPath = "database.db";
+    String dbPath = "database.db";
 
 
     public ArrayList<ArrayList<String>> query(String query){
@@ -48,9 +47,8 @@ public class DatabaseQueries {
             return (queryResultArray);
         }
     }
-<
-    public ArrayList<ArrayList<String>> filteredQuery(ArrayList<String> origins){
-            String queryString = "SELECT DEST, COUNT(*) FROM flights " +
+    public ArrayList<ArrayList<String>> filteredQuery(ArrayList<Checkbox> origins){
+            String queryString = "SELECT DEST, COUNT(*) FROM flights ";
             String filteredAirports = "(";
             String originBuffer = "";
             for(int i = 0; i < origins.size() -1; i++){
@@ -63,10 +61,12 @@ public class DatabaseQueries {
 
             queryString+= "WHERE" + filteredAirports;
 
-            queryString +=" GROUP BY DEST ORDER BY COUNT(*)"+
-                          "DESC LIMIT " +  (int)((w - 50) /  gap)
+            queryString +=" GROUP BY DEST ORDER BY COUNT(*)";
+            // "DESC LIMIT " +  (int)((w - 50) /  gap);
+            return db.query(queryString);
 
     }
-    
+
+
 
 }
