@@ -19,7 +19,7 @@ Button month ;
 Button origin ;
 Button destination ;
 Button search;
-Button graph;
+//Button graph;
 Button back;
 
 TextButton depTime;
@@ -56,7 +56,7 @@ void setup()
 
 
   search = new Button(SCREENX/2-150, SCREENY/2-25, 300, 50, "G E N E R A T E   M A P", 30);
-  graph = new Button(SCREENX/3+10, SCREENY/2, 50, 50, "graph",30);
+  //graph = new Button(SCREENX/3+10, SCREENY/2, 50, 50, "graph",30);
   back = new Button(40, 25, 100, 50, "BACK",30);
 
 
@@ -71,7 +71,7 @@ void setup()
 
 
   search = new Button(SCREENX/2-150, SCREENY/2-25, 300, 50, "G E N E R A T E   M A P", 30);
-  graph = new Button(SCREENX/3+10, SCREENY/2, 50, 50, "graph",30);
+ // graph = new Button(SCREENX/3+10, SCREENY/2, 50, 50, "graph",30);
   back = new Button(40, 25, 100, 50, "BACK",30);
 
 
@@ -92,7 +92,7 @@ void setup()
 
 
   screens.get(0).addButton(search);
-  screens.get(0).addButton(graph);
+ // screens.get(0).addButton(graph);
 
   
   screens.get(0).addButton(day);
@@ -102,7 +102,7 @@ void setup()
   screens.get(0).addCheckbox(cancelled);
   screens.get(0).addCheckbox(diverted);
   
-  screens.get(0).addButton(graph);
+ // screens.get(0).addButton(graph);
   screens.get(0).addTextButton(depTime);
   screens.get(0).addTextButton(arrTime);
   screens.get(0).addButton(destination);
@@ -196,14 +196,17 @@ void mousePressed()
     theScreen = screens.get(1);
     origin.checked = false;
     destination.checked = false;
+    screens.get(1).addBarchart(new Barchart(SCREENX/2+400, 240, 400, 200, 60, origins));
+    screens.get(1).addBarchart(new Barchart(SCREENX/2+400, 530, 400, 300, 60, origins));
   } 
 
-  else if (graph.clicked(mouseX, mouseY)) {
-    theScreen = screens.get(1);
-    origin.checked = false;
-    destination.checked = false;
-    screens.get(1).addBarchart(new Barchart(SCREENX/2+350, 350, 400, 400, 60, origins));
-  } 
+ // else if (graph.clicked(mouseX, mouseY)) {
+  //  theScreen = screens.get(1);
+  //  origin.checked = false;
+ //   destination.checked = false;
+  // 
+
+  //} 
   else if (depTime.clicked(mouseX, mouseY)) {
     depTime.label = "| ";
     origin.checked = false;
