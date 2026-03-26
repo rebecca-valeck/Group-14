@@ -20,7 +20,8 @@ public class DatabaseQueries {
                 }
 
                 return queryResultArray;      
-        }catch(ClassNotFoundException | SQLException e){
+        }catch(Exception e){ 
+            print("error");
             e.printStackTrace();
             return (queryResultArray);
         }
@@ -53,7 +54,7 @@ public class DatabaseQueries {
             String originBuffer = "";
             for(int i = 0; i < origins.size() -1; i++){
                 if (origins.get(i).checked){
-                    if (originBuffer != "") filteredAirports += "ORIGIN = \"" +originBuffer +"\" OR ";
+                    if (originBuffer != "") filteredAirports += "ORIGIN_CITY_NAME = \"" +originBuffer +"\" OR ";
                     originBuffer =  origins.get(i).label;
                 } 
             }
@@ -65,6 +66,7 @@ public class DatabaseQueries {
             queryString +=" GROUP BY DEST ORDER BY COUNT(*)"
             + " DESC LIMIT " +  (int)((w - 50) /  gap);
             System.out.println(queryString);
+            println(db.query(queryString));
             return db.query(queryString);
 
     }
