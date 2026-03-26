@@ -46,7 +46,8 @@ void settings() {
 void setup()
 {
   plane=loadImage("aereo.jpg");
-  movplaneimg = new MovingImage(plane, plane.width * -1, SCREENY/2 - plane.height/2);
+  plane.resize(540, 100);
+  movplaneimg = new MovingImage(plane, plane.width * -1, 0);
   font = loadFont("PoorRichard-Regular-30.vlw");
   textFont(font);
   noStroke();
@@ -179,7 +180,7 @@ void draw() {
     dbar.draw();
   }
 
-  if (theScreen == screens.get(2)){
+  if (theScreen == screens.get(1)){
     movplaneimg.drawImg();
     movplaneimg.moveImg();
   }
