@@ -18,6 +18,9 @@ Button day;
 Button month ;
 Button origin ;
 Button destination ;
+Button search;
+//Button graph;
+Button back;
 
 TextButton depTime;
 TextButton arrTime;
@@ -29,14 +32,9 @@ Scrollbar dbar;
 Checkbox cancelled = new Checkbox(1005, "Cancelled");
 Checkbox diverted = new Checkbox(1125, "Diverted");
 
-
-Button search;
-Button graph;
-Button back;
 PFont  font;
-
-int offset = 0;
 PImage plane;
+
 String userInputDestination="";
 boolean change = false;
 
@@ -59,7 +57,7 @@ void setup()
 
 
   search = new Button(SCREENX/2-150, SCREENY/2-25, 300, 50, "G E N E R A T E   M A P", 30);
-  graph = new Button(SCREENX/3+10, SCREENY/2, 50, 50, "graph",30);
+  //graph = new Button(SCREENX/3+10, SCREENY/2, 50, 50, "graph",30);
   back = new Button(40, 25, 100, 50, "BACK",30);
 
 
@@ -74,7 +72,7 @@ void setup()
 
 
   search = new Button(SCREENX/2-150, SCREENY/2-25, 300, 50, "G E N E R A T E   M A P", 30);
-  graph = new Button(SCREENX/3+10, SCREENY/2, 50, 50, "graph",30);
+ // graph = new Button(SCREENX/3+10, SCREENY/2, 50, 50, "graph",30);
   back = new Button(40, 25, 100, 50, "BACK",30);
 
 
@@ -90,28 +88,26 @@ void setup()
 
   screens.add (new Screen(color(#D3DCEE)));
   screens.add (new Screen(color(#D3DCEE)));
-  screens.add (new Screen(color(#D3DCEE)));
+  screens.add (new Screen(color(#2E5E8E)));
   screens.add (new Screen(color(#D3DCEE)));
 
 
   screens.get(0).addButton(search);
-  screens.get(0).addButton(graph);
 
   
-  //screens.get(1).addButton(back);
   screens.get(0).addButton(day);
   screens.get(0).addButton(month);
-
+  
   screens.get(0).addButton(origin);
   screens.get(0).addCheckbox(cancelled);
   screens.get(0).addCheckbox(diverted);
-
-  screens.get(0).addButton(graph);
+  
   screens.get(0).addTextButton(depTime);
   screens.get(0).addTextButton(arrTime);
   screens.get(0).addButton(destination);
   screens.get(0).addTextButton(distance);
-
+  
+  screens.get(1).addButton(back);
 
   screens.get(2).addButton(back);
 
@@ -129,13 +125,11 @@ void setup()
   dbar = new Scrollbar(582, (SCREENY/4)-15, 16, 505, 16);
 }
 void draw() {
-  //plane.resize(SCREENX/3,100);
- // image (plane, -plane.width, 0);
   
   theScreen.draw();
 
   if(origin.checked){
-    fill(255);
+    fill(#F1F4F9);
     stroke(0);
     rect(173, (SCREENY/4)-15, 290, 505, 5);
 
@@ -161,7 +155,7 @@ void draw() {
   }
 
   if(destination.checked){
-    fill(255);
+    fill(#F1F4F9);
     stroke(0);
     rect(290, (SCREENY/4)-15, 290, 505, 5);
 
@@ -190,26 +184,19 @@ void draw() {
 void mousePressed()
 {
   
- // depTime.clicked(mouseX,mouseY);
   if(back.clicked(mouseX, mouseY)){
     theScreen = screens.get(0);
     origin.checked = false;
     destination.checked = false;
   } 
   else if (search.clicked(mouseX, mouseY)) {
-    theScreen = screens.get(2);
+    theScreen = screens.get(1);
     origin.checked = false;
     destination.checked = false;
+    screens.get(1).addBarchart(new Barchart(SCREENX/2+400, 240, 400, 200, 60, origins));
+    screens.get(1).addBarchart(new Barchart(SCREENX/2+400, 530, 400, 300, 60, origins));
   } 
- // else if (addFilter.clicked(mouseX, mouseY)) {
-  //  theScreen = screens.get(1);
-  //} 
-  else if (graph.clicked(mouseX, mouseY)) {
-    theScreen = screens.get(3);
-    origin.checked = false;
-    destination.checked = false;
-    screens.get(3).addBarchart(new Barchart(SCREENX/2, SCREENY/2, 800, 600, 60, origins));
-  } 
+
   else if (depTime.clicked(mouseX, mouseY)) {
     origin.checked = false;
     destination.checked = false;

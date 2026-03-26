@@ -29,11 +29,12 @@ class Screen {
   void draw() {
     
     background(backgroudColor);
+    noStroke();
     fill(#2E5E8E);
     rect(0, 0, 1900, 100);
     
     textSize(60);
-    String s = "S E A R C H   P L A N E S !";
+    String s = "S E A R C H   P L A N E S  !";
     fill(#D3DCEE);
     textAlign(CENTER, CENTER);
     text(s, 0, 0, width, 100);  
