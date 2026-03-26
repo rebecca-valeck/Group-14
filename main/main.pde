@@ -193,8 +193,8 @@ void mousePressed()
     theScreen = screens.get(1);
     origin.checked = false;
     destination.checked = false;
-    screens.get(1).addBarchart(new Barchart(SCREENX/2+400, 240, 400, 200, 60, origins));
-    screens.get(1).addBarchart(new Barchart(SCREENX/2+400, 530, 400, 300, 60, origins));
+    screens.get(1).addBarchart(new Barchart(SCREENX/2+400, 240, 400, 200, 60, origins, "ORIGIN_CITY_NAME","DEST"));
+    screens.get(1).addBarchart(new Barchart(SCREENX/2+400, 530, 400, 300, 60, destins, "DEST_CITY_NAME","ORIGIN"));
   } 
 
   else if (depTime.clicked(mouseX, mouseY)) {

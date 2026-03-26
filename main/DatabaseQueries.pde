@@ -48,22 +48,22 @@ public class DatabaseQueries {
             return (queryResultArray);
         }
     }
-    public ArrayList<ArrayList<String>> filteredQuery(ArrayList<Checkbox> origins,float w,float gap){
+    public ArrayList<ArrayList<String>> filteredQuery(ArrayList<Checkbox> origins,float w,float gap,String x_title,String groupBy){
             String queryString = "SELECT DEST, COUNT(*) FROM flights ";
             String filteredAirports = "(";
             String originBuffer = "";
             for(int i = 0; i < origins.size() -1; i++){
                 if (origins.get(i).checked){
-                    if (originBuffer != "") filteredAirports += "ORIGIN_CITY_NAME = \"" +originBuffer +"\" OR ";
+                    if (originBuffer != "") filteredAirports += x_title + "= \"" +originBuffer +"\" OR ";
                     originBuffer =  origins.get(i).label;
                 } 
             }
-            filteredAirports += "ORIGIN = \"" +originBuffer +"\")";
+            filteredAirports += x_title +"= \"" +originBuffer +"\")";
 
             queryString+= "WHERE" + filteredAirports;
             println(w);
             println(gap);
-            queryString +=" GROUP BY DEST ORDER BY COUNT(*)"
+            queryString +=" GROUP BY " +groupBy +" ORDER BY COUNT(*)"
             + " DESC LIMIT " +  (int)((w - 50) /  gap);
             System.out.println(queryString);
             println(db.query(queryString));
