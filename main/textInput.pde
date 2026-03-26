@@ -17,8 +17,6 @@ void keyPressed() {
       else if (clickedButton.label == clickedTextButton.userInput) {
         clickedTextButton.userInput += newLetter;
         clickedButton.label = clickedTextButton.userInput;
-        println(clickedButton.label);
-        println(clickedTextButton.label);
 
       }
     }
