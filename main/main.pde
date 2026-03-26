@@ -210,18 +210,14 @@ void mousePressed()
     screens.get(3).addBarchart(new Barchart(SCREENX/2, SCREENY/2, 800, 600, 60, origins));
   } 
   else if (depTime.clicked(mouseX, mouseY)) {
-    println("yloll");
-    depTime.label = "| ";
     origin.checked = false;
     destination.checked = false;
   }
   else if (distance.clicked(mouseX, mouseY)) {
-    distance.label = "| ";
     origin.checked = false;
     destination.checked = false;
   }
   else if (arrTime.clicked(mouseX, mouseY)) {
-    arrTime.label = "| ";
     origin.checked = false;
     destination.checked = false;
   }
