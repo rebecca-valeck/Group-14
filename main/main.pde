@@ -13,7 +13,6 @@ ArrayList<ArrayList<String>> destAirports; //= db.query("SELECT DISTINCT(DEST) F
 
 color squareColor = color(200);
 
-
 Button day;
 Button month ;
 Button origin ;
@@ -33,8 +32,14 @@ Checkbox cancelled = new Checkbox(1005, "Cancelled");
 Checkbox diverted = new Checkbox(1125, "Diverted");
 
 PFont  font;
+<<<<<<< HEAD
 PImage plane;
 
+=======
+
+PImage plane;
+MovingImage movplaneimg;
+>>>>>>> moving-the-plane-image
 String userInputDestination="";
 boolean change = false;
 
@@ -46,6 +51,7 @@ void settings() {
 void setup()
 {
   plane=loadImage("aereo.jpg");
+  movplaneimg = new MovingImage(plane, plane.width * -1, SCREENY/2 - plane.height/2);
   font = loadFont("PoorRichard-Regular-30.vlw");
   textFont(font);
   noStroke();
@@ -106,10 +112,15 @@ void setup()
   screens.get(0).addTextButton(arrTime);
   screens.get(0).addButton(destination);
   screens.get(0).addTextButton(distance);
+<<<<<<< HEAD
   
   screens.get(1).addButton(back);
 
   screens.get(2).addButton(back);
+=======
+  screens.get(1).addButton(back);
+
+>>>>>>> moving-the-plane-image
 
   screens.get(3).addButton(back);
 
@@ -178,6 +189,11 @@ void draw() {
 
     dbar.update();
     dbar.draw();
+  }
+
+  if (theScreen == screens.get(2)){
+    movplaneimg.drawImg();
+    movplaneimg.moveImg();
   }
 }
 
