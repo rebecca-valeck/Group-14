@@ -47,7 +47,7 @@ public class DatabaseQueries {
             return (queryResultArray);
         }
     }
-    public ArrayList<ArrayList<String>> filteredQuery(ArrayList<Checkbox> origins){
+    public ArrayList<ArrayList<String>> filteredQuery(ArrayList<Checkbox> origins,float w,float gap){
             String queryString = "SELECT DEST, COUNT(*) FROM flights ";
             String filteredAirports = "(";
             String originBuffer = "";
@@ -60,9 +60,11 @@ public class DatabaseQueries {
             filteredAirports += "ORIGIN = \"" +originBuffer +"\")";
 
             queryString+= "WHERE" + filteredAirports;
-
-            queryString +=" GROUP BY DEST ORDER BY COUNT(*)";
-            // "DESC LIMIT " +  (int)((w - 50) /  gap);
+            println(w);
+            println(gap);
+            queryString +=" GROUP BY DEST ORDER BY COUNT(*)"
+            + " DESC LIMIT " +  (int)((w - 50) /  gap);
+            System.out.println(queryString);
             return db.query(queryString);
 
     }

@@ -5,7 +5,7 @@
 
 
 class Barchart{
-    float x, y, w, h,gap;
+    float x, y, w,h,gap;
     String title;
     String y_title ="filtered flights";
     String x_title = "destination";
@@ -18,7 +18,8 @@ class Barchart{
         this.h = h;
         this.gap = gap;
         this.title = "Flights by" ;
-        this.data = db.filteredQuery(origins);
+        this.data = db.filteredQuery(origins,this.w,this.gap);
+        println(this.data);
 
 
     }
