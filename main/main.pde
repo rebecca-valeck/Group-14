@@ -36,7 +36,6 @@ Button back;
 PFont  font;
 
 int offset = 0;
-Scrollbar bar;
 PImage plane;
 String userInputDestination="";
 boolean change = false;
