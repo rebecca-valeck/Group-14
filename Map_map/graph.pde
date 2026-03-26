@@ -46,7 +46,7 @@ class Map{
   void renderNormal(float x, float y) {                                   
      fill(240, 255, 255);                          
     noStroke();
-    ellipse(x , y, 4, 4);
+    ellipse(x , y, 7, 7);
   }
 
   // Dest and Origin is represented as red dot
