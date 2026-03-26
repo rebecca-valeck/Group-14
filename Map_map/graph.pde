@@ -43,11 +43,10 @@ class Map{
   }
 
   // Others airport is represented as a smaller dot
-  void renderNormal(float x, float y) {
-    fill (0,0,0)                                   // do need to show other airports
-    //fill(240, 128, 128);                         // just use to test coordinate
+  void renderNormal(float x, float y) {                                   
+     fill(240, 255, 255);                          
     noStroke();
-    ellipse(x , y, 4, 4);
+    ellipse(x , y, 7, 7);
   }
 
   // Dest and Origin is represented as red dot
