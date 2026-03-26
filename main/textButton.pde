@@ -10,10 +10,8 @@
 
 
   boolean clicked(float mx, float my){
-   
-    System.out.println(mx > x && mx < x+w);
       if(mx > x && mx < x+w && my > y && my < y+h){
-            System.out.println("clicked Text button");
+            if (userInput = "") label = "| "
             return true;
       }
       return false;
