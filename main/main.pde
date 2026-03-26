@@ -7,7 +7,9 @@ Barchart chart;
 Screen theScreen;
 ArrayList<Screen> screens = new ArrayList<Screen>();
 ArrayList<Checkbox> origins = new ArrayList<Checkbox>();
+ArrayList<Checkbox> destins = new ArrayList<Checkbox>();
 ArrayList<ArrayList<String>> originAirports; //= db.query("SELECT DISTINCT(ORIGIN) FROM flights ORDER BY ORIGIN ASC");
+ArrayList<ArrayList<String>> destAirports; //= db.query("SELECT DISTINCT(DEST) FROM flights ORDER BY DEST ASC");
 
 color squareColor = color(200);
 
@@ -24,7 +26,7 @@ TextButton distance = new TextButton(870, (SCREENY/4)-50, 100, 30, "Distance", 3
 
 
 Scrollbar bar;
-int offset = 0;
+Scrollbar dbar;
 Checkbox cancelled = new Checkbox(1005, "Cancelled");
 Checkbox diverted = new Checkbox(1125, "Diverted");
 
@@ -53,8 +55,10 @@ void setup()
   textFont(font);
   noStroke();
   DatabaseQueries.dbPath = sketchPath("database.db");
-  originAirports = db.query("SELECT DISTINCT(ORIGIN_CITY_NAME) FROM flights ORDER BY ORIGIN ASC");
+  originAirports = db.query("SELECT DISTINCT(ORIGIN_CITY_NAME) FROM flights ORDER BY ORIGIN_CITY_NAME ASC");
+  destAirports = db.query("SELECT DISTINCT(DEST_CITY_NAME) FROM flights ORDER BY DEST_CITY_NAME ASC");
   System.out.println(originAirports);
+  System.out.println(destAirports);
 
 
   screens.add (new Screen(color(#D3DCEE)));
@@ -92,8 +96,11 @@ void setup()
     origins.add(new Checkbox(183, originAirports.get(i).get(0)));
   }
   bar = new Scrollbar(460, (SCREENY/4)-15, 16, 505, 16);
+  for(int i = 0; i < destAirports.size(); i++){
+    destins.add(new Checkbox(300, destAirports.get(i).get(0)));
+  }
+  dbar = new Scrollbar(582, (SCREENY/4)-15, 16, 505, 16);
 }
-
 void draw() {
   //plane.resize(SCREENX/3,100);
  // image (plane, -plane.width, 0);
@@ -103,9 +110,9 @@ void draw() {
   if(origin.checked){
     fill(255);
     stroke(0);
-    rect(173, (SCREENY/4)-15, 290, 505);
+    rect(173, (SCREENY/4)-15, 290, 505, 5);
 
-    int i = ((int)bar.getPos() / (bar.sh/(origins.size()-20))-22);
+    int i = ((int)bar.getPos() / (bar.sh/(origins.size()-20))-34);
     if(i < origins.size() - 21 && i >= 0){
       for (int j = 0; j <20; j++){
         origins.get(i+j).draw(170+ j * 25);
@@ -125,6 +132,32 @@ void draw() {
     bar.update();
     bar.draw();
   }
+
+  if(destination.checked){
+    fill(255);
+    stroke(0);
+    rect(290, (SCREENY/4)-15, 290, 505, 5);
+
+    int i = ((int)dbar.getPos() / (dbar.sh/(destins.size()-20))-34);
+    if(i < destins.size() - 21 && i >= 0){
+      for (int j = 0; j <20; j++){
+        destins.get(i+j).draw(170+ j * 25);
+      }
+    } else if (i >= destins.size()-21){
+      for (int j = 0; j <20; j++){
+        int index = destins.size() -20;
+        destins.get(index+j).draw(170+ j * 25);
+      }
+    }else if (i < 0){
+      for (int j = 0; j <20; j++){
+        int index = 0;
+        destins.get(index+j).draw(170+ j * 25);
+      }
+    }
+
+    dbar.update();
+    dbar.draw();
+  }
 }
 
 void mousePressed()
@@ -133,15 +166,21 @@ void mousePressed()
   depTime.clicked(mouseX,mouseY);
   if(back.clicked(mouseX, mouseY)){
     theScreen = screens.get(0);
+    origin.checked = false;
+    destination.checked = false;
   } 
   else if (search.clicked(mouseX, mouseY)) {
     theScreen = screens.get(2);
+    origin.checked = false;
+    destination.checked = false;
   } 
  // else if (addFilter.clicked(mouseX, mouseY)) {
   //  theScreen = screens.get(1);
   //} 
   else if (graph.clicked(mouseX, mouseY)) {
     theScreen = screens.get(3);
+    origin.checked = false;
+    destination.checked = false;
     screens.get(3).addBarchart(new Barchart(SCREENX/2, SCREENY/2, 800, 600, 60, origins));
   } 
   else if (depTime.clicked(mouseX, mouseY)) {
@@ -158,7 +197,11 @@ void mousePressed()
   for (Checkbox c: origins){
     c.clicked(mouseX, mouseY);
   }
+  for (Checkbox c: destins){
+    c.clicked(mouseX, mouseY);
+  }
   cancelled.clicked(mouseX, mouseY);
+  diverted.clicked(mouseX, mouseY);
 }
 
 void mouseMoved() {
