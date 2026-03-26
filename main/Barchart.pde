@@ -5,7 +5,7 @@
 
 
 class Barchart{
-    float x, y, w, h,gap;
+    float x, y, w,h,gap;
     String title;
     String y_title ="filtered flights";
     String x_title = "destination";
@@ -18,22 +18,8 @@ class Barchart{
         this.h = h;
         this.gap = gap;
         this.title = "Flights by" ;
-
-        String filteredAirports = "WHERE ";
-        String originBuffer = "";
-        for(int i = 0; i < origins.size() -1; i++){
-            
-            if (origins.get(i).checked){
-                if (originBuffer != "") filteredAirports += "ORIGIN = \"" +originBuffer +"\" OR ";
-                originBuffer =  origins.get(i).label;
-            } 
-        }
-        filteredAirports += "ORIGIN = \"" +originBuffer +"\"";
-        
-        System.out.println("SELECT DEST, COUNT(*) FROM flights " + filteredAirports + " GROUP BY DEST ORDER BY COUNT(*) DESC LIMIT " +  (int)((w - 50) /  gap));
-        data = db.query(
-                "SELECT DEST, COUNT(*) FROM flights " + filteredAirports + " GROUP BY DEST ORDER BY COUNT(*) DESC LIMIT " +  (int)((w - 50) /  gap)
-                );
+        this.data = db.filteredQuery(origins,this.w,this.gap);
+        println(this.data);
 
 
     }
@@ -47,11 +33,9 @@ class Barchart{
         this.title = "Flights by" + x_title;
         if (variables.contains(x_title)){
             this.x_title = x_title;
-                        data = db.query(
-                "SELECT " + x_title +", COUNT(*) FROM flights GROUP BY " + x_title +" ORDER BY COUNT(*) DESC LIMIT " +  (int)((w - 50) /  gap)
-                );
         }
         this.y_title = y_title;
+        
  
     }
 

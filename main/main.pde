@@ -43,6 +43,7 @@ boolean change = false;
 
 void settings() {
   size(SCREENX,SCREENY);
+  size(SCREENX,SCREENY);
 }
 void setup()
 {
@@ -50,7 +51,7 @@ void setup()
   font = loadFont("PoorRichard-Regular-30.vlw");
   textFont(font);
   noStroke();
-  DatabaseQueries.dbPath = sketchPath("database.db");
+  db.dbPath = sketchPath("database.db");
   originAirports = db.query("SELECT DISTINCT(ORIGIN_CITY_NAME) FROM flights ORDER BY ORIGIN_CITY_NAME ASC");
   destAirports = db.query("SELECT DISTINCT(DEST_CITY_NAME) FROM flights ORDER BY DEST_CITY_NAME ASC");
   System.out.println(originAirports);
