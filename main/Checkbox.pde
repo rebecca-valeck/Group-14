@@ -1,4 +1,4 @@
-class Checkbox {
+class Checkbox  {
     float x, y = 0;
     int w = 20;
     int h = 20;
@@ -14,7 +14,7 @@ class Checkbox {
         this.y = y;
         stroke(0);
         fill(255);
-        rect(x, y, w, h);
+        rect(x, y, w, h, 5);
 
         fill(0);
         textSize(h);
@@ -25,7 +25,7 @@ class Checkbox {
             textAlign(CENTER,CENTER);
             fill(0);
             textSize(h);
-            text("X", x + w/2, y+h/2);
+            text("X", x+w/2 +1, y+h/2 +1);
         }
     }
 
