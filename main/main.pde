@@ -87,12 +87,11 @@ void setup()
 
   screens.add (new Screen(color(#D3DCEE)));
   screens.add (new Screen(color(#D3DCEE)));
-  screens.add (new Screen(color(#D3DCEE)));
+  screens.add (new Screen(color(#2E5E8E)));
   screens.add (new Screen(color(#D3DCEE)));
 
 
   screens.get(0).addButton(search);
- // screens.get(0).addButton(graph);
 
   
   screens.get(0).addButton(day);
@@ -102,7 +101,6 @@ void setup()
   screens.get(0).addCheckbox(cancelled);
   screens.get(0).addCheckbox(diverted);
   
- // screens.get(0).addButton(graph);
   screens.get(0).addTextButton(depTime);
   screens.get(0).addTextButton(arrTime);
   screens.get(0).addButton(destination);
@@ -126,8 +124,6 @@ void setup()
   dbar = new Scrollbar(582, (SCREENY/4)-15, 16, 505, 16);
 }
 void draw() {
-  //plane.resize(SCREENX/3,100);
- // image (plane, -plane.width, 0);
   
   theScreen.draw();
 
@@ -200,13 +196,6 @@ void mousePressed()
     screens.get(1).addBarchart(new Barchart(SCREENX/2+400, 530, 400, 300, 60, origins));
   } 
 
- // else if (graph.clicked(mouseX, mouseY)) {
-  //  theScreen = screens.get(1);
-  //  origin.checked = false;
- //   destination.checked = false;
-  // 
-
-  //} 
   else if (depTime.clicked(mouseX, mouseY)) {
     depTime.label = "| ";
     origin.checked = false;
