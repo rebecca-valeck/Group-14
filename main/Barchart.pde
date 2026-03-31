@@ -11,18 +11,23 @@ class Barchart{
     String x_title = "destination";
     ArrayList<ArrayList<String>> data;
     // this is a constructor for filtered count charts where y is the count of flights that meet the origin filter conditions and x is destination
-    Barchart(float x, float y, float w, float h, float gap ,ArrayList<Checkbox> origins,String x_title, String groupBy){
+    Barchart(float x, float y, float w, float h, float gap ,
+        ArrayList<Checkbox> origins,
+        ArrayList<Checkbox> destinations,
+        String dates,
+        String distance,
+        String arrivalTime,
+        String departureTime,
+        String x_title, String groupBy){
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
         this.gap = gap;
         this.x_title = x_title;
+        this.y_title = "count of flights";
         this.title = "Flights by" ;
-        this.data = db.filteredQuery(origins,this.w,this.gap,this.x_title,groupBy);
-        println(this.data);
-
-
+        this.data = db.filteredQuery(origins,destinations,dates,distance,arrivalTime,departureTime,this.w,this.gap,groupBy,"SELECT "+ x_title +", COUNT(*) FROM flights ");
     }
     //this is for simple count charts where y is number of flights and x the different variables of the given x_title column
     Barchart(float x, float y, float w, float h, float gap ,String x_title, String y_title){

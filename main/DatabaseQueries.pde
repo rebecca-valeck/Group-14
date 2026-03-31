@@ -48,25 +48,50 @@ public class DatabaseQueries {
             return (queryResultArray);
         }
     }
-    public ArrayList<ArrayList<String>> filteredQuery(ArrayList<Checkbox> origins,float w,float gap,String x_title,String groupBy){
-            String queryString = "SELECT DEST, COUNT(*) FROM flights ";
-            String filteredAirports = "(";
-            String originBuffer = "";
+    public ArrayList<ArrayList<String>> filteredQuery(  ArrayList<Checkbox> origins,
+                                                        ArrayList<Checkbox> destinations,
+                                                        String date,
+                                                        String distance,
+                                                        String arrivalTime,
+                                                        String departureTime,
+                                                        float w,float gap,String groupBy,String baseQueryString){
+            String queryString = baseQueryString;
+
+            String buffer = "";       
+            String filteredOrigins = "(";
             for(int i = 0; i < origins.size() -1; i++){
                 if (origins.get(i).checked){
-                    if (originBuffer != "") filteredAirports += x_title + "= \"" +originBuffer +"\" OR ";
-                    originBuffer =  origins.get(i).label;
+                    if (buffer != "") filteredOrigins += "ORIGIN_CITY_NAME" + "= \"" +buffer +"\" OR ";
+                    buffer =  origins.get(i).label;
                 } 
             }
-            filteredAirports += x_title +"= \"" +originBuffer +"\")";
+            if (buffer != ""){
+                filteredOrigins += "ORIGIN_CITY_NAME" +"= \"" +buffer +"\")";
+                queryString += "WHERE " + filteredOrigins; 
+            }
+            String filteredDestinations = "(";
+            buffer = "";
+            for(int i = 0; i < destinations.size() -1; i++){
+                if (destinations.get(i).checked){
+                    if (buffer != "") filteredDestinations += "DEST_CITY_NAME" + "= \"" +buffer +"\" OR ";
+                    buffer =  destinations.get(i).label;
+                } 
+            }
+            if (buffer != ""){
+                filteredDestinations +="DEST_CITY_NAME" +"= \"" +buffer +"\")";
+                queryString += (queryString != baseQueryString?" AND ":"WHERE ") + filteredDestinations; 
+            }
 
-            queryString+= "WHERE" + filteredAirports;
-            println(w);
-            println(gap);
+            if(!date.equals("DayMonth"))queryString += (queryString != baseQueryString?" AND ":"WHERE ") + "(date = \"" + date + "\")";
+            if(distance != "Distance")queryString += (queryString != baseQueryString?" AND ":"WHERE ") + "(DISTANCE = \"" + distance + "\")";
+            if(departureTime != "Departure time")queryString += (queryString != baseQueryString?" AND ":"WHERE ") + "(DEPT_TIME = \"" + departureTime + "\")";
+            if(arrivalTime != "Arrival time")queryString += (queryString != baseQueryString?" AND ":"WHERE ") + "(ARR_TIME = \"" + arrivalTime + "\")";
+            println(queryString);
+            println(db.query(queryString));
+
+
             queryString +=" GROUP BY " +groupBy +" ORDER BY COUNT(*)"
             + " DESC LIMIT " +  (int)((w - 50) /  gap);
-            System.out.println(queryString);
-            println(db.query(queryString));
             return db.query(queryString);
 
     }

@@ -1,9 +1,6 @@
 import java.sql.*;
 
 public class DatabaseManipulation {
-    public static void main(String[] args) {
-       clearDatabase(); 
-    }
     public static void clearDatabase() {
 
         String url = "jdbc:sqlite:database.db";

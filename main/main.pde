@@ -45,6 +45,7 @@ void settings() {
 }
 void setup()
 {
+
   plane=loadImage("aereo.jpg");
   movplaneimg = new MovingImage(plane, plane.width * -1, SCREENY/2 - plane.height/2);
   font = loadFont("PoorRichard-Regular-30.vlw");
@@ -197,9 +198,23 @@ void mousePressed()
     theScreen = screens.get(1);
     origin.checked = false;
     destination.checked = false;
-    screens.get(1).addBarchart(new Barchart(SCREENX/2+400, 240, 400, 200, 60, origins, "ORIGIN_CITY_NAME","DEST"));
-    screens.get(1).addBarchart(new Barchart(SCREENX/2+400, 530, 400, 300, 60, destins, "DEST_CITY_NAME","ORIGIN"));
-  } 
+    println(month.label);
+    String date = day.label + month.label;
+    screens.get(1).addBarchart(new Barchart(SCREENX/2+400, 240, 400, 200, 60,
+                               origins,destins,date,
+                               distance.label,
+                               arrTime.label,
+                               depTime.label,
+                              "ORIGIN_CITY_NAME",
+                              "DEST"));
+        screens.get(1).addBarchart(new Barchart(SCREENX/2+400, 530, 400, 300, 60,
+                               origins,destins,date,
+                               distance.label,
+                               arrTime.label,
+                               depTime.label,
+                              "DEST_CITY_NAME",
+                              "ORIGIN"));
+    } 
 
   else if (depTime.clicked(mouseX, mouseY)) {
     origin.checked = false;
