@@ -32,7 +32,11 @@ class Screen {
     noStroke();
     fill(#2E5E8E);
     rect(0, 0, 1900, 100);
-    
+
+    if (theScreen == screens.get(1)){
+      movplaneimg.drawImg();
+      movplaneimg.moveImg();
+    }
     textSize(60);
     String s = "S E A R C H   P L A N E S  !";
     fill(#D3DCEE);
