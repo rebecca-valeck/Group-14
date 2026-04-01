@@ -5,9 +5,15 @@ final int SCREENY = 720;
 DatabaseQueries db = new DatabaseQueries();
 Barchart chart;
 Screen theScreen;
+Calendar dayCalendar;
+Calendar monthCalendar;
 ArrayList<Screen> screens = new ArrayList<Screen>();
 ArrayList<Checkbox> origins = new ArrayList<Checkbox>();
 ArrayList<Checkbox> destins = new ArrayList<Checkbox>();
+ArrayList<Calendar> dates = new ArrayList<Calendar>();
+ArrayList<Calendar> months = new ArrayList<Calendar>();
+boolean twentyEightDays;
+boolean thirtyDays;
 ArrayList<ArrayList<String>> originAirports; //= db.query("SELECT DISTINCT(ORIGIN) FROM flights ORDER BY ORIGIN ASC");
 ArrayList<ArrayList<String>> destAirports; //= db.query("SELECT DISTINCT(DEST) FROM flights ORDER BY DEST ASC");
 
@@ -115,6 +121,8 @@ void setup()
   screens.get(3).addButton(back);
 
   theScreen = screens.get(0);
+  dayCalendar = new Calendar(10,170,250,350, 0);
+  monthCalendar = new Calendar(155,170,150,200, 0);
 
   for(int i = 0; i < originAirports.size(); i++){
     origins.add(new Checkbox(183, originAirports.get(i).get(0)));
@@ -124,6 +132,14 @@ void setup()
     destins.add(new Checkbox(300, destAirports.get(i).get(0)));
   }
   dbar = new Scrollbar(582, (SCREENY/4)-15, 16, 505, 16);
+
+  for(int row = 0; row < 4; row++)
+  {
+    for(int column = 0; column < 3; column++)
+    {
+    months.add(new Calendar(155 + (column * 50), 170 + (50*row), 50, 50, column + 1 + (3*row)));
+    }
+  }
 }
 void draw() {
   
@@ -180,6 +196,60 @@ void draw() {
     dbar.update();
     dbar.draw();
   }
+  
+  if(day.checked)
+ {
+  dayCalendar.draw();
+  
+  
+  for (Calendar c: dates)
+  {
+    
+    c.drawDates(c.x, c.y);
+    
+    if(c.checked)
+    {
+      stroke(0);
+      line(c.x, c.y, c.x + 50, c.y+50);
+      line(c.x, c.y + 50, c.x + 50, c.y);
+    }
+  }
+  
+ }
+ 
+ if(month.checked)
+ {
+   for (Calendar c: months)
+  {
+    
+    c.drawDates(c.x, c.y);
+    
+    if(c.checked)
+    {
+      stroke(0);
+      line(c.x, c.y, c.x + 50, c.y+50);
+      line(c.x, c.y + 50, c.x + 50, c.y);
+      if(c.date == 2)
+      {
+        twentyEightDays = true;
+        thirtyDays = false;
+      }
+      else if(c.date == 4 || c.date == 6 || c.date == 9 || c.date == 11)
+      {
+         twentyEightDays = false;
+         thirtyDays = true;         
+      }
+      else
+      {
+        twentyEightDays = false;
+        thirtyDays = false;  
+      }
+      
+      setDates();
+      
+    }
+  }
+ }
 }
 
 void mousePressed()
@@ -227,10 +297,30 @@ void mousePressed()
   }
   else if (origin.clicked(mouseX, mouseY)){
     destination.checked = false;
+    day.checked = false;
+    month.checked = false;
   }
   else if (destination.clicked(mouseX, mouseY)){
     origin.checked = false;
+    day.checked = false;
+    month.checked = false;
   }
+
+    else if (day.clicked(mouseX, mouseY))
+  {
+    origin.checked = false;
+    destination.checked = false;
+    month.checked = false;
+  }
+  
+  else if (month.clicked(mouseX, mouseY))
+  {
+    origin.checked = false;
+    destination.checked = false;
+    day.checked = false;
+  }
+
+
  
   
   for (Checkbox c: origins){
@@ -238,6 +328,15 @@ void mousePressed()
   }
   for (Checkbox c: destins){
     c.clicked(mouseX, mouseY);
+  }
+
+  for (Calendar c: dates)
+  {
+    c.clicked(mouseX, mouseY);
+  }
+  for(Calendar c: months)
+  {
+    c.clicked(mouseX,mouseY);
   }
   cancelled.clicked(mouseX, mouseY);
   diverted.clicked(mouseX, mouseY);
@@ -247,6 +346,46 @@ void mouseMoved() {
   for (Button b : theScreen.button) {
     if (b.clicked(mouseX, mouseY)) b.stroke = true;
     else b.stroke = false;
+  }
+}
+
+void setDates()
+{
+  dates.clear();
+  if(twentyEightDays)
+  {
+    for(int row = 0; row < 5; row++)
+    {
+      for(int column = 0; column < 5; column++)
+      {
+        dates.add(new Calendar(10 + (column * 50), 170 + (50*row), 50, 50, column + 1 + (5*row)));
+      }
+    }
+    dates.add(new Calendar(10, 420, 50, 50, 26));
+    dates.add(new Calendar(60, 420, 50, 50, 27));
+    dates.add(new Calendar(110, 420, 50, 50, 28));
+  }
+  else if(thirtyDays)
+  {
+    for(int row = 0; row < 6; row++)
+    {
+      for(int column = 0; column < 5; column++)
+      {
+        dates.add(new Calendar(10 + (column * 50), 170 + (50*row), 50, 50, column + 1 + (5*row)));
+      }
+    }
+  }
+  
+  else
+  {
+    for(int row = 0; row < 6; row++)
+    {
+      for(int column = 0; column < 5; column++)
+      {
+        dates.add(new Calendar(10 + (column * 50), 170 + (50*row), 50, 50, column + 1 + (5*row)));
+      }
+    }
+    dates.add(new Calendar(10, 470, 50, 50, 31));
   }
 }
 
