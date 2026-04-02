@@ -59,6 +59,7 @@ class Screen {
     for (Checkbox c: checks){
       c.draw((SCREENY/4)-45);
     }
+    
     if (theScreen == screens.get(1)) sim.draw();
   }
 

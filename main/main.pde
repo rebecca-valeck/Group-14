@@ -5,8 +5,8 @@ final int SCREENY = 720;
 DatabaseQueries db = new DatabaseQueries();
 Barchart chart;
 //Map insertation
-
 PImage bg;
+
 ///
 Screen theScreen;
 Calendar dayCalendar;
@@ -59,9 +59,9 @@ void settings() {
  size(SCREENX,SCREENY); 
   pixelDensity(1);
 }
+
 void setup()
 {
-
   sim = new Simulation();
   bg = loadImage("final.svg.jpg");
 
@@ -174,6 +174,7 @@ void draw() {
     stroke(0);
     rect(173, (SCREENY/4)-15, 290, 505, 5);
 
+    //changes the index of the list of airports to display accordingly
     int i = (int)(bar.getPos() / (bar.sh/(origins.size()-20))*0.70 -120);
     if (i < origins.size() - 21 && i >= 0) {
       for (int j = 0; j <20; j++) {

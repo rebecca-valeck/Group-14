@@ -24,7 +24,7 @@ Simulation(){
     // Draw the image
     image(bg, mX, mY, mW, mH);
 
-    // Draw the airports on top ofthat specific area
+    // Draw the airports on top of that specific area
     graph.draw();
     for (Plane p : planes) {
       //p.move();
