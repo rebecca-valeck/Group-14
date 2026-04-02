@@ -48,7 +48,7 @@ class Barchart{
 
     void draw(){
         if (data != null){
-            fill(255);
+            fill(#E2E8F4);
             rect(x-w/2, y-h/2, w, h);
             for (int i = 0; i < data.size(); i++){
                 float barHeight = map(float(data.get(i).get(1)), 0, float(data.get(0).get(1)), 0, h-100);
