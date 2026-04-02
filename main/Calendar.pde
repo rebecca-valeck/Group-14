@@ -50,10 +50,12 @@ class Calendar
         
     
 
-    boolean clicked(float mx, float my){
+    boolean clicked(float mx, float my, Button b){
       if(mx > x && mx < x+w && my > y && my < y+h){
-        if (checked) checked = false;
-        else checked = true;
+        if (b.checked){
+          if (checked) checked = false;
+          else checked = true;
+        }
         return true;
       }
       return false;

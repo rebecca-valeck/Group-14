@@ -150,7 +150,7 @@ void draw() {
     stroke(0);
     rect(173, (SCREENY/4)-15, 290, 505, 5);
 
-    int i = ((int)bar.getPos() / (bar.sh/(origins.size()-20))-34);
+    int i = (int)(bar.getPos() / (bar.sh/(origins.size()-20))*0.70 -120);
     if(i < origins.size() - 21 && i >= 0){
       for (int j = 0; j <20; j++){
         origins.get(i+j).draw(170+ j * 25);
@@ -176,7 +176,7 @@ void draw() {
     stroke(0);
     rect(290, (SCREENY/4)-15, 290, 505, 5);
 
-    int i = ((int)dbar.getPos() / (dbar.sh/(destins.size()-20))-34);
+    int i = (int)(dbar.getPos() / (dbar.sh/(destins.size()-20))*0.70 -120);
     if(i < destins.size() - 21 && i >= 0){
       for (int j = 0; j <20; j++){
         destins.get(i+j).draw(170+ j * 25);
@@ -332,11 +332,11 @@ void mousePressed()
 
   for (Calendar c: dates)
   {
-    c.clicked(mouseX, mouseY);
+    c.clicked(mouseX, mouseY, day);
   }
   for(Calendar c: months)
   {
-    c.clicked(mouseX,mouseY);
+    c.clicked(mouseX,mouseY, month);
   }
   cancelled.clicked(mouseX, mouseY);
   diverted.clicked(mouseX, mouseY);
