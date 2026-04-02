@@ -38,6 +38,8 @@ Checkbox cancelled = new Checkbox(1005, "Cancelled");
 Checkbox diverted = new Checkbox(1125, "Diverted");
 
 PFont  font;
+int monthNumber;
+int dayNumber;
 
 PImage plane;
 MovingImage movplaneimg;
@@ -209,6 +211,7 @@ void draw() {
     
     if(c.checked)
     {
+      dayNumber = c.date;
       stroke(0);
       line(c.x, c.y, c.x + 50, c.y+50);
       line(c.x, c.y + 50, c.x + 50, c.y);
@@ -226,6 +229,7 @@ void draw() {
     
     if(c.checked)
     {
+      monthNumber = c.date;
       stroke(0);
       line(c.x, c.y, c.x + 50, c.y+50);
       line(c.x, c.y + 50, c.x + 50, c.y);
@@ -264,8 +268,8 @@ void mousePressed()
     theScreen = screens.get(1);
     origin.checked = false;
     destination.checked = false;
-    println(month.label);
-    String date = day.label + month.label;
+    
+    String date = dayNumber +"/" + monthNumber+"/2022 12:00:00 AM" ;
     movplaneimg.x = movplaneimg.initialx;
     screens.get(1).addBarchart(new Barchart(SCREENX/2+400, 240, 400, 200, 60,
                                origins,destins,date,
