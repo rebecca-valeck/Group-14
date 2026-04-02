@@ -3,13 +3,16 @@ class Simulation{
     int gameTickSpeed = 1;
     ArrayList<Plane> planes = new ArrayList<Plane>();
 
-    void start(){
+    void start()
+    {
         gameTime = 0;
     }
 
-    void draw(){
+    void draw()
+    {
         //map.draw();
-        for (Plane p: planes){
+        for (Plane p: planes)
+        {
             //p.move();
             //p.draw();
         }

@@ -1,41 +1,50 @@
 import java.sql.*;
-public class DatabaseQueries {
+public class DatabaseQueries 
+{
     String dbPath = "database.db";
 
-
-    public ArrayList<ArrayList<String>> query(String query){
+    public ArrayList<ArrayList<String>> query(String query)
+    {
         ArrayList<ArrayList<String>> queryResultArray = new ArrayList<>(0);
-            try{
+            try
+            {
                 Class.forName("org.sqlite.JDBC");
                 Connection conn = DriverManager.getConnection("jdbc:sqlite:"+dbPath);
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
                 int numberOfFields = rs.getMetaData().getColumnCount() + 1;
-                while (rs.next()){
+                while (rs.next())
+                {
                     ArrayList<String> queryResultSubarray = new ArrayList<>(0);
-                    for (int i = 1; i < numberOfFields;i++){
+                    for (int i = 1; i < numberOfFields;i++)
+                    {
                         queryResultSubarray.add(rs.getString(i)) ;
                     }
-                queryResultArray.add(queryResultSubarray);
+                    queryResultArray.add(queryResultSubarray);
                 }
 
                 return queryResultArray;      
-        }catch(Exception e){ 
+        }catch(Exception e)
+        { 
             print("error");
             e.printStackTrace();
             return (queryResultArray);
         }
     }
 
-    public ArrayList<ArrayList<Integer>> IntegerQuery(String query){
+    public ArrayList<ArrayList<Integer>> IntegerQuery(String query)
+    {
         ArrayList<ArrayList<Integer>> queryResultArray = new ArrayList<>(0);
-        try(Connection conn = DriverManager.getConnection("jdbc:sqlite:database.db")){
+        try(Connection conn = DriverManager.getConnection("jdbc:sqlite:database.db"))
+        {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             int numberOfFields = rs.getMetaData().getColumnCount() + 1;
-            while (rs.next()){
+            while (rs.next())
+            {
                 ArrayList<Integer> queryResultSubarray = new ArrayList<>(0);
-                for (int i = 1; i < numberOfFields;i++){
+                for (int i = 1; i < numberOfFields;i++)
+                {
                     queryResultSubarray.add(rs.getInt(i)) ;
                 }
                queryResultArray.add(queryResultSubarray);
@@ -59,25 +68,31 @@ public class DatabaseQueries {
 
             String buffer = "";       
             String filteredOrigins = "(";
-            for(int i = 0; i < origins.size() -1; i++){
-                if (origins.get(i).checked){
+            for(int i = 0; i < origins.size() -1; i++)
+            {
+                if (origins.get(i).checked)
+                {
                     if (buffer != "") filteredOrigins += "ORIGIN_CITY_NAME" + "= \"" +buffer +"\" OR ";
                     buffer =  origins.get(i).label;
                 } 
             }
-            if (buffer != ""){
+            if (buffer != "")
+            {
                 filteredOrigins += "ORIGIN_CITY_NAME" +"= \"" +buffer +"\")";
                 queryString += "WHERE " + filteredOrigins; 
             }
             String filteredDestinations = "(";
             buffer = "";
-            for(int i = 0; i < destinations.size() -1; i++){
-                if (destinations.get(i).checked){
+            for(int i = 0; i < destinations.size() -1; i++)
+            {
+                if (destinations.get(i).checked)
+                {
                     if (buffer != "") filteredDestinations += "DEST_CITY_NAME" + "= \"" +buffer +"\" OR ";
                     buffer =  destinations.get(i).label;
                 } 
             }
-            if (buffer != ""){
+            if (buffer != "")
+            {
                 filteredDestinations +="DEST_CITY_NAME" +"= \"" +buffer +"\")";
                 queryString += (queryString != baseQueryString?" AND ":"WHERE ") + filteredDestinations; 
             }
@@ -93,9 +108,6 @@ public class DatabaseQueries {
             queryString +=" GROUP BY " +groupBy +" ORDER BY COUNT(*)"
             + " DESC LIMIT " +  (int)((w - 50) /  gap);
             return db.query(queryString);
-
     }
-
-
 
 }
