@@ -11,7 +11,7 @@ class Logo{
 
     void draw(){
         limg.resize(w, w);
-        noStroke();
+        stroke(#14283E);
         image(limg, x, y);
     }
 
