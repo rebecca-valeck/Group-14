@@ -3,22 +3,26 @@ class simulation{
     int gameTickSpeed = 1;
     ArrayList<Plane> planes = new ArrayList<Plane>();
 
-    void start(){
+    void start()
+    {
         gameTime = 0;
     }
 
-    void draw(){
+    void draw()
+    {
         //map.draw();
-        for (Plane p: planes){
+        for (Plane p: planes)
+        {
             //p.move();
             //p.draw();
         }
     }
-    void addPlanes(){
+    void addPlanes()
+    {
         ArrayList<ArrayList<String>> planesQuery = db.query("SELECT * from flights WHERE ORIGIN = \"DEN\"");
-        for (ArrayList<String> plane : planesQuery){
-
-                planes.add(new Plane(
+        for (ArrayList<String> plane : planesQuery)
+        {
+            planes.add(new Plane(
                 plane.get(1), // date
                 plane.get(4), // origin
                 plane.get(6), // origin state abr

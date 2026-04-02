@@ -29,7 +29,8 @@ class Plane {
             String arr_time,
             String cancelled,
             String diverted,
-            String distance) {
+            String distance) 
+    {
         this.date = date;
         this.origin = origin;
         this.origin_state_abr = origin_state_abr;

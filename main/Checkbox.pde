@@ -1,28 +1,32 @@
-class Checkbox  {
+class Checkbox  
+{
     float x, y = 0;
     int w = 20;
     int h = 20;
     String label;
     boolean checked = false;
 
-    Checkbox(float x, String str){
+    Checkbox(float x, String str)
+    {
         this.x = x;
         label = str;
     }
 
-    void draw(float y){
+    void draw(float y)
+    {
         this.y = y;
         stroke(0);
         fill(255);
         rect(x, y, w, h, 5);
         
-
         fill(#14283E);
         textSize(h);
         textAlign(LEFT, CENTER);
-        text(label, x+w+5, y+h/2);
+        text(label, x+w+5, y+h/2);  
 
-        if (checked){
+        // if clicked, an x will appear to show it's selected
+        if (checked)
+        {
             textAlign(CENTER,CENTER);
             fill(0);
             textSize(h);
@@ -30,8 +34,10 @@ class Checkbox  {
         }
     }
 
-    boolean clicked(float mx, float my){
-      if(mx > x && mx < x+w && my > y && my < y+h){
+    boolean clicked(float mx, float my)
+    {
+      if(mx > x && mx < x+w && my > y && my < y+h)
+      {
         if (checked) checked = false;
         else checked = true;
         return true;

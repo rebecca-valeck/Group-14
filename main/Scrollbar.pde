@@ -1,9 +1,11 @@
-class Scrollbar{
+class Scrollbar
+{
     int x, y, sw, sh, miny, maxy, loose;
     float slidery, newy, ratio;
     boolean over, locked;
 
-    Scrollbar(int x, int y, int sw, int sh, int loose){
+    Scrollbar(int x, int y, int sw, int sh, int loose)
+    {
         this.sw = sw;
         this.sh = sh;
         ratio = (float)sh / (float)(sh - sw);
@@ -16,7 +18,9 @@ class Scrollbar{
         this.loose = loose;
     }
 
-    void update(){
+    // updates the location of the scrollbar when it's being moved
+    void update()
+    {
         if (over()) over = true;
         else over = false;
 
@@ -27,31 +31,34 @@ class Scrollbar{
         if (abs(newy - slidery) > 1) slidery = slidery + (newy - slidery)/loose;
     }
 
-
-    int constrain(int val, int minv, int maxv) {
+    int constrain(int val, int minv, int maxv)
+    {
         return min(max(val, minv), maxv);
     }
 
-    boolean over(){
+    // checks if the mouse is over the bar
+    boolean over()
+    {
         if (mouseX > x && mouseX < x + sw &&
-            mouseY > y && mouseY < y + sh) {
+            mouseY > y && mouseY < y + sh) 
+        {
             return true;
         }
         return false;
     }
 
-    void draw(){
+    void draw()
+    {
         fill(#89A1D1);
         rect(x, y, sw, sh, 5);
 
-        if(over || locked){
-            fill(#D3DCEE);
-        }
+        if(over || locked)  fill(#D3DCEE);
         else fill(#B6C5E2);
         rect(x, slidery, sw, sw, 5);
     }
-    
-    float getPos(){
+
+    float getPos()
+    {
         return slidery * ratio;
     }
 }
