@@ -32,7 +32,7 @@ Button month ;
 Button origin ;
 Button destination ;
 Button search;
-Button back;
+// Button back;
 
 //all the text buttons
 TextButton depTime;
@@ -52,6 +52,10 @@ PFont  font;
 PImage plane;
 MovingImage movplaneimg;
 
+// logo
+PImage logoImg;
+Logo logo;
+
 void settings() 
 {
   size(SCREENX,SCREENY);
@@ -64,6 +68,10 @@ void setup()
   plane = loadImage("aereo.jpg");
   plane.resize(1480, 100);
   movplaneimg = new MovingImage(plane, plane.width * -1, 0);
+  logoImg = loadImage("logo.jpeg");
+
+  // creating the logo
+  logo = new Logo(logoImg, 20, 15);
   
   //loading the font 
   font = loadFont("PoorRichard-Regular-30.vlw");
@@ -79,7 +87,7 @@ void setup()
 
   //creating the buttons
   search      = new Button(SCREENX/2-150, SCREENY/2-25, 300, 50, "G E N E R A T E   M A P", 30);
-  back        = new Button(40, 25, 100, 50, "BACK",30);
+ // back        = new Button(40, 25, 100, 50, "BACK",30);
   day         = new Button(50, (SCREENY/4)-50, 75, 30, "Day", 30);
   month       = new Button(155, (SCREENY/4)-50, 80, 30, "Month",30);
   destination = new Button(380, (SCREENY/4)-50, 120, 30, "Destination", 30);
@@ -117,8 +125,8 @@ void setup()
   screens.get(0).addTextButton(distance);
 
   //adding to other screens 
-  screens.get(1).addButton(back);
-  screens.get(3).addButton(back);
+  //screens.get(1).addButton(back);
+  //screens.get(3).addButton(back);
 
   theScreen = screens.get(0);
 
@@ -148,6 +156,8 @@ void draw()
 {
   
   theScreen.draw();
+
+  logo.draw();
 
   //code for the origin button
   if(origin.checked)
@@ -275,13 +285,13 @@ void draw()
 void mousePressed()
 {
   
-  if(back.clicked(mouseX, mouseY))
+  /*if(back.clicked(mouseX, mouseY))
   {
     theScreen = screens.get(0);
     origin.checked = false;
     destination.checked = false;
-  } 
-  else if (search.clicked(mouseX, mouseY)) 
+  } */
+  if (search.clicked(mouseX, mouseY)) 
   {
     theScreen = screens.get(1);
     origin.checked = false;
@@ -349,6 +359,13 @@ void mousePressed()
     origin.checked = false;
     destination.checked = false;
     day.checked = false;
+  }
+
+  else if (logo.clicked(mouseX, mouseY)){
+    origin.checked = false;
+    destination.checked = false;
+    day.checked = false;
+    theScreen = screens.get(0);
   }
 
   for (Checkbox c: origins)
