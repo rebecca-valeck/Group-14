@@ -18,7 +18,7 @@
     
     if(stroke){
       stroke(0);
-      fill(255);
+      fill(#568FC8);
       rect(x, y, w, h, r);
     }  
     else{ 

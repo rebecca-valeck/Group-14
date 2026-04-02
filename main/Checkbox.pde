@@ -15,6 +15,7 @@ class Checkbox  {
         stroke(0);
         fill(255);
         rect(x, y, w, h, 5);
+        
 
         fill(0);
         textSize(h);
