@@ -14,15 +14,29 @@ void setup() {
    pixelDensity(1);
 }
 
-void draw() {
-  background(bg); // Need to be replaced with suistable map
+// void draw() {
+//   background(bg); // Need to be replaced with suistable map
   
-  //Dest and Origin are highlighted 
-  graph.display(airports);
+//   //Dest and Origin are highlighted 
+//   graph.display(airports);
+// }
+//  // Finding coordinate
+//  //void mousePressed(){
+//  //  print(mouseX, mouseY , " ");
+//  //}
+
+ void draw() {
+  background(210, 225, 240); // Light blue background for the whole app
+  
+  // Define where the map goes (Left side)
+  float mX = 20; 
+  float mY = 100;
+  float mW = 620; 
+  float mH = 400;
+
+  // Draw the image
+  image(bg, mX, mY, mW, mH); 
+
+  // Draw the airports on top of that specific area
+  graph.display(airports, mX, mY, mW, mH);
 }
- // Finding coordinate
- //void mousePressed(){
- //  print(mouseX, mouseY , " ");
- //}
-
-
