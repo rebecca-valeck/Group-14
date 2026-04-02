@@ -3,6 +3,7 @@
   String label;
   boolean stroke = false;
   boolean checked = false;
+  boolean change = false;
 
   Button(float x, float y, float w, float h, String label, float r) {
     this.x=x;
@@ -15,15 +16,23 @@
 
   void draw() {
     
-    if(stroke)  stroke(0);
-    else noStroke();
+    if(stroke){
+      stroke(0);
+      fill(255);
+      rect(x, y, w, h, r);
+    }  
+    else{ 
+      noStroke();
+      fill(#2E5E8E);
+      rect(x, y, w, h, r);
+    }
     
-    fill(#2E5E8E);
-    rect(x, y, w, h, r);
-
+    
     fill(#D3DCEE);
     textAlign(CENTER, CENTER);
     text(label, x+w/2, y+h/2);
+
+    
   }
 
   boolean clicked(float mx, float my){
@@ -37,6 +46,7 @@
       }
       return false;
   }
+
 /*
   color getColor() {
     if (label.equals("red"))  return color(255, 0, 0);
