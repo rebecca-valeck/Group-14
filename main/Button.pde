@@ -17,7 +17,7 @@
   void draw() {
     
     if(stroke){
-      stroke(0);
+      stroke(#14283E);
       fill(#568FC8);
       rect(x, y, w, h, r);
     }  

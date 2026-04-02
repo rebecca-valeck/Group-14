@@ -52,9 +52,9 @@ class Barchart{
             rect(x-w/2, y-h/2, w, h);
             for (int i = 0; i < data.size(); i++){
                 float barHeight = map(float(data.get(i).get(1)), 0, float(data.get(0).get(1)), 0, h-100);
-                fill(100, 150, 200);
+                fill(#2E5E8E);
                 rect(x-w/2 + 50 + i*gap, y+h/2 - barHeight - 50, 40, barHeight);
-                fill(0);
+                fill(#14283E);
                 textAlign(CENTER);
                 text(data.get(i).get(0), x-w/2 + 70 + i*gap, y+h/2 - 30);
             }

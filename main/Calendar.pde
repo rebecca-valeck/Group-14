@@ -21,11 +21,11 @@ class Calendar
 
     void draw()
     {
-      fill(255);
+      fill(#E2E8F4);
       rect(x, y, calendarWidth, calendarHeight);
       if (checked){
             textAlign(CENTER,CENTER);
-            fill(0);
+            fill(#E2E8F4);
             textSize(h);
             text("X", boxX+w/2 +1, boxY+h/2 +1);
         }
@@ -34,11 +34,11 @@ class Calendar
         
         boxX = x;
         boxY = y;
-        stroke(0);
-        fill(255);
+        stroke(#14283E);
+        fill(#E2E8F4);
         rect(boxX, boxY, w, h);
   
-        fill(0);
+        fill(#14283E);
         textSize(20);
         textAlign(CENTER);
         text(date, x+10, y+20);

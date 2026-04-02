@@ -17,7 +17,7 @@ class Checkbox  {
         rect(x, y, w, h, 5);
         
 
-        fill(0);
+        fill(#14283E);
         textSize(h);
         textAlign(LEFT, CENTER);
         text(label, x+w+5, y+h/2);

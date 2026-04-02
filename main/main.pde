@@ -147,7 +147,7 @@ void draw() {
 
   if(origin.checked){
     fill(#F1F4F9);
-    stroke(0);
+    stroke(#14283E);
     rect(173, (SCREENY/4)-15, 290, 505, 5);
 
     int i = ((int)bar.getPos() / (bar.sh/(origins.size()-20))-34);
@@ -173,7 +173,7 @@ void draw() {
 
   if(destination.checked){
     fill(#F1F4F9);
-    stroke(0);
+    stroke(#14283E);
     rect(290, (SCREENY/4)-15, 290, 505, 5);
 
     int i = ((int)dbar.getPos() / (dbar.sh/(destins.size()-20))-34);
