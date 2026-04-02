@@ -28,6 +28,9 @@ class Barchart{
         this.y_title = "count of flights";
         this.title = "Flights by" ;
         this.data = db.filteredQuery(origins,destinations,dates,distance,arrivalTime,departureTime,this.w,this.gap,groupBy,"SELECT "+ x_title +", COUNT(*) FROM flights ");
+        ArrayList<ArrayList<String>> temp = db.filteredQuery(origins,destinations,dates,distance,arrivalTime,departureTime,this.w,this.gap,groupBy,"SELECT * FROM flights ");
+        sim.addPlanes(temp);
+        for (Plane p: sim.planes)println(p.origin);
     }
     //this is for simple count charts where y is number of flights and x the different variables of the given x_title column
     Barchart(float x, float y, float w, float h, float gap ,String x_title, String y_title){
@@ -48,7 +51,7 @@ class Barchart{
 
     void draw(){
         if (data != null){
-            fill(#E2E8F4);
+            fill(255);
             rect(x-w/2, y-h/2, w, h);
             for (int i = 0; i < data.size(); i++){
                 float barHeight = map(float(data.get(i).get(1)), 0, float(data.get(0).get(1)), 0, h-100);

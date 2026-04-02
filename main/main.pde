@@ -46,6 +46,7 @@ MovingImage movplaneimg;
 String userInputDestination="";
 boolean change = false;
 
+Simulation sim;
 
 void settings() {
   size(SCREENX,SCREENY);
@@ -53,7 +54,7 @@ void settings() {
 }
 void setup()
 {
-
+  sim = new Simulation();
   plane=loadImage("aereo.jpg");
   plane.resize(1480, 100);
   movplaneimg = new MovingImage(plane, plane.width * -1, 0);
