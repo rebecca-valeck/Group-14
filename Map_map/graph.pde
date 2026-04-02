@@ -44,7 +44,7 @@ class Map{
 
   // Others airport is represented as a smaller dot
   void renderNormal(float x, float y) {                                   
-     fill(240, 255, 255);                          
+    fill(240, 255, 255);                          
     noStroke();
     ellipse(x , y, 7, 7);
   }
