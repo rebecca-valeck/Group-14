@@ -55,8 +55,8 @@ void setup()
   db.dbPath = sketchPath("database.db");
   originAirports = db.query("SELECT DISTINCT(ORIGIN_CITY_NAME) FROM flights ORDER BY ORIGIN_CITY_NAME ASC");
   destAirports = db.query("SELECT DISTINCT(DEST_CITY_NAME) FROM flights ORDER BY DEST_CITY_NAME ASC");
-  System.out.println(originAirports);
-  System.out.println(destAirports);
+  //System.out.println(originAirports);
+  //System.out.println(destAirports);
 
 
   search = new Button(SCREENX/2-150, SCREENY/2-25, 300, 50, "G E N E R A T E   M A P", 30);
@@ -194,7 +194,7 @@ void mousePressed()
     theScreen = screens.get(1);
     origin.checked = false;
     destination.checked = false;
-    println(month.label);
+    //println(month.label);
     String date = day.label + month.label;
     movplaneimg.x = movplaneimg.initialx;
     screens.get(1).addBarchart(new Barchart(SCREENX/2+400, 240, 400, 200, 60,
