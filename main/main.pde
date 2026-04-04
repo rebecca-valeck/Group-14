@@ -7,36 +7,39 @@ Barchart chart;
 //Map insertation
 PImage bg;
 
-///
+
 Screen theScreen;
+
 Calendar dayCalendar;
 Calendar monthCalendar;
+
 ArrayList<Screen> screens = new ArrayList<Screen>();
 ArrayList<Checkbox> origins = new ArrayList<Checkbox>();
 ArrayList<Checkbox> destins = new ArrayList<Checkbox>();
 ArrayList<Calendar> dates = new ArrayList<Calendar>();
 ArrayList<Calendar> months = new ArrayList<Calendar>();
-boolean twentyEightDays;
-boolean thirtyDays;
+
 ArrayList<ArrayList<String>> originAirports; //= db.query("SELECT DISTINCT(ORIGIN) FROM flights ORDER BY ORIGIN ASC");
 ArrayList<ArrayList<String>> destAirports; //= db.query("SELECT DISTINCT(DEST) FROM flights ORDER BY DEST ASC");
 
-color squareColor = color(200);
 
+boolean twentyEightDays;
+boolean thirtyDays;
+
+//creating all the buttons 
 Button day;
 Button month ;
 Button origin ;
 Button destination ;
 Button search;
-//Button graph;
-Button back;
+// Button back;
 
 //all the text buttons
 TextButton depTime;
 TextButton arrTime;
 TextButton distance;
 
-
+//all the scrollbar
 Scrollbar bar;
 Scrollbar dbar;
 
@@ -54,6 +57,9 @@ MovingImage movplaneimg;
 String userInputDestination="";
 boolean change = false;
 
+PImage logoImg;
+Logo logo;
+
 Simulation sim ;
 void settings() {
  size(SCREENX,SCREENY); 
@@ -70,6 +76,7 @@ void setup()
   plane=loadImage("aereo.jpg");
   plane.resize(1480, 100);
   movplaneimg = new MovingImage(plane, plane.width * -1, 0);
+  
   logoImg = loadImage("logo.jpeg");
 
   // creating the logo
@@ -88,7 +95,7 @@ void setup()
 
   search = new Button(SCREENX/2-150, SCREENY/2-25, 300, 50, "G E N E R A T E   M A P", 30);
   //graph = new Button(SCREENX/3+10, SCREENY/2, 50, 50, "graph",30);
-  back = new Button(40, 25, 100, 50, "BACK", 30);
+  //back = new Button(40, 25, 100, 50, "BACK", 30);
 
 
   day = new Button(50, (SCREENY/4)-50, 75, 30, "Day", 30);
@@ -103,7 +110,6 @@ void setup()
 
   search = new Button(SCREENX/2-150, SCREENY/2-25, 300, 50, "G E N E R A T E   M A P", 30);
   // graph = new Button(SCREENX/3+10, SCREENY/2, 50, 50, "graph",30);
-  back = new Button(40, 25, 100, 50, "BACK", 30);
 
 
   day = new Button(50, (SCREENY/4)-50, 75, 30, "Day", 30);
@@ -137,10 +143,8 @@ void setup()
   screens.get(0).addTextButton(arrTime);
   screens.get(0).addButton(destination);
   screens.get(0).addTextButton(distance);
-  screens.get(1).addButton(back);
 
 
-  screens.get(3).addButton(back);
 
   theScreen = screens.get(0);
   dayCalendar = new Calendar(10, 170, 250, 350, 0);
@@ -168,6 +172,8 @@ void setup()
 void draw() {
 
   theScreen.draw();
+
+  logo.draw();
 
   if (origin.checked) {
     fill(#F1F4F9);
@@ -279,7 +285,7 @@ void draw() {
 void mousePressed()
 {
 
-  if (back.clicked(mouseX, mouseY)) {
+  if (logo.clicked(mouseX, mouseY)) {
     theScreen = screens.get(0);
     origin.checked = false;
     destination.checked = false;
