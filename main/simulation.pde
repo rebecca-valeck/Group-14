@@ -6,7 +6,7 @@ class Simulation {
   Map graph;   // replace with real name of class
 
 Simulation(){
-  graph = new Map("airports_coordinates_final_copy.csv");
+  graph = new Map("airports_coordinates_final.csv");
 }
   void setMap(Map m) {
     this.currentMap = m;
