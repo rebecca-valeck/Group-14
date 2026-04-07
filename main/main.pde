@@ -49,8 +49,8 @@ Checkbox diverted = new Checkbox(1125, "Diverted");
 
 // font and images
 PFont  font;
-int monthNumber =0 ;
-int dayNumber =0 ;
+int monthNumber =0;
+int dayNumber =0;
 
 PImage plane;
 MovingImage movplaneimg;
@@ -92,10 +92,9 @@ void setup()
   originAirports = db.query("SELECT DISTINCT(ORIGIN_CITY_NAME) FROM flights ORDER BY ORIGIN_CITY_NAME ASC");
   destAirports = db.query("SELECT DISTINCT(DEST_CITY_NAME) FROM flights ORDER BY DEST_CITY_NAME ASC");
 
-  search = new Button(SCREENX/2-150, SCREENY/2-25, 300, 50, "G E N E R A T E   M A P", 30);
-  //graph = new Button(SCREENX/3+10, SCREENY/2, 50, 50, "graph",30);
-  //back = new Button(40, 25, 100, 50, "BACK", 30);
 
+  search = new Button(SCREENX/2-150, SCREENY/2-25, 300, 50, "G E N E R A T E   M A P", 30);
+ 
 
   day = new Button(50, (SCREENY/4)-50, 75, 30, "Day", 30);
   month = new Button(155, (SCREENY/4)-50, 80, 30, "Month", 30);
@@ -108,7 +107,6 @@ void setup()
 
 
   search = new Button(SCREENX/2-150, SCREENY/2-25, 300, 50, "G E N E R A T E   M A P", 30);
-  // graph = new Button(SCREENX/3+10, SCREENY/2, 50, 50, "graph",30);
 
 
   day = new Button(50, (SCREENY/4)-50, 75, 30, "Day", 30);
@@ -303,14 +301,14 @@ void mousePressed()
       distance.label,
       arrTime.label,
       depTime.label,
-      "ORIGIN_CITY_NAME",
+      "DEST_CITY_NAME",
       "DEST"));
     screens.get(1).addBarchart(new Barchart(SCREENX/2+400, 530, 400, 300, 60,
       origins, destins, date,
       distance.label,
       arrTime.label,
       depTime.label,
-      "DEST_CITY_NAME",
+      "ORIGIN_CITY_NAME",
       "ORIGIN"));
   } else if (depTime.clicked(mouseX, mouseY)) {
     origin.checked = false;

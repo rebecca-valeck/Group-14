@@ -102,7 +102,7 @@ public class DatabaseQueries
             if(departureTime != "Departure time")queryString += (queryString != baseQueryString?" AND ":"WHERE ") + "(DEPT_TIME = \"" + departureTime + "\")";
             if(arrivalTime != "Arrival time")queryString += (queryString != baseQueryString?" AND ":"WHERE ") + "(ARR_TIME = \"" + arrivalTime + "\")";
 
-            
+
 
             queryString +=" GROUP BY " +groupBy +" ORDER BY COUNT(*)"
             + " DESC LIMIT " +  (int)((w - 50) /  gap);
