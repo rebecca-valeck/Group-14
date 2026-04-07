@@ -30,6 +30,8 @@ class Screen {
     
     background(backgroudColor);
     noStroke();
+    
+    //creatingt the rectangle at the to of all the screens
     fill(#2E5E8E);
     rect(0, 0, 1900, 100);
 
@@ -57,6 +59,8 @@ class Screen {
     for (Checkbox c: checks){
       c.draw((SCREENY/4)-45);
     }
+    
+    if (theScreen == screens.get(1)) sim.draw();
   }
 
 

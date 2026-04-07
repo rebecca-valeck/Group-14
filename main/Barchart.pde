@@ -7,8 +7,8 @@
 class Barchart{
     float x, y, w,h,gap;
     String title;
-    String y_title ="filtered flights";
-    String x_title = "destination";
+    String y_title ="Filtered flights";
+    String x_title = "Destination";
     ArrayList<ArrayList<String>> data;
     // this is a constructor for filtered count charts where y is the count of flights that meet the origin filter conditions and x is destination
     Barchart(float x, float y, float w, float h, float gap ,
@@ -25,7 +25,7 @@ class Barchart{
         this.h = h;
         this.gap = gap;
         this.x_title = x_title;
-        this.y_title = "count of flights";
+        this.y_title = "Count of flights";
         this.title = "Flights by" ;
         this.data = db.filteredQuery(origins,destinations,dates,distance,arrivalTime,departureTime,this.w,this.gap,groupBy,"SELECT "+ x_title +", COUNT(*) FROM flights ");
         ArrayList<ArrayList<String>> temp = db.filteredQuery(origins,destinations,dates,distance,arrivalTime,departureTime,this.w,this.gap,groupBy,"SELECT * FROM flights ");
@@ -55,9 +55,9 @@ class Barchart{
             rect(x-w/2, y-h/2, w, h);
             for (int i = 0; i < data.size(); i++){
                 float barHeight = map(float(data.get(i).get(1)), 0, float(data.get(0).get(1)), 0, h-100);
-                fill(100, 150, 200);
+                fill(#2E5E8E);
                 rect(x-w/2 + 50 + i*gap, y+h/2 - barHeight - 50, 40, barHeight);
-                fill(0);
+                fill(#14283E);
                 textAlign(CENTER);
                 text(data.get(i).get(0), x-w/2 + 70 + i*gap, y+h/2 - 30);
             }
