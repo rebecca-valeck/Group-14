@@ -82,13 +82,12 @@ public class DatabaseQueries {
                 queryString += (queryString != baseQueryString?" AND ":"WHERE ") + filteredDestinations; 
             }
 
-            if(!date.equals("DayMonth"))queryString += (queryString != baseQueryString?" AND ":"WHERE ") + "(date = \"" + date + "\")";
+            if(!date.equals("0/0/2022 12:00:00 AM"))queryString += (queryString != baseQueryString?" AND ":"WHERE ") + "(date = \"" + date + "\")";
             if(distance != "Distance")queryString += (queryString != baseQueryString?" AND ":"WHERE ") + "(DISTANCE = \"" + distance + "\")";
             if(departureTime != "Departure time")queryString += (queryString != baseQueryString?" AND ":"WHERE ") + "(DEPT_TIME = \"" + departureTime + "\")";
             if(arrivalTime != "Arrival time")queryString += (queryString != baseQueryString?" AND ":"WHERE ") + "(ARR_TIME = \"" + arrivalTime + "\")";
-            println(queryString);
-            println(db.query(queryString));
 
+            
 
             queryString +=" GROUP BY " +groupBy +" ORDER BY COUNT(*)"
             + " DESC LIMIT " +  (int)((w - 50) /  gap);

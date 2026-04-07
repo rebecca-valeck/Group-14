@@ -38,8 +38,8 @@ Checkbox cancelled = new Checkbox(1005, "Cancelled");
 Checkbox diverted = new Checkbox(1125, "Diverted");
 
 PFont  font;
-int monthNumber;
-int dayNumber;
+int monthNumber =0 ;
+int dayNumber =0 ;
 
 PImage plane;
 MovingImage movplaneimg;
@@ -64,9 +64,6 @@ void setup()
   db.dbPath = sketchPath("database.db");
   originAirports = db.query("SELECT DISTINCT(ORIGIN_CITY_NAME) FROM flights ORDER BY ORIGIN_CITY_NAME ASC");
   destAirports = db.query("SELECT DISTINCT(DEST_CITY_NAME) FROM flights ORDER BY DEST_CITY_NAME ASC");
-  System.out.println(originAirports);
-  System.out.println(destAirports);
-
 
   search = new Button(SCREENX/2-150, SCREENY/2-25, 300, 50, "G E N E R A T E   M A P", 30);
   //graph = new Button(SCREENX/3+10, SCREENY/2, 50, 50, "graph",30);
