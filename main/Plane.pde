@@ -21,7 +21,7 @@ class Plane {
     float speed = 1;
     float sx, sy, ex, ey;
 
-    Plane(  /*String date,
+    Plane(  String date,
             String origin,
             String origin_state_abr,
             String dest,
@@ -32,10 +32,10 @@ class Plane {
             String arr_time,
             String cancelled,
             String diverted,
-            String distance,*/
+            String distance,
             float sx, float sy, float ex, float ey) 
     {
-      /*  this.date = date;
+        this.date = date;
         this.origin = origin;
         this.origin_state_abr = origin_state_abr;
         this.dest = dest;
@@ -46,7 +46,7 @@ class Plane {
         this.arr_time = arr_time;
         this.cancelled = cancelled;
         this.diverted = diverted; 
-        this.distance = distance; */
+        this.distance = distance; 
         planeX = sx;
         planeY = sy;
         this.sx = sx;
@@ -65,25 +65,25 @@ class Plane {
         float run = ey - sy;
         float rise = ex - sx;
         if(sx < ex && sy < ey){
-            while (planeX < ex && planeY < ey){
+            if (planeX < ex && planeY < ey){
                 planeX += (rise/run) * speed;
                 planeY += (run/rise) * speed;
             }
         }
         else if (sx > ex && sy < ey){
-            while (planeX > ex && planeY < ey){
+            if (planeX > ex && planeY < ey){
                 planeX += (rise/run) * speed;
                 planeY += (run/rise) * speed * -1;
             }
         }
         else if (sx < ex && sy > ey){
-            while (planeX < ex && planeY > ey){
+            if (planeX < ex && planeY > ey){
                 planeX += (rise/run) * speed * -1;
                 planeY += (run/rise) * speed;
             }
         }
         else if (sx > ex && sy > ey){
-            while (planeX > ex && planeY > ey){
+            if (planeX > ex && planeY > ey){
                 planeX += (rise/run) * speed *-1;
                 planeY += (run/rise) * speed *-1;
             }
