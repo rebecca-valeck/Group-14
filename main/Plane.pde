@@ -65,25 +65,25 @@ class Plane {
         float run = ey - sy;
         float rise = ex - sx;
         if(sx < ex && sy < ey){
-            while (planeX < ex && planeY < ey){
+            if (planeX < ex && planeY < ey){
                 planeX += (rise/run) * speed;
                 planeY += (run/rise) * speed;
             }
         }
         else if (sx > ex && sy < ey){
-            while (planeX > ex && planeY < ey){
+            if (planeX > ex && planeY < ey){
                 planeX += (rise/run) * speed;
                 planeY += (run/rise) * speed * -1;
             }
         }
         else if (sx < ex && sy > ey){
-            while (planeX < ex && planeY > ey){
+            if (planeX < ex && planeY > ey){
                 planeX += (rise/run) * speed * -1;
                 planeY += (run/rise) * speed;
             }
         }
         else if (sx > ex && sy > ey){
-            while (planeX > ex && planeY > ey){
+            if (planeX > ex && planeY > ey){
                 planeX += (rise/run) * speed *-1;
                 planeY += (run/rise) * speed *-1;
             }

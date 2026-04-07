@@ -60,6 +60,8 @@ boolean change = false;
 PImage logoImg;
 Logo logo;
 
+Plane pp = new Plane(100, 100, 500, 500);
+
 Simulation sim ;
 void settings() {
  size(SCREENX,SCREENY); 
@@ -171,6 +173,9 @@ void draw() {
   theScreen.draw();
 
   logo.draw();
+
+  pp.draw();
+  pp.move();
 
   if (origin.checked) {
     fill(#F1F4F9);

@@ -26,7 +26,7 @@ Simulation(){
 
     // Draw the airports on top of that specific area
     graph.draw();
-    for (Plane p : planes) {
+   /* for (Plane p : planes) {
       //p.move();
       //p.draw();
     }
@@ -49,5 +49,5 @@ Simulation(){
         plane.get(18)  // distance
         ));
     }
-  }
+  }*/
 }
