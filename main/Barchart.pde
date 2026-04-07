@@ -29,7 +29,7 @@ class Barchart{
         this.title = "Flights by" ;
         this.data = db.filteredQuery(origins,destinations,dates,distance,arrivalTime,departureTime,this.w,this.gap,groupBy,"SELECT "+ x_title +", COUNT(*) FROM flights ");
         ArrayList<ArrayList<String>> temp = db.filteredQuery(origins,destinations,dates,distance,arrivalTime,departureTime,this.w,this.gap,groupBy,"SELECT * FROM flights ");
-    //    sim.addPlanes(temp);
+      //  sim.addPlanes(temp);
         for (Plane p: sim.planes)println(p.origin);
     }
     //this is for simple count charts where y is number of flights and x the different variables of the given x_title column

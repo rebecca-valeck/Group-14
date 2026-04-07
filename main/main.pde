@@ -38,14 +38,16 @@ Button search;
 TextButton depTime;
 TextButton arrTime;
 TextButton distance;
+TextButton lateness;
+
 
 //all the scrollbar
 Scrollbar bar;
 Scrollbar dbar;
 
 //the check boxes
-Checkbox cancelled = new Checkbox(1005, "Cancelled");
-Checkbox diverted = new Checkbox(1125, "Diverted");
+Checkbox cancelled = new Checkbox(1025, "Cancelled");
+Checkbox diverted = new Checkbox(1145, "Diverted");
 
 // font and images
 PFont  font;
@@ -59,8 +61,6 @@ boolean change = false;
 
 PImage logoImg;
 Logo logo;
-
-Plane pp = new Plane(100, 100, 500, 500);
 
 Simulation sim ;
 void settings() {
@@ -98,28 +98,17 @@ void setup()
   search = new Button(SCREENX/2-150, SCREENY/2-25, 300, 50, "G E N E R A T E   M A P", 30);
  
 
-  day = new Button(50, (SCREENY/4)-50, 75, 30, "Day", 30);
-  month = new Button(155, (SCREENY/4)-50, 80, 30, "Month", 30);
-  origin = new Button(265, (SCREENY/4)-50, 90, 30, "Origin", 30);
-  destination = new Button(380, (SCREENY/4)-50, 120, 30, "Destination", 30);
+  month = new Button(20, (SCREENY/4)-50, 80, 30, "Month", 30);
+  day = new Button(120, (SCREENY/4)-50, 75, 30, "Day", 30);
+  origin = new Button(215, (SCREENY/4)-50, 90, 30, "Origin", 30);
+  destination = new Button(325, (SCREENY/4)-50, 120, 30, "Destination", 30);
 
-  depTime = new TextButton(530, (SCREENY/4)-50, 150, 30, "Departure time", 30);
-  arrTime = new TextButton(710, (SCREENY/4)-50, 130, 30, "Arrival time", 30);
-  distance = new TextButton(870, (SCREENY/4)-50, 100, 30, "Distance", 30);
-
+  depTime = new TextButton(465, (SCREENY/4)-50, 150, 30, "Departure time", 30);
+  arrTime = new TextButton(635, (SCREENY/4)-50, 130, 30, "Arrival time", 30);
+  distance = new TextButton(785, (SCREENY/4)-50, 100, 30, "Distance", 30);
+  lateness = new TextButton(905, (SCREENY/4)-50, 100, 30, "Lateness", 30);
 
   search = new Button(SCREENX/2-150, SCREENY/2-25, 300, 50, "G E N E R A T E   M A P", 30);
-
-
-  day = new Button(50, (SCREENY/4)-50, 75, 30, "Day", 30);
-  month = new Button(155, (SCREENY/4)-50, 80, 30, "Month", 30);
-  origin = new Button(265, (SCREENY/4)-50, 90, 30, "Origin", 30);
-  destination = new Button(380, (SCREENY/4)-50, 120, 30, "Destination", 30);
-
-  depTime = new TextButton(530, (SCREENY/4)-50, 150, 30, "Departure time", 30);
-  arrTime = new TextButton(710, (SCREENY/4)-50, 130, 30, "Arrival time", 30);
-  distance = new TextButton(870, (SCREENY/4)-50, 100, 30, "Distance", 30);
-
 
   screens.add (new Screen(color(#D3DCEE)));
   screens.add (new Screen(color(#D3DCEE)));
@@ -142,12 +131,14 @@ void setup()
   screens.get(0).addTextButton(arrTime);
   screens.get(0).addButton(destination);
   screens.get(0).addTextButton(distance);
+  screens.get(0).addTextButton(lateness);
+
 
 
 
   theScreen = screens.get(0);
-  dayCalendar = new Calendar(10, 170, 250, 350, 0);
-  monthCalendar = new Calendar(155, 170, 150, 200, 0);
+  dayCalendar = new Calendar(120, 170, 250, 350, 0);
+  monthCalendar = new Calendar(20, 170, 150, 200, 0);
 
   for (int i = 0; i < originAirports.size(); i++) {
     origins.add(new Checkbox(183, originAirports.get(i).get(0)));
@@ -164,7 +155,7 @@ void setup()
   {
     for (int column = 0; column < 3; column++)
     {
-      months.add(new Calendar(155 + (column * 50), 170 + (50*row), 50, 50, column + 1 + (3*row)));
+      months.add(new Calendar(20 + (column * 50), 170 + (50*row), 50, 50, column + 1 + (3*row)));
     }
   }
 }
@@ -173,9 +164,6 @@ void draw() {
   theScreen.draw();
 
   logo.draw();
-
-  pp.draw();
-  pp.move();
 
   if (origin.checked) {
     fill(#F1F4F9);
@@ -342,6 +330,9 @@ void mousePressed()
     origin.checked = false;
     destination.checked = false;
     day.checked = false;
+  } else if (lateness.clicked(mouseX, mouseY)){
+    origin.checked = false;
+    destination.checked = false;
   }
 
 
@@ -382,19 +373,19 @@ void setDates()
     {
       for (int column = 0; column < 5; column++)
       {
-        dates.add(new Calendar(10 + (column * 50), 170 + (50*row), 50, 50, column + 1 + (5*row)));
+        dates.add(new Calendar(120 + (column * 50), 170 + (50*row), 50, 50, column + 1 + (5*row)));
       }
     }
-    dates.add(new Calendar(10, 420, 50, 50, 26));
-    dates.add(new Calendar(60, 420, 50, 50, 27));
-    dates.add(new Calendar(110, 420, 50, 50, 28));
+    dates.add(new Calendar(120, 420, 50, 50, 26));
+    dates.add(new Calendar(170, 420, 50, 50, 27));
+    dates.add(new Calendar(220, 420, 50, 50, 28));
   } else if (thirtyDays)
   {
     for (int row = 0; row < 6; row++)
     {
       for (int column = 0; column < 5; column++)
       {
-        dates.add(new Calendar(10 + (column * 50), 170 + (50*row), 50, 50, column + 1 + (5*row)));
+        dates.add(new Calendar(120 + (column * 50), 170 + (50*row), 50, 50, column + 1 + (5*row)));
       }
     }
   } else
@@ -403,10 +394,10 @@ void setDates()
     {
       for (int column = 0; column < 5; column++)
       {
-        dates.add(new Calendar(10 + (column * 50), 170 + (50*row), 50, 50, column + 1 + (5*row)));
+        dates.add(new Calendar(120 + (column * 50), 170 + (50*row), 50, 50, column + 1 + (5*row)));
       }
     }
-    dates.add(new Calendar(10, 470, 50, 50, 31));
+    dates.add(new Calendar(120, 470, 50, 50, 31));
   }
   
 }

@@ -26,12 +26,12 @@ Simulation(){
 
     // Draw the airports on top of that specific area
     graph.draw();
-    for (Plane p : planes) {
+ //   for (Plane p : planes) {
       //p.move();
       //p.draw();
-    }
+ //   }
   }
-  void addPlanes(ArrayList<ArrayList<String>> planesQuery) {
+ /* void addPlanes(ArrayList<ArrayList<String>> planesQuery) {
     for (ArrayList<String> plane : planesQuery) {
 
       planes.add(new Plane(
@@ -49,6 +49,6 @@ Simulation(){
         plane.get(18)  // distance
         ));
     }
-  }
+  }*/
     
 }
