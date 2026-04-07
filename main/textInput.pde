@@ -6,7 +6,6 @@ void keyPressed()
   String newLetter = str(key);
   Button clickedButton = theScreen.getEvent();
 
-  System.out.println(clickedButton instanceof Button);
   if (clickedButton != null && clickedButton instanceof TextButton)
   {
     TextButton clickedTextButton = (TextButton) clickedButton;

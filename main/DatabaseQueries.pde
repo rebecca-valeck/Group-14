@@ -59,11 +59,12 @@ public class DatabaseQueries
     }
     public ArrayList<ArrayList<String>> filteredQuery(  ArrayList<Checkbox> origins,
                                                         ArrayList<Checkbox> destinations,
-                                                        String date,
+                                                        ArrayList<String> dates,
                                                         String distance,
                                                         String arrivalTime,
                                                         String departureTime,
-                                                        float w,float gap,String groupBy,String baseQueryString){
+                                                        String baseQueryString,
+                                                        String endQueryString){
             String queryString = baseQueryString;
 
             String buffer = "";       
@@ -79,7 +80,7 @@ public class DatabaseQueries
             if (buffer != "")
             {
                 filteredOrigins += "ORIGIN_CITY_NAME" +"= \"" +buffer +"\")";
-                queryString += "WHERE " + filteredOrigins; 
+                queryString += filteredOrigins; 
             }
             String filteredDestinations = "(";
             buffer = "";
@@ -94,19 +95,25 @@ public class DatabaseQueries
             if (buffer != "")
             {
                 filteredDestinations +="DEST_CITY_NAME" +"= \"" +buffer +"\")";
-                queryString += (queryString != baseQueryString?" AND ":"WHERE ") + filteredDestinations; 
+                queryString += (queryString != baseQueryString?" AND ":"") + filteredDestinations; 
             }
 
-            if(!date.equals("0/0/2022 12:00:00 AM"))queryString += (queryString != baseQueryString?" AND ":"WHERE ") + "(date = \"" + date + "\")";
-            if(distance != "Distance")queryString += (queryString != baseQueryString?" AND ":"WHERE ") + "(DISTANCE = \"" + distance + "\")";
-            if(departureTime != "Departure time")queryString += (queryString != baseQueryString?" AND ":"WHERE ") + "(DEPT_TIME = \"" + departureTime + "\")";
-            if(arrivalTime != "Arrival time")queryString += (queryString != baseQueryString?" AND ":"WHERE ") + "(ARR_TIME = \"" + arrivalTime + "\")";
+            if (dates.size()>0){
+                String allDates = "date = \"" + dates.get(0) + "\"";
+                for (int index = 1; index < dates.size(); index++) allDates += " OR date = \"" + dates.get(index) + "\"";
+                queryString += (queryString != baseQueryString?" AND ":"") + "( " + allDates +" )";
+            }
+            if(distance != "Distance")queryString += (queryString != baseQueryString?" AND ":"") + "(DISTANCE = \"" + distance + "\")";
+            if(departureTime != "Departure time")queryString += (queryString != baseQueryString?" AND ":"") + "(DEPT_TIME = \"" + departureTime + "\")";
+            if(arrivalTime != "Arrival time")queryString += (queryString != baseQueryString?" AND ":"") + "(ARR_TIME = \"" + arrivalTime + "\")";
 
 
 
-            queryString +=" GROUP BY " +groupBy +" ORDER BY COUNT(*)"
-            + " DESC LIMIT " +  (int)((w - 50) /  gap);
+            queryString += endQueryString;
+            print(queryString);
             return db.query(queryString);
     }
+
+
 
 }

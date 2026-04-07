@@ -62,3 +62,42 @@ class Calendar
     }
     
 }
+
+
+void setDates()
+{
+  dates.clear();
+  if (twentyEightDays)
+  {
+    for (int row = 0; row < 5; row++)
+    {
+      for (int column = 0; column < 5; column++)
+      {
+        dates.add(new Calendar(10 + (column * 50), 170 + (50*row), 50, 50, column + 1 + (5*row)));
+      }
+    }
+    dates.add(new Calendar(10, 420, 50, 50, 26));
+    dates.add(new Calendar(60, 420, 50, 50, 27));
+    dates.add(new Calendar(110, 420, 50, 50, 28));
+  } else if (thirtyDays)
+  {
+    for (int row = 0; row < 6; row++)
+    {
+      for (int column = 0; column < 5; column++)
+      {
+        dates.add(new Calendar(10 + (column * 50), 170 + (50*row), 50, 50, column + 1 + (5*row)));
+      }
+    }
+  } else
+  {
+    for (int row = 0; row < 6; row++)
+    {
+      for (int column = 0; column < 5; column++)
+      {
+        dates.add(new Calendar(10 + (column * 50), 170 + (50*row), 50, 50, column + 1 + (5*row)));
+      }
+    }
+    dates.add(new Calendar(10, 470, 50, 50, 31));
+  }
+  
+}

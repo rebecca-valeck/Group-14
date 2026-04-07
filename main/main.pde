@@ -16,6 +16,7 @@ Calendar monthCalendar;
 ArrayList<Screen> screens = new ArrayList<Screen>();
 ArrayList<Checkbox> origins = new ArrayList<Checkbox>();
 ArrayList<Checkbox> destins = new ArrayList<Checkbox>();
+ArrayList<String> selectedDates = new ArrayList<String>();
 ArrayList<Calendar> dates = new ArrayList<Calendar>();
 ArrayList<Calendar> months = new ArrayList<Calendar>();
 
@@ -238,7 +239,7 @@ void draw() {
 
       if (c.checked)
       {
-        dayNumber = c.date;
+        if(!selectedDates.contains(monthNumber +"/" + c.date+"/2022 12:00:00 AM"))selectedDates.add(monthNumber +"/" + c.date+"/2022 12:00:00 AM");
         stroke(0);
         line(c.x, c.y, c.x + 50, c.y+50);
         line(c.x, c.y + 50, c.x + 50, c.y);
@@ -287,6 +288,7 @@ void mousePressed()
     origin.checked = false;
     destination.checked = false;
   } else if (search.clicked(mouseX, mouseY)) {
+    sim.addPlanes(db.filteredQuery(origins,destins,selectedDates,distance.label,arrTime.label,depTime.label,"SELECT * FROM flights WHERE ",""));
     theScreen = screens.get(1);
     origin.checked = false;
     destination.checked = false;
@@ -294,22 +296,13 @@ void mousePressed()
     // Reset simulation and add the map to the simulation draw loop
     
 
-    String date = dayNumber +"/" + monthNumber+"/2022 12:00:00 AM" ;
     movplaneimg.x = movplaneimg.initialx;
     screens.get(1).addBarchart(new Barchart(SCREENX/2+400, 240, 400, 200, 60,
-      origins, destins, date,
-      distance.label,
-      arrTime.label,
-      depTime.label,
-      "DEST_CITY_NAME",
-      "DEST"));
+       db.filteredQuery(origins,destins,selectedDates,distance.label,arrTime.label,depTime.label,"SELECT DEST_CITY_NAME,(ARR_TIME - CRS_ARR_TIME) FROM flights WHERE (CANCELLED = 0)  AND (ARR_TIME - CRS_ARR_TIME < 2300) AND "," ORDER BY (ARR_TIME - CRS_ARR_TIME) DESC LIMIT 6"),
+      "DEST_CITY_NAME"));
     screens.get(1).addBarchart(new Barchart(SCREENX/2+400, 530, 400, 300, 60,
-      origins, destins, date,
-      distance.label,
-      arrTime.label,
-      depTime.label,
-      "ORIGIN_CITY_NAME",
-      "ORIGIN"));
+       db.filteredQuery(origins,destins,selectedDates,distance.label,arrTime.label,depTime.label,"SELECT ORIGIN,COUNT(*) FROM flights WHERE "," GROUP BY ORIGIN ORDER BY COUNT(*) DESC LIMIT 6"),
+      "DEST_CITY_NAME"));
   } else if (depTime.clicked(mouseX, mouseY)) {
     origin.checked = false;
     destination.checked = false;
@@ -368,40 +361,3 @@ void mouseMoved() {
   }
 }
 
-void setDates()
-{
-  dates.clear();
-  if (twentyEightDays)
-  {
-    for (int row = 0; row < 5; row++)
-    {
-      for (int column = 0; column < 5; column++)
-      {
-        dates.add(new Calendar(10 + (column * 50), 170 + (50*row), 50, 50, column + 1 + (5*row)));
-      }
-    }
-    dates.add(new Calendar(10, 420, 50, 50, 26));
-    dates.add(new Calendar(60, 420, 50, 50, 27));
-    dates.add(new Calendar(110, 420, 50, 50, 28));
-  } else if (thirtyDays)
-  {
-    for (int row = 0; row < 6; row++)
-    {
-      for (int column = 0; column < 5; column++)
-      {
-        dates.add(new Calendar(10 + (column * 50), 170 + (50*row), 50, 50, column + 1 + (5*row)));
-      }
-    }
-  } else
-  {
-    for (int row = 0; row < 6; row++)
-    {
-      for (int column = 0; column < 5; column++)
-      {
-        dates.add(new Calendar(10 + (column * 50), 170 + (50*row), 50, 50, column + 1 + (5*row)));
-      }
-    }
-    dates.add(new Calendar(10, 470, 50, 50, 31));
-  }
-  
-}

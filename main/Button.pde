@@ -47,7 +47,6 @@
     {
       if (mousePressed)
       {
-        System.out.print("clicked button");
         if (checked) checked = false;
         else checked = true;
       }
