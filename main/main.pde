@@ -166,54 +166,46 @@ void draw() {
 
   logo.draw();
 
-  if (origin.checked) {
+if (origin.checked) {
     fill(#F1F4F9);
     stroke(0);
     rect(173, (SCREENY/4)-15, 290, 505, 5);
 
-    //changes the index of the list of airports to display accordingly
-    int i = (int)(bar.getPos() / (bar.sh/(origins.size()-20))*0.70 -120);
-    if (i < origins.size() - 21 && i >= 0) {
-      for (int j = 0; j <20; j++) {
-        origins.get(i+j).draw(170+ j * 25);
-      }
-    } else if (i >= origins.size()-21) {
-      for (int j = 0; j <20; j++) {
-        int index = origins.size() -20;
-        origins.get(index+j).draw(170+ j * 25);
-      }
-    } else if (i < 0) {
-      for (int j = 0; j <20; j++) {
-        int index = 0;
-        origins.get(index+j).draw(170+ j * 25);
-      }
+    // 1. Get scroll percentage (0.0 to 1.0)
+    float ratio = bar.getPos() / (float)bar.sh; 
+    
+    // 2. Map ratio directly to the list. 
+    // This removes the '-120' which was skipping ABQ.
+    int startIndex = int(ratio * (origins.size() - 20) - 32);
+    
+    // 3. Constrain ensures we start exactly at index 0 (ABQ)
+    startIndex = constrain(startIndex, 0, max(0, origins.size() - 20));
+
+    for (int j = 0; j < 20 && (startIndex + j) < origins.size(); j++) {
+        origins.get(startIndex + j).draw(170 + (j * 25));
     }
 
     bar.update();
     bar.draw();
-
   }
-
-  if (destination.checked) {
+  
+ if (destination.checked) {
     fill(#F1F4F9);
     stroke(0);
-    rect(290, (SCREENY/4)-15, 290, 505, 5);
+    // Destination box should be at X: 290 to not overlap Origin
+    rect(290, (SCREENY/4)-15, 290, 505, 5); 
 
-    int i = (int)(dbar.getPos() / (dbar.sh/(destins.size()-20))*0.70 -120);
-    if (i < destins.size() - 21 && i >= 0) {
-      for (int j = 0; j <20; j++) {
-        destins.get(i+j).draw(170+ j * 25);
-      }
-    } else if (i >= destins.size()-21) {
-      for (int j = 0; j <20; j++) {
-        int index = destins.size() -20;
-        destins.get(index+j).draw(170+ j * 25);
-      }
-    } else if (i < 0) {
-      for (int j = 0; j <20; j++) {
-        int index = 0;
-        destins.get(index+j).draw(170+ j * 25);
-      }
+    // 1. Use dbar for Destination
+    float ratio = dbar.getPos() / (float)dbar.sh; 
+    
+    // 2.
+    int startIndex = int(ratio * (destins.size() - 20)-32);
+    
+    // 3. Constrain ensures a perfect start and finish
+    startIndex = constrain(startIndex, 0, max(0, destins.size() - 20));
+
+    for (int j = 0; j < 20 && (startIndex + j) < destins.size(); j++) {
+        destins.get(startIndex + j).draw(170 + (j * 25));
     }
 
     dbar.update();
