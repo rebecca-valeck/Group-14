@@ -75,6 +75,7 @@ void setup()
   bg = loadImage("final.svg.jpg");
 
 
+
   sim = new Simulation();
   plane=loadImage("aereo.jpg");
   plane.resize(1480, 100);

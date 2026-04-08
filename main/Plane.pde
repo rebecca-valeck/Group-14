@@ -14,9 +14,10 @@ class Plane {
     
     float planeX;
     float planeY;
-    float planeWidth = 100; 
-    float planeHeight = 100;
+    float planeWidth = 20; 
+    float planeHeight = 20;
     PImage planeImage;
+    Table airportTable = loadTable("airports_coordinates_final.csv", "header");
     
     float speed = 1;
     float sx, sy, ex, ey;
@@ -32,8 +33,9 @@ class Plane {
             String arr_time,
             String cancelled,
             String diverted,
-            String distance,
-            float sx, float sy, float ex, float ey) 
+            String distance)
+            //float sx, float sy, float ex, float ey)
+
     {
         this.date = date;
         this.origin = origin;
@@ -47,17 +49,43 @@ class Plane {
         this.cancelled = cancelled;
         this.diverted = diverted; 
         this.distance = distance; 
-        planeX = sx;
-        planeY = sy;
-        this.sx = sx;
-        this.sy = sy;
-        this.ex = ex;
-        this.ey = ey;
+        //planeX = sx;
+        //planeY = sy;
+        //this.sx = sx;
+        //this.sy = sy;
+        //this.ex = ex;
+        //this.ey = ey;
+        planeImage = loadImage("plane.png");
     }
     
+     void display(float xOffset, float yOffset, float mapWidth, float mapHeight) { // ArrayList<Plane> airportsList,
+     for (TableRow row : airportTable.rows()) {
+      String airportName = row.getString("Airport");
+
+      
+        if (airportName.equals(this.origin)) 
+        {
+          float x = map(row.getFloat("X"), 0, 970, xOffset, xOffset + mapWidth);
+          float y = map(row.getFloat("Y"), 0, 625, yOffset, yOffset + mapHeight);
+          
+          planeX = x;
+          planeY = y;
+          break;
+        } 
+        
+
+
+ 
+
+    }
+  }
     void draw()
     {
-        planeImage = loadImage("plane.png");
+        float mX = 10;
+        float mY = 90;
+        float mW = 620;
+        float mH = 400;
+        display(mX, mY, mW, mH);
         image(planeImage, planeX, planeY, planeWidth, planeHeight);
     }
     
