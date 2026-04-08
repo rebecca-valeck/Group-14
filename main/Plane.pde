@@ -51,59 +51,31 @@ class Plane {
         planeImage = loadImage("plane.png");
     }
     
-     void planeStart(float xOffset, float yOffset, float mapWidth, float mapHeight) { // ArrayList<Plane> airportsList,
-     for (TableRow row : airportTable.rows()) {
-      String airportName = row.getString("Airport");
+ void planeStart() { // ArrayList<Plane> airportsList,
+    for (ArrayList<String> a : sim.graph.airportLocations) {
+      if (a.get(0).equals(origin)) {
 
-      
-        if (airportName.equals(this.origin)) 
-        {
-          float sx = map(row.getFloat("X"), 0, 970, xOffset, xOffset + mapWidth);
-          float sy = map(row.getFloat("Y"), 0, 625, yOffset, yOffset + mapHeight);
-          
-          this.sx = sx;
-          this.sy = sy;
-          planeX = sx;
-          planeY = sy;
-          break;
-        } 
-        
-
-
- 
+        this.sx = float(a.get(1));
+        this.sy = float(a.get(2));
+      }
+      if (a.get(0).equals(dest)) {
+        this.ex = float(a.get(1));
+        this.ey = float(a.get(2));
+      }
+      //if(sx != 0 && sy != 0){break;}
 
     }
+    this.planeX = this.sx;
+    this.planeY = this.sy;
   }
 
-  void planeEnd(float xOffset, float yOffset, float mapWidth, float mapHeight) 
-     { // ArrayList<Plane> airportsList,
-     for (TableRow row : airportTable.rows()) 
-     {
-      String airportName = row.getString("Airport");
 
-      
-        if (airportName.equals(this.dest)) 
-        {
-          float ex = map(row.getFloat("X"), 0, 970, xOffset, xOffset + mapWidth);
-          float ey = map(row.getFloat("Y"), 0, 625, yOffset, yOffset + mapHeight);
-          
-          this.ex = ex;
-          this.ey = ey;
-          break;
-        } 
 
-    }
-    }
     void draw()
     {
-        float mX = 10;
-        float mY = 90;
-        float mW = 620;
-        float mH = 400;
         if(!started)
         {
-        planeStart(mX, mY, mW, mH);
-        planeEnd(mX, mY, mW, mH);
+        planeStart();
         started = true;
         }
         image(planeImage, planeX, planeY, planeWidth, planeHeight);
