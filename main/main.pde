@@ -276,7 +276,7 @@ void mousePressed()
     origin.checked = false;
     destination.checked = false;
   } else if (search.clicked(mouseX, mouseY)) {
-    sim.addPlanes(db.filteredQuery(origins,destins,selectedDates,distance.label,arrTime.label,depTime.label,"SELECT * FROM flights WHERE "," LIMIT 200"));
+    sim.addPlanes(db.filteredQuery(origins,destins,selectedDates,distance.label,arrTime.label,depTime.label,"SELECT * FROM flights WHERE "," LIMIT 10"));
     theScreen = screens.get(1);
     origin.checked = false;
     destination.checked = false;
