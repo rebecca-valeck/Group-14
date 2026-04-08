@@ -8,10 +8,10 @@ class Plane
   String dest_wac;
   String crs_dep_time;
   String dep_time;
-  float dep_time_in_hours;
+  Integer dep_time_in_hours;
   String crs_arr_time;
   String arr_time;
-  float arr_time_in_hours;
+  Integer arr_time_in_hours;
   String cancelled;
   String diverted;
   String distance;
@@ -53,8 +53,12 @@ class Plane
         this.dep_time = dep_time;
         this.crs_arr_time = crs_arr_time;
         this.arr_time = arr_time;
-        this.arr_time_in_hours = (int(arr_time) /100 + (int(arr_time) % 100)/60.0) * 100;
-        this.dep_time_in_hours = (int(arr_time) /100 + (int(arr_time) % 100)/60.0) * 100;
+        this.dep_time_in_hours = ((int(dep_time) /100) * 100 + (int(dep_time) % 100)*100/60);
+        this.arr_time_in_hours = ((int(arr_time) /100) * 100 + (int(arr_time) % 100)*100/60);
+        if (this.arr_time_in_hours < this.dep_time_in_hours){
+          this.arr_time_in_hours += 2400;
+          this.arr_time = (int(arr_time) + 2400) +"";
+        } 
         this.cancelled = cancelled;
         this.diverted = diverted; 
         this.distance = distance; 

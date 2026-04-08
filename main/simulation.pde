@@ -20,7 +20,7 @@ Simulation(){
 
   void draw() {
     // Draw the image
-
+    
     // Draw the airports on top of that specific area
     graph.draw();
     
@@ -30,15 +30,18 @@ Simulation(){
     for (Plane p : planes) {
       p.draw();
       if(theScreen == screens.get(0))
-    {
-      p.planeTime = 0;
-    }
-      String timeString = "" + p.planeTime;
-      p.planeTime+= 10;
-      println(timeString);
-      if(!p.arr_time.isEmpty() && !timeString.isEmpty())
       {
-        if(Integer.parseInt(timeString) >= Integer.parseInt(p.arr_time))
+        p.planeTime = 0;
+      }
+      String timeString = "" + p.planeTime;
+      textSize(32);
+      fill(255,0,0);
+      text(int(timeString)/ 100 + "hrs and " + (int(timeString) % 100)*60/100 + "seconds",SCREENX/2,SCREENY-30);
+
+      p.planeTime+= 10;
+      if(p.dep_time_in_hours != 0 && !timeString.isEmpty())
+      {
+        if(Integer.parseInt(timeString) >= p.dep_time_in_hours)
         {
           p.move = true;
         }
