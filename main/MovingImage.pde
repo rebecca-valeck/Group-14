@@ -17,6 +17,7 @@ class MovingImage
         image (img, x, y);
     }
 
+    //making the images move
     void moveImg()
     {
         x += speed;
