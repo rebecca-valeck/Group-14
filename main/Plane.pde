@@ -1,4 +1,5 @@
-class Plane {
+class Plane 
+{
   String date;
   String origin;
   String origin_state_abr;
@@ -6,6 +7,7 @@ class Plane {
   String dest_state_abr;
   String dest_wac;
   String crs_dep_time;
+  String dep_time;
   String crs_arr_time;
   String arr_time;
   String cancelled;
@@ -17,6 +19,10 @@ class Plane {
   float planeWidth = 20;
   float planeHeight = 20;
   boolean started;
+  boolean move;
+  boolean speedAltered;
+  int planeTime;
+  Table airportTable = loadTable("airports_coordinates_final.csv", "header");
 
   float speed = 1;
   float sx, sy, ex, ey;
@@ -26,23 +32,23 @@ class Plane {
     String origin_state_abr,
     String dest,
     String dest_state_abr,
-    String crs_dep_time,
     String dest_wac,
+    String crs_dep_time,
+    String dep_time,
     String crs_arr_time,
     String arr_time,
     String cancelled,
     String diverted,
     String distance)
-
-
     {
         this.date = date;
         this.origin = origin;
         this.origin_state_abr = origin_state_abr;
         this.dest = dest;
         this.dest_state_abr = dest_state_abr;
-        this.crs_dep_time = crs_dep_time;
         this.dest_wac = dest_wac;
+        this.crs_dep_time = crs_dep_time;
+        this.dep_time = dep_time;
         this.crs_arr_time = crs_arr_time;
         this.arr_time = arr_time;
         this.cancelled = cancelled;
@@ -81,49 +87,32 @@ class Plane {
         image(planeImage, planeX, planeY, planeWidth, planeHeight);
     }
     
-    // void move(){
-    //     float run = ex - sx;
-    //     float rise = ey - sy;
-    //     if(sx < ex && sy < ey){
-    //         if (planeX < ex && planeY < ey){
-    //             planeX += (rise/run) * speed;
-    //             planeY += (run/rise) * speed;
-    //         }
-    //     }
-    //     else if (sx > ex && sy < ey){
-    //         if (planeX > ex && planeY < ey){
-    //             planeX += (rise/run) * speed;
-    //             planeY += (run/rise) * speed * -1;
-    //         }
-    //     }
-    //     else if (sx < ex && sy > ey){
-    //         if (planeX < ex && planeY > ey){
-    //             planeX += (rise/run) * speed * -1;
-    //             planeY += (run/rise) * speed;
-    //         }
-    //     }
-    //     else if (sx > ex && sy > ey){
-    //         if (planeX > ex && planeY > ey){
-    //             planeX += (rise/run) * speed *-1;
-    //             planeY += (run/rise) * speed *-1;
-    //         }
-    //     }
-    // }
 
-    void move() {
-    float dx = ex - planeX; // direction x
-    float dy = ey - planeY; // direction y
+    // makes the planes move from the origin airport to destination airport
+    // speed is altered based on the duration of the flight
+    void move() 
+    {
+      float dx = ex - planeX;
+      float dy = ey - planeY; 
 
-    float distance = sqrt(dx * dx + dy * dy); // distance = sqrt of dx^2 + dy^2
+      float distance = sqrt(dx * dx + dy * dy);
+      if(!speedAltered && arr_time != "" && dep_time != "")
+      {
+        speed = speed / (((float)Integer.parseInt(arr_time) - (float)Integer.parseInt(dep_time)) / 250);
 
-    if (distance > speed) {
-        planeX += (dx / distance) * speed; 
-        planeY += (dy / distance) * speed;
-    } 
-    else {
+        println(speed);
+        speedAltered = true;
+      }
 
+      if (distance > speed) 
+      {
+        planeX += (dx / distance) * Math.abs(speed); 
+        planeY += (dy / distance) * Math.abs(speed);
+      } 
+      else 
+      {
         planeX = ex;
         planeY = ey;
+      }
     }
-}
 }

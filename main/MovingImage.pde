@@ -1,13 +1,14 @@
 class MovingImage
 {
-    float x, y, initialx;
+    float x, y, initialx, speed;
     PImage img;
 
-    MovingImage (PImage img, float x, float y)
+    MovingImage (PImage img, float x, float y, float speed)
     {
         this.x = x;
         this.y = y;
         this.img = img;
+        this.speed = speed;
         initialx = x;
     }
 
@@ -18,9 +19,12 @@ class MovingImage
 
     void moveImg()
     {
-        if (x < 0){
-            x += 15;
+        x += speed;
+        if(speed > 0){
+            if(x>SCREENX) x = img.width * -1;
         }
-        else x = 0;
+        else{
+            if(x <  (img.width * -1)) x = SCREENX;
+        }
     }
 }

@@ -23,7 +23,7 @@ ArrayList<Calendar> months = new ArrayList<Calendar>();
 ArrayList<ArrayList<String>> originAirports; //= db.query("SELECT DISTINCT(ORIGIN) FROM flights ORDER BY ORIGIN ASC");
 ArrayList<ArrayList<String>> destAirports; //= db.query("SELECT DISTINCT(DEST) FROM flights ORDER BY DEST ASC");
 
-
+// Calendar booleans for days based on month selected
 boolean twentyEightDays;
 boolean thirtyDays;
 
@@ -52,11 +52,23 @@ Checkbox diverted = new Checkbox(1145, "Diverted");
 
 // font and images
 PFont  font;
+
 int monthNumber =0;
 int dayNumber =0;
 
 PImage plane;
 MovingImage movplaneimg;
+PImage girlImg;
+MovingImage girl;
+PImage guyBookImg;
+MovingImage guyBook;
+PImage guySuitcaseImg;
+MovingImage guySuitcase;
+PImage yippeeImg;
+MovingImage yippee;
+PImage kidsImg;
+MovingImage kids;
+PImage penguin;
 String userInputDestination="";
 boolean change = false;
 
@@ -75,13 +87,27 @@ void setup()
   bg = loadImage("final.svg.jpg");
   planeImage = loadImage("plane.png");
 
-
-
-
   sim = new Simulation();
   plane=loadImage("aereo.jpg");
   plane.resize(1480, 100);
-  movplaneimg = new MovingImage(plane, plane.width * -1, 0);
+  movplaneimg = new MovingImage(plane, plane.width * -1, 0, 15);
+  girlImg = loadImage("girl.jpg");
+  girlImg.resize(130, 150);
+  girl = new MovingImage(girlImg, 70, 550, -5);
+  guyBookImg = loadImage("guyBook.jpg");
+  guyBookImg.resize(80, 150);
+  guyBook = new MovingImage(guyBookImg, 200, 550, -5);
+  guySuitcaseImg = loadImage("guySuicase.jpg");
+  guySuitcaseImg.resize(120, 150);
+  guySuitcase = new MovingImage(guySuitcaseImg, 620, 550, -5);
+  yippeeImg = loadImage("yippe.jpg");
+  yippeeImg.resize(130, 150);
+  yippee = new MovingImage(yippeeImg, 370, 550, -5);
+  kidsImg = loadImage("kids.jpg");
+  kidsImg.resize(190, 150);
+  kids = new MovingImage(kidsImg, 1000, 390, -10);
+  penguin = loadImage("penguin.gif");
+  penguin.resize(60,60);
   
   logoImg = loadImage("logo.jpeg");
 
@@ -215,6 +241,7 @@ if (origin.checked) {
     dbar.draw();
   }
 
+  // draws Calendar, dates, months and filters with dates
   if (day.checked)
   {
     dayCalendar.draw();
@@ -281,6 +308,8 @@ void mousePressed()
     theScreen = screens.get(1);
     origin.checked = false;
     destination.checked = false;
+    day.checked = false;
+    month.checked = false;
 
     // Reset simulation and add the map to the simulation draw loop
     
@@ -352,7 +381,8 @@ void mouseMoved() {
     else b.stroke = false;
   }
 }
-
+// based on what months are selected, sets the amount of dates that are shown
+// e.g. February selected = 28 dates shown
 void setDates()
 {
   dates.clear();
