@@ -31,11 +31,15 @@ Simulation(){
     for (Plane p : planes) {
       p.move();
       p.draw();
-      line = new Line(p.sx,p.sy,p.planeX + 10,p.planeY + 10);
+      line = new Line(p.sx + 10,p.sy + 10,p.planeX + 10,p.planeY + 10);
       line.draw();
     }
   }
   void addPlanes(ArrayList<ArrayList<String>> planesQuery) {
+    if(theScreen == screens.get(0))
+    {
+      planes.clear();
+    }
     for (ArrayList<String> plane : planesQuery) {
 
       planes.add(new Plane(
