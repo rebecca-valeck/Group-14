@@ -1,4 +1,5 @@
 class Plane {
+
     String date;
     String origin; 
     String origin_state_abr; 
@@ -16,7 +17,7 @@ class Plane {
     float planeY;
     float planeWidth = 20; 
     float planeHeight = 20;
-    PImage planeImage;
+
     Table airportTable = loadTable("airports_coordinates_final.csv", "header");
     
     float speed = 1;
@@ -55,7 +56,7 @@ class Plane {
         //this.sy = sy;
         //this.ex = ex;
         //this.ey = ey;
-        planeImage = loadImage("plane.png");
+        
     }
     
      void display(float xOffset, float yOffset, float mapWidth, float mapHeight) { // ArrayList<Plane> airportsList,

@@ -6,7 +6,7 @@ DatabaseQueries db = new DatabaseQueries();
 Barchart chart;
 //Map insertation
 PImage bg;
-
+PImage planeImage;
 
 Screen theScreen;
 
@@ -73,6 +73,8 @@ void setup()
 {
   sim = new Simulation();
   bg = loadImage("final.svg.jpg");
+  planeImage = loadImage("plane.png");
+
 
 
 
