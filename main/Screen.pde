@@ -1,7 +1,6 @@
 class Screen {
 
   ArrayList<Button> button = new ArrayList<Button>();
-
   ArrayList<Barchart> charts = new ArrayList<Barchart>();
   ArrayList<Checkbox> checks = new ArrayList<Checkbox>();
   color backgroudColor ;
@@ -10,18 +9,22 @@ class Screen {
     this.backgroudColor=backgroudColor;
   }
   
-  
+  //funtion to add the buttons to the screen
   void addButton(Button b) {
     button.add(b);
   }
+
+   //funtion to add the  textbuttons to the screen
   void addTextButton(TextButton t) {
     button.add(t);
   }
 
+  //funtion to add the barchart to the screen
   void addBarchart(Barchart c){
     charts.add(c);
   }
 
+  //funtion to add the checkboxes to the screen
   void addCheckbox(Checkbox c){
     checks.add(c);
   }
@@ -64,7 +67,7 @@ class Screen {
       b.draw();
     }
 
-
+    //drawing all the elements into the screen
     for ( Barchart c: charts)
     {
       c.draw();

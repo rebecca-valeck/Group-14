@@ -4,6 +4,7 @@ final int SCREENY = 720;
 
 DatabaseQueries db = new DatabaseQueries();
 Barchart chart;
+
 //Map insertation
 PImage bg;
 PImage planeImage;
@@ -23,9 +24,11 @@ ArrayList<Calendar> months = new ArrayList<Calendar>();
 ArrayList<ArrayList<String>> originAirports; //= db.query("SELECT DISTINCT(ORIGIN) FROM flights ORDER BY ORIGIN ASC");
 ArrayList<ArrayList<String>> destAirports; //= db.query("SELECT DISTINCT(DEST) FROM flights ORDER BY DEST ASC");
 
-// Calendar booleans for days based on month selected
+// Calendar booleans for days based on month selected and variable to check witch number is selected
 boolean twentyEightDays;
 boolean thirtyDays;
+int monthNumber =0;
+int dayNumber =0;
 
 //creating all the buttons 
 Button day;
@@ -33,7 +36,7 @@ Button month ;
 Button origin ;
 Button destination ;
 Button search;
-// Button back;
+
 
 //all the text buttons
 TextButton depTime;
@@ -53,9 +56,14 @@ Checkbox diverted = new Checkbox(1145, "Diverted");
 // font and images
 PFont  font;
 
-int monthNumber =0;
-int dayNumber =0;
+//static images 
+PImage penguin;
+PImage logoImg;
 
+//logo
+Logo logo;
+
+//moving images
 PImage plane;
 MovingImage movplaneimg;
 PImage girlImg;
@@ -68,14 +76,13 @@ PImage yippeeImg;
 MovingImage yippee;
 PImage kidsImg;
 MovingImage kids;
-PImage penguin;
+
+
 String userInputDestination="";
 boolean change = false;
 
-PImage logoImg;
-Logo logo;
-
 Simulation sim ;
+
 void settings() {
  size(SCREENX,SCREENY); 
   pixelDensity(1);
@@ -86,32 +93,39 @@ void setup()
   sim = new Simulation();
   bg = loadImage("final.svg.jpg");
   planeImage = loadImage("plane.png");
-
+  
   sim = new Simulation();
+
+  //loading all the images
   plane=loadImage("aereo.jpg");
   plane.resize(1480, 100);
   movplaneimg = new MovingImage(plane, plane.width * -1, 0, 15);
+
   girlImg = loadImage("girl.jpg");
   girlImg.resize(130, 150);
   girl = new MovingImage(girlImg, 70, 550, -5);
+
   guyBookImg = loadImage("guyBook.jpg");
   guyBookImg.resize(80, 150);
   guyBook = new MovingImage(guyBookImg, 200, 550, -5);
+
   guySuitcaseImg = loadImage("guySuicase.jpg");
   guySuitcaseImg.resize(120, 150);
   guySuitcase = new MovingImage(guySuitcaseImg, 620, 550, -5);
+
   yippeeImg = loadImage("yippe.jpg");
   yippeeImg.resize(130, 150);
   yippee = new MovingImage(yippeeImg, 370, 550, -5);
+
   kidsImg = loadImage("kids.jpg");
   kidsImg.resize(190, 150);
   kids = new MovingImage(kidsImg, 1000, 390, -10);
+
   penguin = loadImage("penguin.gif");
   penguin.resize(60,60);
   
-  logoImg = loadImage("logo.jpeg");
-
   // creating the logo
+  logoImg = loadImage("logo.jpeg");
   logo = new Logo(logoImg, 20, 15);
   
   //loading the font 
@@ -123,53 +137,50 @@ void setup()
   db.dbPath = sketchPath("database.db");
   originAirports = db.query("SELECT DISTINCT(ORIGIN_CITY_NAME) FROM flights ORDER BY ORIGIN_CITY_NAME ASC");
   destAirports = db.query("SELECT DISTINCT(DEST_CITY_NAME) FROM flights ORDER BY DEST_CITY_NAME ASC");
-
-
-  search = new Button(SCREENX/2-150, SCREENY/2-25, 300, 50, "G E N E R A T E   M A P", 30);
- 
-
-  month = new Button(20, (SCREENY/4)-50, 80, 30, "Month", 30);
-  day = new Button(120, (SCREENY/4)-50, 75, 30, "Day", 30);
-  origin = new Button(215, (SCREENY/4)-50, 90, 30, "Origin", 30);
-  destination = new Button(325, (SCREENY/4)-50, 120, 30, "Destination", 30);
-
-  depTime = new TextButton(465, (SCREENY/4)-50, 150, 30, "Departure time", 30);
-  arrTime = new TextButton(635, (SCREENY/4)-50, 130, 30, "Arrival time", 30);
-  distance = new TextButton(785, (SCREENY/4)-50, 100, 30, "Distance", 30);
-  lateness = new TextButton(905, (SCREENY/4)-50, 100, 30, "Lateness", 30);
-
-  search = new Button(SCREENX/2-150, SCREENY/2-25, 300, 50, "G E N E R A T E   M A P", 30);
-
+  
+  //adding the screens
   screens.add (new Screen(color(#D3DCEE)));
   screens.add (new Screen(color(#D3DCEE)));
   screens.add (new Screen(color(#2E5E8E)));
   screens.add (new Screen(color(#D3DCEE)));
 
 
+  
+  //crating all the buttons
+  search = new Button(SCREENX/2-150, SCREENY/2-25, 300, 50, "G E N E R A T E   M A P", 30);
+  month = new Button(20, (SCREENY/4)-50, 80, 30, "Month", 30);
+  day = new Button(120, (SCREENY/4)-50, 75, 30, "Day", 30);
+  origin = new Button(215, (SCREENY/4)-50, 90, 30, "Origin", 30);
+  destination = new Button(325, (SCREENY/4)-50, 120, 30, "Destination", 30);
+
+  //creating the text buttons 
+  depTime = new TextButton(465, (SCREENY/4)-50, 150, 30, "Departure time", 30);
+  arrTime = new TextButton(635, (SCREENY/4)-50, 130, 30, "Arrival time", 30);
+  distance = new TextButton(785, (SCREENY/4)-50, 100, 30, "Distance", 30);
+  lateness = new TextButton(905, (SCREENY/4)-50, 100, 30, "Lateness", 30);
+  
+  
   //adding to the home screen
   screens.get(0).addButton(search);
-
-
   screens.get(0).addButton(day);
   screens.get(0).addButton(month);
-
   screens.get(0).addButton(origin);
+  screens.get(0).addButton(destination);
+  
   screens.get(0).addCheckbox(cancelled);
   screens.get(0).addCheckbox(diverted);
-
+  
   screens.get(0).addTextButton(depTime);
   screens.get(0).addTextButton(arrTime);
-  screens.get(0).addButton(destination);
   screens.get(0).addTextButton(distance);
   screens.get(0).addTextButton(lateness);
-
-
-
-
+  
   theScreen = screens.get(0);
+  
+  
+  //creating the calendar
   dayCalendar = new Calendar(120, 170, 250, 350, 0);
   monthCalendar = new Calendar(20, 170, 150, 200, 0);
-
   for (int i = 0; i < originAirports.size(); i++) {
     origins.add(new Checkbox(183, originAirports.get(i).get(0)));
   }
@@ -189,10 +200,11 @@ void setup()
     }
   }
 }
+
+
 void draw() {
 
   theScreen.draw();
-
   logo.draw();
 
 if (origin.checked) {
@@ -312,17 +324,21 @@ void mousePressed()
     month.checked = false;
 
     // Reset simulation and add the map to the simulation draw loop
-    
-
+  
     movplaneimg.x = movplaneimg.initialx;
+
+    //Top planes ranked on how late they are (difference between scheduled arrival time and actual arrival time)
     screens.get(1).addBarchart(new Barchart(SCREENX/2+400, 240, 450, 200, 80,
        db.filteredQuery(origins,destins,selectedDates,distance.label,arrTime.label,depTime.label,lateness.label,"SELECT DEST_CITY_NAME,(ARR_TIME - CRS_ARR_TIME) FROM flights WHERE (CANCELLED = 0)  AND (ARR_TIME - CRS_ARR_TIME < 2300) AND "," ORDER BY (ARR_TIME - CRS_ARR_TIME) DESC LIMIT 5"),
       "DEST_CITY_NAME",
       "lateness of flight"));
+
+    //Top 5 planes ranked by the number of times the destination appears in the dataset
     screens.get(1).addBarchart(new Barchart(SCREENX/2+400, 530, 450, 300, 80,
        db.filteredQuery(origins,destins,selectedDates,distance.label,arrTime.label,depTime.label,lateness.label,"SELECT ORIGIN,COUNT(*) FROM flights WHERE "," GROUP BY ORIGIN ORDER BY COUNT(*) DESC LIMIT 5"),
       "DEST_CITY_NAME",
       "popularity of airport"));
+
   } else if (depTime.clicked(mouseX, mouseY)) {
     origin.checked = false;
     destination.checked = false;
@@ -354,9 +370,6 @@ void mousePressed()
     origin.checked = false;
     destination.checked = false;
   }
-
-
-
 
   for (Checkbox c : origins) {
     c.clicked(mouseX, mouseY);

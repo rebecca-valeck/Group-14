@@ -6,6 +6,7 @@ void keyPressed()
   String newLetter = str(key);
   Button clickedButton = theScreen.getEvent();
 
+  //checks if the key input is allowed and use it as a user input
   if (clickedButton != null && clickedButton instanceof TextButton)
   {
     TextButton clickedTextButton = (TextButton) clickedButton;
@@ -27,11 +28,7 @@ void keyPressed()
       clickedTextButton.userInput = clickedTextButton.userInput.substring(0,clickedTextButton.userInput.length()-1);
       clickedButton.label = clickedTextButton.userInput;
     } 
-    /*
-      if (key == ENTER ||  key == RETURN){
-        theScreen = screens.get(3);
-        screens.get(3).addBarchart(new Barchart(SCREENX/2, SCREENY/2, 800, 600, 60, origins));
-    } */
+   
   }
 
 }
