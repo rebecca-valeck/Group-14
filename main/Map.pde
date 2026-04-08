@@ -1,4 +1,10 @@
 class Map {
+
+    float mX = 20;
+    float mY = 120;
+    float mW = 970 * 0.8;
+    float mH = 625 * 0.8;
+
   JSONObject json;
   ArrayList<ArrayList<String>> airportLocations = new  ArrayList<ArrayList<String>>();
   Table airportTable; // container to hold  CSV data
@@ -12,14 +18,14 @@ class Map {
     
   }
 
-  void generateAirportLocations(ArrayList<Plane> airportsList, float xOffset, float yOffset, float mapWidth, float mapHeight) {
+  void generateAirportLocations(ArrayList<Plane> airportsList) {
     airportLocations.clear();
     for (TableRow row : airportTable.rows()) {
       String airportName = row.getString("Airport");
 
       // Scale coordinates from original 970x625 space to current position/size
-      float x = map(row.getFloat("X"), 0, 970, xOffset, xOffset + mapWidth);
-      float y = map(row.getFloat("Y"), 0, 625, yOffset, yOffset + mapHeight);
+      float x = map(row.getFloat("X"), 0, 970, mX, mX + mW);
+      float y = map(row.getFloat("Y"), 0, 625, mY, mY + mH);
       ArrayList<String> tempAirport = new ArrayList<String>();
       tempAirport.add(airportName);
       tempAirport.add(str(x));
@@ -73,10 +79,6 @@ void renderHighlight(float x, float y, String label) {
 void draw() {
 
   // Define where the map goes (Left side)
-  float mX = 20;
-  float mY = 100;
-  float mW = 620;
-  float mH = 400;
 
   // Draw the image
   image(bg, mX, mY, mW, mH);

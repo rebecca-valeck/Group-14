@@ -303,8 +303,8 @@ void mousePressed()
     origin.checked = false;
     destination.checked = false;
   } else if (search.clicked(mouseX, mouseY)) {
-    sim.addPlanes(db.filteredQuery(origins,destins,selectedDates,distance.label,arrTime.label,depTime.label,"SELECT * FROM flights WHERE "," LIMIT 50"));
-    sim.graph.generateAirportLocations(sim.planes, 20, 100, 620, 400);
+    sim.addPlanes(db.filteredQuery(origins,destins,selectedDates,distance.label,arrTime.label,depTime.label,lateness.label,"SELECT * FROM flights WHERE "," LIMIT 50"));
+    sim.graph.generateAirportLocations(sim.planes);
     theScreen = screens.get(1);
     origin.checked = false;
     destination.checked = false;
@@ -315,12 +315,14 @@ void mousePressed()
     
 
     movplaneimg.x = movplaneimg.initialx;
-    screens.get(1).addBarchart(new Barchart(SCREENX/2+400, 240, 400, 200, 60,
-       db.filteredQuery(origins,destins,selectedDates,distance.label,arrTime.label,depTime.label,"SELECT DEST_CITY_NAME,(ARR_TIME - CRS_ARR_TIME) FROM flights WHERE (CANCELLED = 0)  AND (ARR_TIME - CRS_ARR_TIME < 2300) AND "," ORDER BY (ARR_TIME - CRS_ARR_TIME) DESC LIMIT 6"),
-      "DEST_CITY_NAME"));
-    screens.get(1).addBarchart(new Barchart(SCREENX/2+400, 530, 400, 300, 60,
-       db.filteredQuery(origins,destins,selectedDates,distance.label,arrTime.label,depTime.label,"SELECT ORIGIN,COUNT(*) FROM flights WHERE "," GROUP BY ORIGIN ORDER BY COUNT(*) DESC LIMIT 6"),
-      "DEST_CITY_NAME"));
+    screens.get(1).addBarchart(new Barchart(SCREENX/2+400, 240, 450, 200, 80,
+       db.filteredQuery(origins,destins,selectedDates,distance.label,arrTime.label,depTime.label,lateness.label,"SELECT DEST_CITY_NAME,(ARR_TIME - CRS_ARR_TIME) FROM flights WHERE (CANCELLED = 0)  AND (ARR_TIME - CRS_ARR_TIME < 2300) AND "," ORDER BY (ARR_TIME - CRS_ARR_TIME) DESC LIMIT 5"),
+      "DEST_CITY_NAME",
+      "lateness of flight"));
+    screens.get(1).addBarchart(new Barchart(SCREENX/2+400, 530, 450, 300, 80,
+       db.filteredQuery(origins,destins,selectedDates,distance.label,arrTime.label,depTime.label,lateness.label,"SELECT ORIGIN,COUNT(*) FROM flights WHERE "," GROUP BY ORIGIN ORDER BY COUNT(*) DESC LIMIT 5"),
+      "DEST_CITY_NAME",
+      "popularity of airport"));
   } else if (depTime.clicked(mouseX, mouseY)) {
     origin.checked = false;
     destination.checked = false;

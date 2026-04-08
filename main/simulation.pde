@@ -19,12 +19,7 @@ Simulation(){
   }
 
   void draw() {
-    float mX = 20;
-    float mY = 100;
-    float mW = 620;
-    float mH = 400;
     // Draw the image
-    image(bg, mX, mY, mW, mH);
 
     // Draw the airports on top of that specific area
     graph.draw();
@@ -49,7 +44,7 @@ Simulation(){
       {
       p.move();
       }
-      line = new Line(p.sx + 10,p.sy + 10,p.planeX + 10,p.planeY + 10);
+      line = new Line(p.sx,p.sy,p.planeX,p.planeY);
       line.draw();
     }
   }

@@ -11,14 +11,14 @@ class Barchart{
     String x_title = "Destination";
     ArrayList<ArrayList<String>> data;
     // this is a constructor for filtered count charts where y is the count of flights that meet the origin filter conditions and x is destination
-    Barchart(float x, float y, float w, float h, float gap , ArrayList<ArrayList<String>> data, String x_title){
+    Barchart(float x, float y, float w, float h, float gap , ArrayList<ArrayList<String>> data, String x_title, String y_title){
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
         this.gap = gap;
         this.x_title = x_title;
-        this.y_title = "Count of flights";
+        this.y_title = y_title;
         this.title = "Flights by" ;
         this.data = data;
         println(this.data);
@@ -51,6 +51,7 @@ class Barchart{
                 fill(#14283E);
                 textAlign(CENTER);
                 text(data.get(i).get(0), x-w/2 + 70 + i*gap, y+h/2 - 30);
+                text(data.get(i).get(1), x-w/2 + 70 + i*gap, y + h/2 - barHeight - 30);
             }
             text( x_title, x, y + h/2 -10);
             pushMatrix();

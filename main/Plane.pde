@@ -84,7 +84,7 @@ class Plane
         planeStart();
         started = true;
         }
-        image(planeImage, planeX, planeY, planeWidth, planeHeight);
+        image(planeImage, planeX - 10, planeY -10, planeWidth, planeHeight);
     }
     
 
@@ -99,8 +99,6 @@ class Plane
       if(!speedAltered && arr_time != "" && dep_time != "")
       {
         speed = speed / (((float)Integer.parseInt(arr_time) - (float)Integer.parseInt(dep_time)) / 250);
-
-        println(speed);
         speedAltered = true;
       }
 
