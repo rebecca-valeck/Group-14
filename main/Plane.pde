@@ -100,7 +100,7 @@ class Plane
         float distance = sqrt(dx * dx + dy * dy);
         if(!speedAltered && arr_time != "" && dep_time != "")
         {
-          speed = speed / (((float)Integer.parseInt(arr_time) - (float)Integer.parseInt(dep_time)) / 250);
+          speed = speed / (((float)Integer.parseInt(arr_time) - (float)Integer.parseInt(dep_time)) / 500);
           speedAltered = true;
         }
 

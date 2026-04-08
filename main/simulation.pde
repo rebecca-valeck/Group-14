@@ -34,11 +34,14 @@ Simulation(){
       p.planeTime = 0;
     }
       String timeString = "" + p.planeTime;
-      p.planeTime++;
-
-      if(p.arr_time.equals(timeString))
+      p.planeTime+= 10;
+      println(timeString);
+      if(!p.arr_time.isEmpty() && !timeString.isEmpty())
       {
-        p.move = true;
+        if(Integer.parseInt(timeString) >= Integer.parseInt(p.arr_time))
+        {
+          p.move = true;
+        }
       }
       if(p.move)
       {
