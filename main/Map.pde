@@ -1,6 +1,6 @@
 class Map {
   JSONObject json;
-
+  ArrayList<ArrayList<String>> airportLocations = new  ArrayList<ArrayList<String>>();
   Table airportTable; // container to hold  CSV data
 
   Map(String csvPath) {
@@ -9,18 +9,21 @@ class Map {
     if (airportTable == null) {
       println("Error: Could not find " + csvPath);
     }
+    
   }
 
-
-  void display(ArrayList<Plane> airportsList, float xOffset, float yOffset, float mapWidth, float mapHeight) {
+  void generateAirportLocations(ArrayList<Plane> airportsList, float xOffset, float yOffset, float mapWidth, float mapHeight) {
     for (TableRow row : airportTable.rows()) {
       String airportName = row.getString("Airport");
 
       // Scale coordinates from original 970x625 space to current position/size
       float x = map(row.getFloat("X"), 0, 970, xOffset, xOffset + mapWidth);
       float y = map(row.getFloat("Y"), 0, 625, yOffset, yOffset + mapHeight);
+      ArrayList<String> tempAirport = new ArrayList<String>();
+      tempAirport.add(airportName);
+      tempAirport.add(str(x));
+      tempAirport.add(str(y));
 
-      // Check if this specific airport is in your 'chosen' list
       boolean isSelected = false;
       for (Plane plane : airportsList) {
         if (airportName.equals(plane.origin)) {
@@ -28,49 +31,57 @@ class Map {
           break; // Stop looking once found
         }
       }
+      tempAirport.add(str(isSelected));
+      airportLocations.add(tempAirport);
 
-      // Draw the correct style
-      if (isSelected) {
-        renderHighlight(x, y, airportName);
-      } else {
-        renderNormal(x, y);
-      }
+      // Check if this specific airport is in your 'chosen' list
     }
   }
-
-  // Others airport is represented as a smaller dot
-  void renderNormal(float x, float y) {
-    fill(240, 255, 255);
-    noStroke();
-    ellipse(x, y, 7, 7);
+  void display() {
+    
+    for (ArrayList<String> airport : airportLocations){
+      // Draw the correct style
+      if (airport.get(3) == "true") {
+        renderHighlight(float (airport.get(1)), float(airport.get(2)), airport.get(0));
+      } else {
+        renderNormal(float (airport.get(1)), float(airport.get(2)));
+      }
   }
+}
+// Others airport is represented as a smaller dot
+void renderNormal(float x, float y) {
+  fill(240, 255, 255);
+  noStroke();
+  ellipse(x, y, 7, 7);
+}
 
-  // Dest and Origin is represented as red dot
-  void renderHighlight(float x, float y, String label) {
-    fill(46, 94, 142);
-    stroke(255);
-    strokeWeight(2);
-    ellipse(x, y, 20, 20);
+// Dest and Origin is represented as red dot
+void renderHighlight(float x, float y, String label) {
+  fill(46, 94, 142);
+  stroke(255);
+  strokeWeight(2);
+  ellipse(x, y, 20, 20);
 
-    fill(46, 94, 142);
-    textAlign(CENTER);
-    textSize(12);
-    text(label, x, y - 16);
-  }
+  fill(46, 94, 142);
+  textAlign(CENTER);
+  textSize(12);
+  text(label, x, y - 16);
+}
 
 
-  void draw() {
+void draw() {
 
-    // Define where the map goes (Left side)
-    float mX = 20;
-    float mY = 100;
-    float mW = 620;
-    float mH = 400;
+  // Define where the map goes (Left side)
+  float mX = 20;
+  float mY = 100;
+  float mW = 620;
+  float mH = 400;
 
-    // Draw the image
-    image(bg, mX, mY, mW, mH);
+  // Draw the image
+  image(bg, mX, mY, mW, mH);
 
-    // Draw the airports on top of that specific area
-    display(sim.planes, mX, mY, mW, mH);
-  }
+  // Draw the airports on top of that specific area
+
+  display();
+}
 }

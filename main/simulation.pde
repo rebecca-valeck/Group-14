@@ -11,6 +11,7 @@ Simulation(){
 }
   void setMap(Map m) {
     this.currentMap = m;
+
   }
 
   void start() {
@@ -53,5 +54,6 @@ Simulation(){
         
         ));
     }
+
   }
 }

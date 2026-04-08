@@ -276,7 +276,8 @@ void mousePressed()
     origin.checked = false;
     destination.checked = false;
   } else if (search.clicked(mouseX, mouseY)) {
-    sim.addPlanes(db.filteredQuery(origins,destins,selectedDates,distance.label,arrTime.label,depTime.label,"SELECT * FROM flights WHERE "," LIMIT 10"));
+    sim.addPlanes(db.filteredQuery(origins,destins,selectedDates,distance.label,arrTime.label,depTime.label,"SELECT * FROM flights WHERE "," LIMIT 50"));
+    sim.graph.generateAirportLocations(sim.planes, 20, 100, 620, 400);
     theScreen = screens.get(1);
     origin.checked = false;
     destination.checked = false;

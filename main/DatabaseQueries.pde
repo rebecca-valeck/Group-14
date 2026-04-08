@@ -110,7 +110,6 @@ public class DatabaseQueries
 
 
             queryString += endQueryString;
-            print(queryString);
             return db.query(queryString);
     }
 
