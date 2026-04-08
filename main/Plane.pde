@@ -79,12 +79,13 @@ class Plane
 
     void draw()
     {
+      
         if(!started)
-        {
+      {
         planeStart();
         started = true;
-        }
-        image(planeImage, planeX - 10, planeY -10, planeWidth, planeHeight);
+      }
+        if ((sx != 0 && ex != 0) && (planeX != sx && planeY != sy) && (planeX != ex && planeY != ey)){image(planeImage, planeX - 10, planeY -10, planeWidth, planeHeight);}
     }
     
 
@@ -92,25 +93,27 @@ class Plane
     // speed is altered based on the duration of the flight
     void move() 
     {
-      float dx = ex - planeX;
-      float dy = ey - planeY; 
+      if (sx != 0 && ex != 0){
+        float dx = ex - planeX;
+        float dy = ey - planeY; 
 
-      float distance = sqrt(dx * dx + dy * dy);
-      if(!speedAltered && arr_time != "" && dep_time != "")
-      {
-        speed = speed / (((float)Integer.parseInt(arr_time) - (float)Integer.parseInt(dep_time)) / 250);
-        speedAltered = true;
-      }
+        float distance = sqrt(dx * dx + dy * dy);
+        if(!speedAltered && arr_time != "" && dep_time != "")
+        {
+          speed = speed / (((float)Integer.parseInt(arr_time) - (float)Integer.parseInt(dep_time)) / 250);
+          speedAltered = true;
+        }
 
-      if (distance > speed) 
-      {
-        planeX += (dx / distance) * Math.abs(speed); 
-        planeY += (dy / distance) * Math.abs(speed);
-      } 
-      else 
-      {
-        planeX = ex;
-        planeY = ey;
-      }
+        if (distance > speed) 
+        {
+          planeX += (dx / distance) * Math.abs(speed); 
+          planeY += (dy / distance) * Math.abs(speed);
+        } 
+        else 
+        {
+          planeX = ex;
+          planeY = ey;
+        }
+    }
     }
 }

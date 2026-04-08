@@ -212,12 +212,10 @@ if (origin.checked) {
     stroke(0);
     rect(173, (SCREENY/4)-15, 290, 505, 5);
 
-    // 1. Get scroll percentage (0.0 to 1.0)
+   
     float ratio = bar.getPos() / (float)bar.sh; 
     
-    // 2. Map ratio directly to the list. 
-    // This removes the '-120' which was skipping ABQ.
-    int startIndex = int(ratio * (origins.size() - 20) - 32);
+    int startIndex = int(ratio * (origins.size() - 20) - 116);
     
     // 3. Constrain ensures we start exactly at index 0 (ABQ)
     startIndex = constrain(startIndex, 0, max(0, origins.size() - 20));
@@ -233,16 +231,15 @@ if (origin.checked) {
  if (destination.checked) {
     fill(#F1F4F9);
     stroke(0);
-    // Destination box should be at X: 290 to not overlap Origin
+
     rect(290, (SCREENY/4)-15, 290, 505, 5); 
 
-    // 1. Use dbar for Destination
+
     float ratio = dbar.getPos() / (float)dbar.sh; 
     
-    // 2.
-    int startIndex = int(ratio * (destins.size() - 20)-32);
-    
-    // 3. Constrain ensures a perfect start and finish
+
+    int startIndex = int(ratio * (destins.size() - 20)-116);
+
     startIndex = constrain(startIndex, 0, max(0, destins.size() - 20));
 
     for (int j = 0; j < 20 && (startIndex + j) < destins.size(); j++) {
