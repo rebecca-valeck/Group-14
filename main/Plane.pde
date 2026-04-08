@@ -68,7 +68,7 @@ class Plane
         this.ex = float(a.get(1));
         this.ey = float(a.get(2));
       }
-      //if(sx != 0 && sy != 0){break;}
+      if(sx != 0 && ex != 0){break;}
 
     }
     this.planeX = this.sx;
