@@ -306,6 +306,8 @@ void mousePressed()
     theScreen = screens.get(1);
     origin.checked = false;
     destination.checked = false;
+    day.checked = false;
+    month.checked = false;
 
     // Reset simulation and add the map to the simulation draw loop
     

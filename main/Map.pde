@@ -13,6 +13,7 @@ class Map {
   }
 
   void generateAirportLocations(ArrayList<Plane> airportsList, float xOffset, float yOffset, float mapWidth, float mapHeight) {
+    airportLocations.clear();
     for (TableRow row : airportTable.rows()) {
       String airportName = row.getString("Airport");
 
