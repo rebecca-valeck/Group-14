@@ -12,11 +12,14 @@ class Plane {
     String diverted;
     String distance;
     
-    float planeX = 200;
-    float planeY = 200;
+    float planeX;
+    float planeY;
     float planeWidth = 100; 
     float planeHeight = 100;
     PImage planeImage;
+    
+    float speed = 1;
+    float sx, sy, ex, ey;
 
     Plane(  String date,
             String origin,
@@ -29,7 +32,9 @@ class Plane {
             String arr_time,
             String cancelled,
             String diverted,
-            String distance) {
+            String distance,
+            float sx, float sy, float ex, float ey) 
+    {
         this.date = date;
         this.origin = origin;
         this.origin_state_abr = origin_state_abr;
@@ -41,7 +46,13 @@ class Plane {
         this.arr_time = arr_time;
         this.cancelled = cancelled;
         this.diverted = diverted; 
-        this.distance = distance;
+        this.distance = distance; 
+        planeX = sx;
+        planeY = sy;
+        this.sx = sx;
+        this.sy = sy;
+        this.ex = ex;
+        this.ey = ey;
     }
     
     void draw()
@@ -50,7 +61,32 @@ class Plane {
         image(planeImage, planeX, planeY, planeWidth, planeHeight);
     }
     
-
-   
-
+    void move(){
+        float run = ey - sy;
+        float rise = ex - sx;
+        if(sx < ex && sy < ey){
+            if (planeX < ex && planeY < ey){
+                planeX += (rise/run) * speed;
+                planeY += (run/rise) * speed;
+            }
+        }
+        else if (sx > ex && sy < ey){
+            if (planeX > ex && planeY < ey){
+                planeX += (rise/run) * speed;
+                planeY += (run/rise) * speed * -1;
+            }
+        }
+        else if (sx < ex && sy > ey){
+            if (planeX < ex && planeY > ey){
+                planeX += (rise/run) * speed * -1;
+                planeY += (run/rise) * speed;
+            }
+        }
+        else if (sx > ex && sy > ey){
+            if (planeX > ex && planeY > ey){
+                planeX += (rise/run) * speed *-1;
+                planeY += (run/rise) * speed *-1;
+            }
+        }
+    }
 }
