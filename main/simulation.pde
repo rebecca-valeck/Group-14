@@ -28,7 +28,7 @@ Simulation(){
     graph.draw();
     for (Plane p : planes) {
       //p.move();
-      //p.draw();
+      p.draw();
     }
   }
   void addPlanes(ArrayList<ArrayList<String>> planesQuery) {
@@ -47,6 +47,10 @@ Simulation(){
         plane.get(16), // cancelled
         plane.get(17), // diverted
         plane.get(18)  // distance
+        //1,//plane.sx,
+        //2,//plane.sy,
+        //3,//plane.ex,
+        //4//plane.ey
         ));
     }
   }
