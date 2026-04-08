@@ -57,6 +57,7 @@ int dayNumber =0;
 
 PImage plane;
 MovingImage movplaneimg;
+PImage penguin;
 String userInputDestination="";
 boolean change = false;
 
@@ -82,6 +83,8 @@ void setup()
   plane=loadImage("aereo.jpg");
   plane.resize(1480, 100);
   movplaneimg = new MovingImage(plane, plane.width * -1, 0);
+  penguin = loadImage("penguin.gif");
+  penguin.resize(60,60);
   
   logoImg = loadImage("logo.jpeg");
 

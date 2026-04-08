@@ -39,6 +39,9 @@ class Screen {
       movplaneimg.drawImg();
       movplaneimg.moveImg();
     }
+    else if (theScreen == screens.get(0)){
+      image(penguin, 510, 285);
+    }
     textSize(60);
     String s = "S E A R C H   P L A N E S  !";
     fill(#D3DCEE);
