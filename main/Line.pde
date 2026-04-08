@@ -13,7 +13,7 @@ class Line
     
     void draw()
     {    
-        stroke(255, 0 ,0);
+        stroke(#2E5E8E);
         line(cityX, cityY, planeX, planeY); // draws line from the City X and City Y to the Plane X and Plane Y
     }
 
