@@ -111,32 +111,49 @@ class Plane {
         image(planeImage, planeX, planeY, planeWidth, planeHeight);
     }
     
-    void move(){
-        float run = ex - sx;
-        float rise = ey - sy;
-        if(sx < ex && sy < ey){
-            if (planeX < ex && planeY < ey){
-                planeX += (rise/run) * speed;
-                planeY += (run/rise) * speed;
-            }
-        }
-        else if (sx > ex && sy < ey){
-            if (planeX > ex && planeY < ey){
-                planeX += (rise/run) * speed;
-                planeY += (run/rise) * speed * -1;
-            }
-        }
-        else if (sx < ex && sy > ey){
-            if (planeX < ex && planeY > ey){
-                planeX += (rise/run) * speed * -1;
-                planeY += (run/rise) * speed;
-            }
-        }
-        else if (sx > ex && sy > ey){
-            if (planeX > ex && planeY > ey){
-                planeX += (rise/run) * speed *-1;
-                planeY += (run/rise) * speed *-1;
-            }
-        }
+    // void move(){
+    //     float run = ex - sx;
+    //     float rise = ey - sy;
+    //     if(sx < ex && sy < ey){
+    //         if (planeX < ex && planeY < ey){
+    //             planeX += (rise/run) * speed;
+    //             planeY += (run/rise) * speed;
+    //         }
+    //     }
+    //     else if (sx > ex && sy < ey){
+    //         if (planeX > ex && planeY < ey){
+    //             planeX += (rise/run) * speed;
+    //             planeY += (run/rise) * speed * -1;
+    //         }
+    //     }
+    //     else if (sx < ex && sy > ey){
+    //         if (planeX < ex && planeY > ey){
+    //             planeX += (rise/run) * speed * -1;
+    //             planeY += (run/rise) * speed;
+    //         }
+    //     }
+    //     else if (sx > ex && sy > ey){
+    //         if (planeX > ex && planeY > ey){
+    //             planeX += (rise/run) * speed *-1;
+    //             planeY += (run/rise) * speed *-1;
+    //         }
+    //     }
+    // }
+
+    void move() {
+    float dx = ex - planeX; // direction x
+    float dy = ey - planeY; // direction y
+
+    float distance = sqrt(dx * dx + dy * dy); // distance = sqrt of dx^2 + dy^2
+
+    if (distance > speed) {
+        planeX += (dx / distance) * speed; 
+        planeY += (dy / distance) * speed;
+    } 
+    else {
+
+        planeX = ex;
+        planeY = ey;
     }
+}
 }
