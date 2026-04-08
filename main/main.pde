@@ -23,7 +23,7 @@ ArrayList<Calendar> months = new ArrayList<Calendar>();
 ArrayList<ArrayList<String>> originAirports; //= db.query("SELECT DISTINCT(ORIGIN) FROM flights ORDER BY ORIGIN ASC");
 ArrayList<ArrayList<String>> destAirports; //= db.query("SELECT DISTINCT(DEST) FROM flights ORDER BY DEST ASC");
 
-
+// Calendar booleans for days based on month selected
 boolean twentyEightDays;
 boolean thirtyDays;
 
@@ -52,6 +52,7 @@ Checkbox diverted = new Checkbox(1145, "Diverted");
 
 // font and images
 PFont  font;
+
 int monthNumber =0;
 int dayNumber =0;
 
@@ -240,6 +241,7 @@ if (origin.checked) {
     dbar.draw();
   }
 
+  // draws Calendar, dates, months and filters with dates
   if (day.checked)
   {
     dayCalendar.draw();
@@ -379,7 +381,8 @@ void mouseMoved() {
     else b.stroke = false;
   }
 }
-
+// based on what months are selected, sets the amount of dates that are shown
+// e.g. February selected = 28 dates shown
 void setDates()
 {
   dates.clear();

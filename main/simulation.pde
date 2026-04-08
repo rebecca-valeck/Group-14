@@ -29,6 +29,9 @@ Simulation(){
     // Draw the airports on top of that specific area
     graph.draw();
     
+    // draws planes
+    // makes planes move based on their departing time
+    // draws line from starting airport to plane
     for (Plane p : planes) {
       p.draw();
       if(theScreen == screens.get(0))
@@ -37,8 +40,7 @@ Simulation(){
     }
       String timeString = "" + p.planeTime;
       p.planeTime++;
-      //println("arr_time: " + p.arr_time);
-      //println("timeString: " + timeString);
+
       if(p.arr_time.equals(timeString))
       {
         p.move = true;
@@ -51,6 +53,7 @@ Simulation(){
       line.draw();
     }
   }
+  
   void addPlanes(ArrayList<ArrayList<String>> planesQuery) {
     if(theScreen == screens.get(0))
     {
