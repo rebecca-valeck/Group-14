@@ -20,7 +20,7 @@ class Plane {
     Table airportTable = loadTable("airports_coordinates_final.csv", "header");
     boolean started;
 
-    float speed = 0.25;
+    float speed = 1;
     float sx, sy, ex, ey;
 
     Plane(  String date,
