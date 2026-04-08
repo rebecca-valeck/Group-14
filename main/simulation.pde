@@ -4,6 +4,7 @@ class Simulation {
   ArrayList<Plane> planes = new ArrayList<Plane>();
   Map currentMap;
   Map graph;   // replace with real name of class
+  Line line;
 
 Simulation(){
   graph = new Map("airports_coordinates_final.csv");
@@ -27,8 +28,10 @@ Simulation(){
     // Draw the airports on top of that specific area
     graph.draw();
     for (Plane p : planes) {
-      //p.move();
+      p.move();
       p.draw();
+      line = new Line(p.sx,p.sy,p.planeX + 10,p.planeY + 10);
+      line.draw();
     }
   }
   void addPlanes(ArrayList<ArrayList<String>> planesQuery) {
@@ -47,10 +50,7 @@ Simulation(){
         plane.get(16), // cancelled
         plane.get(17), // diverted
         plane.get(18)  // distance
-        //1,//plane.sx,
-        //2,//plane.sy,
-        //3,//plane.ex,
-        //4//plane.ey
+        
         ));
     }
   }

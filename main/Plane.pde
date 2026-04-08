@@ -1,5 +1,4 @@
 class Plane {
-
     String date;
     String origin; 
     String origin_state_abr; 
@@ -17,10 +16,11 @@ class Plane {
     float planeY;
     float planeWidth = 20; 
     float planeHeight = 20;
-
+    PImage planeImage;
     Table airportTable = loadTable("airports_coordinates_final.csv", "header");
-    
-    float speed = 1;
+    boolean started;
+
+    float speed = 0.25;
     float sx, sy, ex, ey;
 
     Plane(  String date,
@@ -35,7 +35,7 @@ class Plane {
             String cancelled,
             String diverted,
             String distance)
-            //float sx, float sy, float ex, float ey)
+            
 
     {
         this.date = date;
@@ -50,27 +50,23 @@ class Plane {
         this.cancelled = cancelled;
         this.diverted = diverted; 
         this.distance = distance; 
-        //planeX = sx;
-        //planeY = sy;
-        //this.sx = sx;
-        //this.sy = sy;
-        //this.ex = ex;
-        //this.ey = ey;
-        
+        planeImage = loadImage("plane.png");
     }
     
-     void display(float xOffset, float yOffset, float mapWidth, float mapHeight) { // ArrayList<Plane> airportsList,
+     void planeStart(float xOffset, float yOffset, float mapWidth, float mapHeight) { // ArrayList<Plane> airportsList,
      for (TableRow row : airportTable.rows()) {
       String airportName = row.getString("Airport");
 
       
         if (airportName.equals(this.origin)) 
         {
-          float x = map(row.getFloat("X"), 0, 970, xOffset, xOffset + mapWidth);
-          float y = map(row.getFloat("Y"), 0, 625, yOffset, yOffset + mapHeight);
+          float sx = map(row.getFloat("X"), 0, 970, xOffset, xOffset + mapWidth);
+          float sy = map(row.getFloat("Y"), 0, 625, yOffset, yOffset + mapHeight);
           
-          planeX = x;
-          planeY = y;
+          this.sx = sx;
+          this.sy = sy;
+          planeX = sx;
+          planeY = sy;
           break;
         } 
         
@@ -80,19 +76,44 @@ class Plane {
 
     }
   }
+
+  void planeEnd(float xOffset, float yOffset, float mapWidth, float mapHeight) 
+     { // ArrayList<Plane> airportsList,
+     for (TableRow row : airportTable.rows()) 
+     {
+      String airportName = row.getString("Airport");
+
+      
+        if (airportName.equals(this.dest)) 
+        {
+          float ex = map(row.getFloat("X"), 0, 970, xOffset, xOffset + mapWidth);
+          float ey = map(row.getFloat("Y"), 0, 625, yOffset, yOffset + mapHeight);
+          
+          this.ex = ex;
+          this.ey = ey;
+          break;
+        } 
+
+    }
+    }
     void draw()
     {
         float mX = 10;
         float mY = 90;
         float mW = 620;
         float mH = 400;
-        display(mX, mY, mW, mH);
+        if(!started)
+        {
+        planeStart(mX, mY, mW, mH);
+        planeEnd(mX, mY, mW, mH);
+        started = true;
+        }
         image(planeImage, planeX, planeY, planeWidth, planeHeight);
     }
     
     void move(){
-        float run = ey - sy;
-        float rise = ex - sx;
+        float run = ex - sx;
+        float rise = ey - sy;
         if(sx < ex && sy < ey){
             if (planeX < ex && planeY < ey){
                 planeX += (rise/run) * speed;
