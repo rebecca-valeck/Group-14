@@ -57,6 +57,16 @@ int dayNumber =0;
 
 PImage plane;
 MovingImage movplaneimg;
+PImage girlImg;
+MovingImage girl;
+PImage guyBookImg;
+MovingImage guyBook;
+PImage guySuitcaseImg;
+MovingImage guySuitcase;
+PImage yippeeImg;
+MovingImage yippee;
+PImage kidsImg;
+MovingImage kids;
 PImage penguin;
 String userInputDestination="";
 boolean change = false;
@@ -76,13 +86,25 @@ void setup()
   bg = loadImage("final.svg.jpg");
   planeImage = loadImage("plane.png");
 
-
-
-
   sim = new Simulation();
   plane=loadImage("aereo.jpg");
   plane.resize(1480, 100);
-  movplaneimg = new MovingImage(plane, plane.width * -1, 0);
+  movplaneimg = new MovingImage(plane, plane.width * -1, 0, 15);
+  girlImg = loadImage("girl.jpg");
+  girlImg.resize(100, 150);
+  girl = new MovingImage(girlImg, 70, 550, 5);
+  guyBookImg = loadImage("guyBook.jpg");
+  guyBookImg.resize(100, 150);
+  guyBook = new MovingImage(guyBookImg, 220, 550, 5);
+  guySuitcaseImg = loadImage("guySuicase.jpg");
+  guySuitcaseImg.resize(100, 150);
+  guySuitcase = new MovingImage(guySuitcaseImg, 620, 550, 5);
+  yippeeImg = loadImage("yippe.jpg");
+  yippeeImg.resize(100, 150);
+  yippee = new MovingImage(yippeeImg, 370, 550, 5);
+  kidsImg = loadImage("kids.jpg");
+  kidsImg.resize(170, 150);
+  kids = new MovingImage(kidsImg, 1000, 390, -5);
   penguin = loadImage("penguin.gif");
   penguin.resize(60,60);
   

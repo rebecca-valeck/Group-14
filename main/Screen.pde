@@ -37,10 +37,21 @@ class Screen {
 
     if (theScreen == screens.get(1)){
       movplaneimg.drawImg();
-      movplaneimg.moveImg();
+      if(movplaneimg.x < 0) movplaneimg.moveImg();
+      else movplaneimg.x = 0;
     }
     else if (theScreen == screens.get(0)){
-      image(penguin, 510, 285);
+      image(penguin, 510, 275);
+      girl.drawImg();
+      girl.moveImg();
+      guyBook.drawImg();
+      guyBook.moveImg();
+      guySuitcase.drawImg();
+      guySuitcase.moveImg();
+      yippee.drawImg();
+      yippee.moveImg();
+      kids.drawImg();
+      kids.moveImg();
     }
     textSize(60);
     String s = "S E A R C H   P L A N E S  !";
