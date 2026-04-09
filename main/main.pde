@@ -312,7 +312,7 @@ void mousePressed()
     origin.checked = false;
     destination.checked = false;
   } else if (search.clicked(mouseX, mouseY)) {
-    sim.addPlanes(db.filteredQuery(origins,destins,selectedDates,distance.label,arrTime.label,depTime.label,lateness.label,"SELECT * FROM flights WHERE "," LIMIT 50"));
+    sim.addPlanes(db.filteredQuery(origins,destins,selectedDates,distance.label,arrTime.label,depTime.label,lateness.label,cancelled,diverted,"SELECT * FROM flights WHERE "," LIMIT 50"));
     sim.graph.generateAirportLocations(sim.planes);
     theScreen = screens.get(1);
     origin.checked = false;
@@ -326,13 +326,13 @@ void mousePressed()
 
     //Top planes ranked on how late they are (difference between scheduled arrival time and actual arrival time)
     screens.get(1).addBarchart(new Barchart(SCREENX/2+400, 240, 450, 200, 80,
-       db.filteredQuery(origins,destins,selectedDates,distance.label,arrTime.label,depTime.label,lateness.label,"SELECT DEST_CITY_NAME,(ARR_TIME - CRS_ARR_TIME) FROM flights WHERE (CANCELLED = 0)  AND (ARR_TIME - CRS_ARR_TIME < 2300) AND "," ORDER BY (ARR_TIME - CRS_ARR_TIME) DESC LIMIT 5"),
+       db.filteredQuery(origins,destins,selectedDates,distance.label,arrTime.label,depTime.label,lateness.label,cancelled,diverted,"SELECT DEST_CITY_NAME,(ARR_TIME - CRS_ARR_TIME) FROM flights WHERE (CANCELLED = 0)  AND (ARR_TIME - CRS_ARR_TIME < 2300) AND "," ORDER BY (ARR_TIME - CRS_ARR_TIME) DESC LIMIT 5"),
       "DEST_CITY_NAME",
       "lateness of flight"));
 
     //Top 5 planes ranked by the number of times the destination appears in the dataset
     screens.get(1).addBarchart(new Barchart(SCREENX/2+400, 530, 450, 300, 80,
-       db.filteredQuery(origins,destins,selectedDates,distance.label,arrTime.label,depTime.label,lateness.label,"SELECT ORIGIN,COUNT(*) FROM flights WHERE "," GROUP BY ORIGIN ORDER BY COUNT(*) DESC LIMIT 5"),
+       db.filteredQuery(origins,destins,selectedDates,distance.label,arrTime.label,depTime.label,lateness.label,cancelled,diverted,"SELECT ORIGIN,COUNT(*) FROM flights WHERE "," GROUP BY ORIGIN ORDER BY COUNT(*) DESC LIMIT 5"),
       "DEST_CITY_NAME",
       "popularity of airport"));
 

@@ -137,6 +137,8 @@ public class DatabaseQueries
                                                         String arrivalTime,
                                                         String departureTime,
                                                         String lateness,
+                                                        Checkbox cancelled,
+                                                        Checkbox diverted,
                                                         String baseQueryString,
                                                         String endQueryString){
             String queryString = baseQueryString;
@@ -180,6 +182,12 @@ public class DatabaseQueries
             if(distance != "Distance")queryString += (queryString != baseQueryString?" AND ":"") + "(DISTANCE = \"" + distance + "\")";
             if(departureTime != "Departure time")queryString += (queryString != baseQueryString?" AND ":"") + "(DEPT_TIME = \"" + departureTime + "\")";
             if(arrivalTime != "Arrival time")queryString += (queryString != baseQueryString?" AND ":"") + "(ARR_TIME = \"" + arrivalTime + "\")";
+            if(cancelled.checked)queryString += (queryString != baseQueryString?" AND ":"") + "(CANCELLED = 1)";
+            else queryString += (queryString != baseQueryString?" AND ":"") + "(CANCELLED = 0)";
+
+            if(diverted.checked)queryString += (queryString != baseQueryString?" AND ":"") + "(DIVERTED = 1)";
+            else queryString += (queryString != baseQueryString?" AND ":"") + "(DIVERTED = 0)";
+
             if(lateness != "Lateness")queryString += (queryString != baseQueryString?" AND ":"") + "(ARR_TIME - CRS_ARR_TIME > " + lateness + ")";
 
 

@@ -26,7 +26,7 @@ class Plane
   int planeTime;
   Table airportTable = loadTable("airports_coordinates_final.csv", "header");
 
-  float speed = 1;
+  float speed = 30;
   float sx, sy, ex, ey;
 
   Plane(  String date,
@@ -108,9 +108,11 @@ class Plane
         float distance = sqrt(dx * dx + dy * dy);
         if(!speedAltered && arr_time != "" && dep_time != "")
         {
-          speed = speed / (((float)Integer.parseInt(arr_time) - (float)Integer.parseInt(dep_time)) / 500);
+          speed = 1 / (((float)Integer.parseInt(arr_time) - (float)Integer.parseInt(dep_time)) / 500);
+          if (speed < 10) speed = 10;
           speedAltered = true;
         }
+
 
         if (distance > speed) 
         {
