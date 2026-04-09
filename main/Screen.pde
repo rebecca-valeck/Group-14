@@ -38,11 +38,13 @@ class Screen {
     fill(#2E5E8E);
     rect(0, 0, 1900, 100);
 
+    // drawing and moving the plane on the header
     if (theScreen == screens.get(1)){
       movplaneimg.drawImg();
       if(movplaneimg.x < 0) movplaneimg.moveImg();
       else movplaneimg.x = 0;
     }
+    // drawing and moving the images on the main screen
     else if (theScreen == screens.get(0)){
       image(penguin, 510, 275);
       girl.drawImg();
@@ -56,6 +58,7 @@ class Screen {
       kids.drawImg();
       kids.moveImg();
     }
+
     textSize(60);
     String s = "S E A R C H   P L A N E S  !";
     fill(#D3DCEE);
@@ -80,7 +83,7 @@ class Screen {
     if (theScreen == screens.get(1)) sim.draw();
   }
 
-
+  // returns the button that is clicked
   Button getEvent()
   {
     for (Button b : button) {
@@ -88,7 +91,5 @@ class Screen {
     }
     return null;
   }
-
-
-
+  
 }

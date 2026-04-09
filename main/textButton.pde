@@ -19,5 +19,3 @@
       return false;
   }
 }
-
-//END CLASS

@@ -17,10 +17,7 @@ class Logo{
 
         boolean clicked(float mx, float my)
     {
-      if(mx > x && mx < x+w && my > y && my < y+w)
-      {
-        return true;
-      }
+      if(mx > x && mx < x+w && my > y && my < y+w) return true;
       return false;
     }
 }

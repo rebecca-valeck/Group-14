@@ -17,7 +17,7 @@ class MovingImage
         image (img, x, y);
     }
 
-    //making the images move
+    // making the images move and if they are out of the screen, it resets their x position
     void moveImg()
     {
         x += speed;

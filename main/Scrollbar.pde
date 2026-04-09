@@ -57,6 +57,7 @@ class Scrollbar
         rect(x, slidery, sw, sw, 5);
     }
 
+    // returns the position of the scroll bar
     float getPos()
     {
         return slidery * ratio;
