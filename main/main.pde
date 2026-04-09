@@ -216,7 +216,7 @@ if (origin.checked) {
     float ratio = bar.getPos() / (float)bar.sh; 
     
     // 2. Map ratio directly to the list. 
-    int startIndex = int(ratio * (origins.size() - 20) - 32);
+    int startIndex = int(ratio * (origins.size() - 20) - 32); //(-116)
     
     // 3. Constrain ensures we start exactly at index 0 (ABQ)
     startIndex = constrain(startIndex, 0, max(0, origins.size() - 20));
@@ -237,7 +237,7 @@ if (origin.checked) {
 
     float ratio = dbar.getPos() / (float)dbar.sh; 
     
-    int startIndex = int(ratio * (destins.size() - 20)-32);
+    int startIndex = int(ratio * (destins.size() - 20)-32); // (-116)
 
     startIndex = constrain(startIndex, 0, max(0, destins.size() - 20));
 
@@ -311,7 +311,9 @@ void mousePressed()
     origin.checked = false;
     destination.checked = false;
   } else if (search.clicked(mouseX, mouseY)) {
-    sim.addPlanes(db.filteredQuery(origins,destins,selectedDates,distance.label,arrTime.label,depTime.label,lateness.label,cancelled,diverted,"SELECT * FROM flights WHERE "," LIMIT 50"));
+    sim.addPlanes(db.filteredQuery(origins,destins,selectedDates,distance.label,arrTime.label,depTime.label,
+                  lateness.label,cancelled,diverted,
+                  "SELECT * FROM flights WHERE "," LIMIT 50"));
     sim.graph.generateAirportLocations(sim.planes);
     theScreen = screens.get(1);
     origin.checked = false;
@@ -325,13 +327,17 @@ void mousePressed()
 
     //Top planes ranked on how late they are (difference between scheduled arrival time and actual arrival time)
     screens.get(1).addBarchart(new Barchart(SCREENX/2+400, 240, 450, 200, 80,
-       db.filteredQuery(origins,destins,selectedDates,distance.label,arrTime.label,depTime.label,lateness.label,cancelled,diverted,"SELECT DEST_CITY_NAME,(ARR_TIME - CRS_ARR_TIME) FROM flights WHERE (CANCELLED = 0)  AND (ARR_TIME - CRS_ARR_TIME < 2300) AND "," ORDER BY (ARR_TIME - CRS_ARR_TIME) DESC LIMIT 5"),
+       db.filteredQuery(origins,destins,selectedDates,distance.label,arrTime.label,depTime.label,lateness.label,
+                        cancelled,diverted,
+                        "SELECT DEST_CITY_NAME,(ARR_TIME - CRS_ARR_TIME) FROM flights WHERE (CANCELLED = 0)  AND (ARR_TIME - CRS_ARR_TIME < 2300) AND ",
+                        " ORDER BY (ARR_TIME - CRS_ARR_TIME) DESC LIMIT 5"),
       "DEST_CITY_NAME",
       "lateness of flight"));
 
     //Top 5 planes ranked by the number of times the destination appears in the dataset
     screens.get(1).addBarchart(new Barchart(SCREENX/2+400, 530, 450, 300, 80,
-       db.filteredQuery(origins,destins,selectedDates,distance.label,arrTime.label,depTime.label,lateness.label,cancelled,diverted,"SELECT ORIGIN,COUNT(*) FROM flights WHERE "," GROUP BY ORIGIN ORDER BY COUNT(*) DESC LIMIT 5"),
+       db.filteredQuery(origins,destins,selectedDates,distance.label,arrTime.label,depTime.label,lateness.label,cancelled,diverted,"SELECT ORIGIN,COUNT(*) FROM flights WHERE ",
+                        " GROUP BY ORIGIN ORDER BY COUNT(*) DESC LIMIT 5"),
       "DEST_CITY_NAME",
       "popularity of airport"));
 

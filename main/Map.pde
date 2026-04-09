@@ -42,7 +42,7 @@ class Map {
       tempAirport.add(str(isSelected));
       airportLocations.add(tempAirport);
 
-      // Check if this specific airport is in your 'chosen' list
+      
     }
   }
   void display() {
@@ -79,13 +79,10 @@ void renderHighlight(float x, float y, String label) {
 
 void draw() {
 
-  // Define where the map goes (Left side)
-
   // Draw the image
   image(bg, mX, mY, mW, mH);
 
   // Draw the airports on top of that specific area
-
   display();
 }
 }
