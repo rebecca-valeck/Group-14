@@ -31,6 +31,7 @@ class Map {
       tempAirport.add(str(x));
       tempAirport.add(str(y));
 
+      // Check if this specific airport is in 'chosen' list
       boolean isSelected = false;
       for (Plane plane : airportsList) {
         if (airportName.equals(plane.origin)) {

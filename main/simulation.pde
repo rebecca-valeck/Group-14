@@ -3,7 +3,7 @@ class Simulation {
   int gameTickSpeed = 1;
   ArrayList<Plane> planes = new ArrayList<Plane>();
   Map currentMap;
-  Map graph;   // replace with real name of class
+  Map graph;   
   Line line;
 
 Simulation(){

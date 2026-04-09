@@ -215,7 +215,8 @@ if (origin.checked) {
    
     float ratio = bar.getPos() / (float)bar.sh; 
     
-    int startIndex = int(ratio * (origins.size() - 20) - 116);
+    // 2. Map ratio directly to the list. 
+    int startIndex = int(ratio * (origins.size() - 20) - 32);
     
     // 3. Constrain ensures we start exactly at index 0 (ABQ)
     startIndex = constrain(startIndex, 0, max(0, origins.size() - 20));
@@ -234,11 +235,9 @@ if (origin.checked) {
 
     rect(290, (SCREENY/4)-15, 290, 505, 5); 
 
-
     float ratio = dbar.getPos() / (float)dbar.sh; 
     
-
-    int startIndex = int(ratio * (destins.size() - 20)-116);
+    int startIndex = int(ratio * (destins.size() - 20)-32);
 
     startIndex = constrain(startIndex, 0, max(0, destins.size() - 20));
 
