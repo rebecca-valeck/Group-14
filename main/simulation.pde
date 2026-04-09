@@ -35,7 +35,7 @@ Simulation(){
       }
       String timeString = "" + p.planeTime;
       textSize(32);
-      fill(255,0,0);
+      fill(#2E5E8E);
       text(int(timeString)/ 100 + "hrs and " + (int(timeString) % 100)*60/100 + "seconds",SCREENX/2,SCREENY-30);
 
       p.planeTime+= 10;
